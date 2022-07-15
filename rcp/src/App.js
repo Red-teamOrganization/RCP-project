@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthProvider from "./context/auth";
 function App() {
   return (
+
     <AuthProvider>
       <BrowserRouter>
         <Navbar />
@@ -18,6 +19,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AuthProvider>
+
   );
 }
 
