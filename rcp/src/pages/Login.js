@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
-import { auth, db } from "../firebase";
-import { getDoc, doc } from "firebase/firestore";
-
+import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from '@heroicons/react/solid'
-import LaodingComponent from "../components/LoadingComponent";
+import LoadingComponent from "../components/LoadingComponent";
 
 export default function Login() {
 
@@ -32,22 +29,22 @@ export default function Login() {
       setData({ ...data, error: "All fields are required" });
     }
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-      const isProducer = await getDoc(doc(db, "users", result.user.uid));
+    await signInWithEmailAndPassword(auth, email, password);
+     
       setData({
         email: "",
         password: "",
         error: null,
         loading: false,
       });
-      navigate("/");
+      navigate("/main");
     } catch (err) {
       setData({ ...data, error: err.message, loading: false });
     }
   }
 
   if (loading) {
-    return <LaodingComponent />
+    return <LoadingComponent />
   }
 
   return (
@@ -113,7 +110,7 @@ export default function Login() {
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                Sign in
+                Log in
               </button>
             </div>
           </form>
