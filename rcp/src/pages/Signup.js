@@ -82,7 +82,7 @@ import { useNavigate } from "react-router-dom";
         </div>
         <div className="input_container">
             
-            <input type="checkbox" name="producer" />
+            <input type="checkbox" name="producer" checked={isProducer} onChange={handleChange} />
             <label htmlFor="producer">Check if you are a producer</label>
         </div>
         {error ? <p className="error">{error}</p> : null}

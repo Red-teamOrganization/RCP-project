@@ -1,0 +1,24 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    list-style: none;
+}
+.mainPage{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgb(61, 117, 61);
+}
+
+.aboutUs{
+    width: 100%;
+    text-align: center;
+}
+.producerRole{
+    width: 40%;
+}
+.consumerRole{
+    width: 40%;
+}
