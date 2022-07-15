@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase";
-import { getDoc, doc} from "firebase/firestore";
+import { auth} from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -26,15 +25,14 @@ function Login() {
       setData({ ...data, error: "All fields are required" });
     }
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-      const isProducer = await getDoc(doc(db, "users",result.user.uid ));
+      await signInWithEmailAndPassword(auth, email, password);
       setData({
         email: "",
         password: "",
         error: null,
         loading: false,
       });
-      navigate("/");
+      navigate("/main");
     } catch (err) {
       setData({ ...data, error: err.message, loading: false });
     }
