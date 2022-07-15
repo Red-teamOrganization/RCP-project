@@ -84,14 +84,9 @@ function Signup() {
           />
         </div>
         <div className="input_container">
-          <input
-            type="checkbox"
-            name="isProducer"
-            id="isProducer"
-            checked={isProducer}
-            onChange={handleChange}
-          />
-          <label htmlFor="producer">Check if you are a producer</label>
+            
+            <input type="checkbox" name="producer" checked={isProducer} onChange={handleChange} />
+            <label htmlFor="producer">Check if you are a producer</label>
         </div>
         {error ? <p className="error">{error}</p> : null}
         <div className="btn_container">

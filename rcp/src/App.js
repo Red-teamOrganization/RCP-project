@@ -4,7 +4,11 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+
 import AuthProvider from "./context/auth";
+
 function App() {
   return (
 

@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Sign Up', href: '/signup', current: true },
 ]
 const loginNav = { name: 'Login', href: '#', current: false };
-const signupNav = { name: 'Signn Up', href: '#', current: false };
+const signupNav = { name: 'Sign Up', href: '#', current: false };
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
