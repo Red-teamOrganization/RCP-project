@@ -6,10 +6,17 @@ function Home() {
    <>
     <main className='mainPage'>
       <div className='aboutUs'>
-        <h1>about us</h1>
+        <h1>ABOUT US</h1>
+        <p>we try to </p>
       </div>
-      <aside className='producerRole'>producer role</aside>
-      <aside className='consumerRole'>consumer role</aside>
+      <aside className='producerRole'>
+        <h1>PRODUCER ROLE</h1>
+        <p></p>
+        </aside>
+      <aside className='consumerRole'>
+      <h1>CONSUMER ROLE</h1> 
+      <p></p>
+      </aside>
     </main>
     <footer>
       

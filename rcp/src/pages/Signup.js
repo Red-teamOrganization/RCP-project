@@ -4,7 +4,7 @@ import { auth, db } from "../firebase";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
- function Signup() {
+function Signup() {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -18,7 +18,11 @@ import { useNavigate } from "react-router-dom";
   const { name, email, password, error, loading, isProducer } = data;
 
   function handleChange(e) {
-    setData({ ...data, [e.target.name]:e.target.type === "checkbox"?e.target.checked : e.target.value });
+    setData({
+      ...data,
+      [e.target.name]:
+        e.target.type === "checkbox" ? e.target.checked : e.target.value
+    });
   }
 
   async function handleSubmit(e) {
@@ -54,7 +58,6 @@ import { useNavigate } from "react-router-dom";
   }
 
   return (
-    
     <section>
       <h3>Create An Account</h3>
       <form className="form" onSubmit={handleSubmit}>
@@ -96,5 +99,4 @@ import { useNavigate } from "react-router-dom";
   );
 }
 
-
-export default Signup
+export default Signup;
