@@ -3,13 +3,16 @@
     height: 100vh;
     display: flex;
     padding: 2em;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-around;
 }
 .producerCONHeader{
 text-align: center;
 color: white;
 margin-bottom: 2em;
+width: 100%;
 }
 .submit-button{
     background: linear-gradient(90deg, rgba(63,251,66,1) 15%, rgba(64,150,65,1) 72%);

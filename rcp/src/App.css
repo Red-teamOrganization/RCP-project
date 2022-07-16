@@ -4,9 +4,8 @@
     background-color: black;
     justify-content: space-around;
     align-items: center;
-    position: static;
-    bottom: 0;
 }
+
 .contactUs{
     width: 30%;
     color: white;

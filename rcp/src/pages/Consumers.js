@@ -101,9 +101,6 @@ function Consumers() {
       <h1 className="producerCONHeader">CONSUMER page</h1>
       <form>
       {product}
-      
-
-
         <button onClick={handleSubmit}
           className="submit-button">Submit</button>
 
@@ -113,7 +110,7 @@ function Consumers() {
         <Monitor userProducts={userProducts} />
       </div>
     </div>
-      
+    
     </>
   );
 }
