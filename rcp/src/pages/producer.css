@@ -13,6 +13,13 @@ color: white;
 margin-bottom: 2em;
 width: 100%;
 }
+.submit-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 16px;
+}
 .submit-button{
     background: linear-gradient(90deg, rgba(63,251,66,1) 15%, rgba(64,150,65,1) 72%);
     padding: 1em;
@@ -61,3 +68,14 @@ width: 100%;
     opacity: 0.8;
 }
 
+@media only screen and (max-width: 600px){
+    .producerCONPage{
+        background-color: rgb(61, 117, 61);
+        height: 100%;
+        display: flex;
+        padding: 2em;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+    }   
+}

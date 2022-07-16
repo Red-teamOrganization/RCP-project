@@ -7,6 +7,8 @@ function Monitor({ userProducts, yearly }) {
     setProducts(userProducts);
   }, [userProducts]);
 
+
+
   if (!(Object.entries(userProducts).length > 0)) {
     return (
       <>
@@ -84,8 +86,9 @@ function Monitor({ userProducts, yearly }) {
   );
 }
 
+
 function getRow(rowData, index, yearly) {
-  console.log(rowData, index);
+
   return (
     <tr
       key={index}
@@ -101,4 +104,5 @@ function getRow(rowData, index, yearly) {
     </tr>
   );
 }
+
 export default Monitor;
