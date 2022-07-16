@@ -1,87 +1,85 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    list-style: none;
-    box-sizing: border-box;
+* {
+  margin: 0%;
+  padding: 0%;
+  list-style: none;
+  box-sizing: border-box;
 }
-.mainPage{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 5em;
-    justify-content: space-around;
-    background-color: rgb(61, 117, 61);
-    overflow: auto;
-}
-
-.aboutUs{
-    width: 90%;
-    height: 50vh;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    background-image: url(../images/Wheat_photo-cred-Adobe-stock_E-copy.jpg);
-    background-size: cover;
-    background-color: rgb(24, 24, 24);
-    background-repeat: no-repeat;
-    background-blend-mode: overlay;
-    border-radius: 5px;
-}
-.producerRole{
-    margin-top: 2em;
-    width: 40%;
-    height: 50vh;
-    padding: 10px;
-    color: white;
-    text-align: center;
-    background-image: url(../images/b30b92f7ef56451792c76d014402406a.avif);
-    background-size: cover;
-    background-color: rgb(24, 24, 24);
-    background-repeat: no-repeat;
-    background-blend-mode: overlay;
-    border-radius: 5px;
+.mainPage {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5em;
+  justify-content: space-around;
+  background-color: rgb(61, 117, 61);
+  overflow: auto;
 }
 
-.consumerRole{
-    margin-top: 2em;
-    width: 40%;
-    height: 50vh;
-    padding: 10px;
-    color:white;
-    text-align: center;
-    background-image: url(../images/1138414299_thumb_1536x1536.webp);
-    background-size: cover;
-    background-color: rgb(24, 24, 24);
-    background-repeat: no-repeat;
-    background-blend-mode: overlay;
-    border-radius: 5px;
+.aboutUs {
+  width: 90%;
+  height: 50vh;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  background-image: url(../images/Wheat_photo-cred-Adobe-stock_E-copy.jpg);
+  background-size: cover;
+  background-color: rgb(24, 24, 24);
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  border-radius: 5px;
 }
-.content{
-    margin-top: 20%;
-    font-size: 1.2rem;
-    color:rgb(180, 219, 180); 
+.producerRole {
+  margin-top: 2em;
+  width: 40%;
+  height: 50vh;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  background-image: url(../images/b30b92f7ef56451792c76d014402406a.avif);
+  background-size: cover;
+  background-color: rgb(24, 24, 24);
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  border-radius: 5px;
 }
-h1{
-    font-size: 1.5rem;
+
+.consumerRole {
+  margin-top: 2em;
+  width: 40%;
+  height: 50vh;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  background-image: url(../images/1138414299_thumb_1536x1536.webp);
+  background-size: cover;
+  background-color: rgb(24, 24, 24);
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  border-radius: 5px;
+}
+.content {
+  margin-top: 20%;
+  font-size: 1.2rem;
+  color: rgb(180, 219, 180);
+}
+h1 {
+  font-size: 1.5rem;
 }
 
 
 
-
-@media only screen and (max-width: 800px)  {
-.mainPage{
+@media only screen and (max-width: 800px) {
+  .mainPage {
     display: block;
-}
-.aboutUs{
+  }
+  .aboutUs {
     width: 100%;
-        }
-    
-.consumerRole{
-        width: 100%;
-       
-      }
-      
-.producerRole{
-        width: 100%;
-    }
+  }
+
+  .consumerRole {
+    width: 100%;
+  }
+
+  .producerRole {
+    width: 100%;
+  }
 }

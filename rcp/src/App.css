@@ -1,3 +1,4 @@
+
 .footer{
     width: 100%;
     display: flex;
@@ -9,7 +10,8 @@
 .contactUs{
     width: 30%;
     color: white;
+
 }
-.hover:hover{
-color:  rgb(61, 117, 61);
+.hover:hover {
+  color: rgb(61, 117, 61);
 }

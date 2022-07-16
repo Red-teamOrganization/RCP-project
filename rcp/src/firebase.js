@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "rcpproject",
   storageBucket: "rcpproject.appspot.com",
   messagingSenderId: "813805243331",
-  appId: "1:813805243331:web:d6fda46f98f26503d84b76"
+  appId: "1:813805243331:web:d6fda46f98f26503d84b76",
 };
 
 // Initialize Firebase
@@ -20,4 +20,4 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export {auth,db}
+export { auth, db };

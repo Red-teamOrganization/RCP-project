@@ -20,11 +20,17 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const navItems = [{ name: "Login", href: "/login", current: false },
-  { name: "Sign Up", href: "/signup", current: false },
-  { name: "Main", href: "/main", current: false },
-  ]
-  const [activeNavItems, setActiveNavItems] = useState({ "/login": false, "/signup": false, "/main": false, "/logout": false })
+  const navItems = [
+    { name: "Login", href: "/login", current: false },
+    { name: "Sign Up", href: "/signup", current: false },
+    { name: "Main", href: "/main", current: false },
+  ];
+  const [activeNavItems, setActiveNavItems] = useState({
+    "/login": false,
+    "/signup": false,
+    "/main": false,
+    "/logout": false,
+  });
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   async function handleSignout() {
@@ -35,13 +41,13 @@ export default function Navbar() {
 
   useEffect(() => {
     function setActive(active) {
-      let newItems = navItems
-      newItems[active] = true
-      setActiveNavItems(newItems)
+      let newItems = navItems;
+      newItems[active] = true;
+      setActiveNavItems(newItems);
     }
 
-    setActive(location.pathname)
-  }, [location])
+    setActive(location.pathname);
+  }, [location]);
 
   return (
     <Disclosure as="nav" className="bg-white">
@@ -74,10 +80,8 @@ export default function Navbar() {
                     href={loginNav.href}
                     className={classNames(
                       activeNavItems["/main"]
-                        ?
-                        "bg-green-700 text-white"
-                        :
-                        "text-green-900 hover:bg-green-700 hover:text-white",
+                        ? "bg-green-700 text-white"
+                        : "text-green-900 hover:bg-green-700 hover:text-white",
                       "px-3 py-2 rounded-md text-sm font-medium"
                     )}
                     aria-current="page"
@@ -97,10 +101,10 @@ export default function Navbar() {
                     Logout
                   </div>
                 </>
+              ) : (
                 // <button className="btn" onClick={handleSignout}>
                 //   Logout
                 // </button>
-              ) : (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
@@ -130,7 +134,6 @@ export default function Navbar() {
                       >
                         {signupNav.name}
                       </Link>
-
                     </div>
                   </div>
                 </div>

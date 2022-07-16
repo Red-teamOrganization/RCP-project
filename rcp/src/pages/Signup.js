@@ -7,7 +7,6 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
 
-
 export default function Signup() {
   const [data, setData] = useState({
     name: "",

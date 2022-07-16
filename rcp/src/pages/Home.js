@@ -1,14 +1,12 @@
-import React from 'react';
-import MainHome from '../components/MainHome';
-
-
+import React from "react";
+import MainHome from "../components/MainHome";
 
 function Home() {
   return (
-   <>
-   <MainHome />
+    <>
+      <MainHome />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;
