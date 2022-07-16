@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection,getDocs, setDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Products from "../components/Products";
+import "./producer.css";
 
 function Consumers() {
   const [conProducts, setConProducts] = useState({
@@ -85,12 +86,15 @@ console.log(sumConProducts , sumProProducts)
     );
   });
   return (
+    <div className="producerCONPage">
+    <h1 className="producerCONHeader">CONSUMER page</h1>
+
+    {product} 
     <div>
-      {product}
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
-      </div>
+      <button onClick={handleSubmit}
+      className="submit-button">Submit</button>
     </div>
+  </div>
   );
 }
 
