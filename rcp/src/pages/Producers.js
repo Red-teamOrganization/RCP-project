@@ -76,9 +76,10 @@ function Producers() {
   }, []);
 
   async function handleChange(e) {
-    setProProducts({ ...proProducts, [e.target.name]: e.target.value * 12 });
+    setProProducts({ ...proProducts, [e.target.name]: e.target.value  });
   }
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     await setDoc(doc(db, "producers", auth.currentUser.uid), {
       ...proProducts,
     });
@@ -94,7 +95,7 @@ function Producers() {
       <Products
         key={i}
         name={product}
-        quantity={proProducts.product}
+        quantity={proProducts[product]}
         handleChange={handleChange}
         totalProduction={sumProProducts[product]}
         totalConsumption={sumConProducts[product]}
@@ -105,14 +106,19 @@ function Producers() {
     <>
       <div className="producerCONPage">
         <h1 className="producerCONHeader">PRODUCER page</h1>
-        <div>
+        <form onSubmit={handleSubmit}>
           {product}
-            <button onClick={handleSubmit} className="submit-button">
-              Submit
-            </button>
-            </div>
-            <div>
-          <Monitor userProducts={userProducts} />
+
+          <button className="submit-button">Submit</button>
+        </form>
+          <div>
+          <h4>Your Products this Month</h4>
+          <Monitor userProducts={userProducts} yearly={false}/>
+          <h4>Total Production per Year</h4>
+          <Monitor userProducts={sumProProducts} yearly={true}/>
+          <h4>Total Consumption per Year</h4>
+          <Monitor userProducts={sumConProducts} yearly={true}/>
+
         </div>
       </div>
     </>
