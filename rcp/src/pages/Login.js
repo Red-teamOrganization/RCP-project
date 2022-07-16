@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from '@heroicons/react/solid'
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
-import FooterLogin from "../components/FooterLogin";
 
 export default function Login() {
 
@@ -111,8 +110,7 @@ export default function Login() {
           </form>
         </div>
       </div>
-      <FooterLogin />
-    </>
+      </>
   )
 }
 

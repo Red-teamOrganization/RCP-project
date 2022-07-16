@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Products from "../components/Products";
-import Footer from '../components/Footer';
+
 import Monitor from "../components/Monitor";
 
 import "./producer.css";
@@ -99,21 +99,21 @@ function Consumers() {
     <>
     <div className="producerCONPage">
       <h1 className="producerCONHeader">CONSUMER page</h1>
-
+      <form>
       {product}
-      <div>
+      
 
 
         <button onClick={handleSubmit}
           className="submit-button">Submit</button>
 
-      </div>
+      </form>
       <br />
       <div>
         <Monitor userProducts={userProducts} />
       </div>
     </div>
-      <Footer classPosition="footer"/>
+      
     </>
   );
 }

@@ -4,7 +4,7 @@ import { auth, db } from "../firebase";
 import Products from "../components/Products";
 import "./producer.css"
 import Monitor from "../components/Monitor";
-import Footer from '../components/Footer';
+
 function Producers() {
   const [proProducts, setProProducts] = useState({
     TOMATOES: 0,
@@ -96,17 +96,17 @@ function Producers() {
     <>
     <div className="producerCONPage">
       <h1 className="producerCONHeader">PRODUCER page</h1>
-
+      <form>
       {product} 
-      <div>
+      
         <button onClick={handleSubmit}
         className="submit-button">Submit</button>
-      </div>
+      </form>
       <div>
         <Monitor userProducts={userProducts}/>
       </div>
     </div>
-      <Footer classPosition="footer"/>
+      
       </>
   );
 }
