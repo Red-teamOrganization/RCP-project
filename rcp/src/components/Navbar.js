@@ -89,7 +89,7 @@ export default function Navbar() {
                     to="/login"
                     href={loginNav.href}
                     className={classNames(
-                      "text-green-900 hover:bg-green-900 hover:text-white",
+                      "text-green-900 hover:bg-green-700 hover:text-white",
                       "px-3 py-2 rounded-md text-sm font-medium"
                     )}
                     aria-current="page"
@@ -111,7 +111,7 @@ export default function Navbar() {
                         className={classNames(
                           activeNavItems["/login"]
                             ? "bg-green-700 text-white"
-                            : "text-gray-900 hover:bg-gray-700 hover:text-white",
+                            : "text-gray-900 hover:bg-green-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
                         aria-current="page"
@@ -124,7 +124,7 @@ export default function Navbar() {
                         className={classNames(
                           activeNavItems["/signup"]
                             ? "bg-green-700 text-white"
-                            : "text-gray-900 hover:bg-gray-700 hover:text-white",
+                            : "text-gray-900 hover:bg-green-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
                         aria-current="page"
