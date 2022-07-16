@@ -1,6 +1,7 @@
 import React from 'react'
 
-function Products({name, quantity, handleChange}) {
+function Products({name, quantity, handleChange, totalConsumption, totalProduction}) {
+  const availability = totalProduction >= totalConsumption
   return (
     <div> 
         <h3>{name}</h3>
@@ -11,6 +12,7 @@ function Products({name, quantity, handleChange}) {
                 <label htmlFor={name}>kg</label>
             
             </form> 
+            {availability?<h5>"The product is available"</h5>:<h5>"The product is not available"</h5>}
         </div>
   )
 }
