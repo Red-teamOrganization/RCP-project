@@ -24,26 +24,34 @@ console.log(sumConProducts , sumProProducts)
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
-      
-      const obj = {};
       const result = data.docs.map((doc)=>doc.data())
-      console.log(result)
-      result.forEach((doc) => {
-        return Object.keys(doc).forEach((key) => {
-          return obj.key ? (obj.key += doc.key) : doc.key;
-        });
-      });
+      const obj = {};
+
+      for(let i = 0 ; i < result.length ; i++){
+        for(let key in result[i]){
+          if(obj[key]) {
+              obj[key] += result[i][key]
+          } else {
+              obj[key] = result[i][key]
+          }
+        }
+      }
+      
       setSumProProducts({ ...obj });
     }
     async function getConsumption() {
       const data = await getDocs(collection(db, "consumers"));
       const obj = {};
       const result = data.docs.map((doc)=>doc.data())
-      result.forEach((doc) => {
-        return Object.keys(doc).forEach((key) => {
-          return obj.key ? (obj.key += doc.key) : doc.key;
-        });
-      });
+      for(let i = 0 ; i < result.length ; i++){
+        for(let key in result[i]){
+          if(obj[key]) {
+              obj[key] += result[i][key]
+          } else {
+              obj[key] = result[i][key]
+          }
+        }
+      }
       setSumConProducts({ ...obj });
     }
     getProduction();
@@ -71,8 +79,8 @@ console.log(sumConProducts , sumProProducts)
         name={product}
         quantity={conProducts.product}
         handleChange={handleChange}
-        totalProduction={sumProProducts.product}
-        totalConsumption={sumConProducts.product}
+        totalProduction={sumProProducts[product]}
+        totalConsumption={sumConProducts[product]}
       />
     );
   });

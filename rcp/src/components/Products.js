@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { db, auth } from "../firebase";
+import { getDoc, doc } from "firebase/firestore";
 
 function Products({name, quantity, handleChange, totalConsumption, totalProduction}) {
   const availability = totalProduction >= totalConsumption
+  const market = totalProduction-totalConsumption > 0
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    async function getUser() {
+      const user = await getDoc(doc(db, "users", auth.currentUser.uid));
+      setUser({ ...user.data() });
+    }
+    getUser();
+  }, []);
+
+  console.log(availability, totalConsumption,totalProduction)
   return (
     <div> 
         <h3>{name}</h3>
@@ -12,7 +25,7 @@ function Products({name, quantity, handleChange, totalConsumption, totalProducti
                 <label htmlFor={name}>kg</label>
             
             </form> 
-            {availability?<h5>"The product is available"</h5>:<h5>"The product is not available"</h5>}
+            {user.isProducer? market?<h5>Market do not need that product</h5>: <h5>Market needs that product</h5> : availability?<h5>"The product is available"</h5>:<h5>"The product is not available"</h5>}
         </div>
   )
 }
