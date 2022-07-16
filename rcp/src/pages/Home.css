@@ -11,6 +11,7 @@
     padding: 5em;
     justify-content: space-around;
     background-color: rgb(61, 117, 61);
+    overflow: auto;
 }
 
 .aboutUs{
@@ -63,25 +64,7 @@
 h1{
     font-size: 1.5rem;
 }
-.footer{
-    width: 100%;
-    display: flex;
-    background-color: black;
-    justify-content: space-around;
-    align-items: center;
-    position: absolute;
 
-}
-.footer-b0{
-    width: 100%;
-    display: flex;
-    background-color: black;
-    justify-content: space-around;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-
-}
 .contactUs{
     width: 30%;
     color: white;

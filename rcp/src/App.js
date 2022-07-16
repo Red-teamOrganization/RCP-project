@@ -3,7 +3,9 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
+import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css"
 
 
 
@@ -21,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </AuthProvider>
 
