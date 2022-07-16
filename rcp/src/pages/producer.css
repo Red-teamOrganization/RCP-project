@@ -1,10 +1,8 @@
-
 .producerCONPage{
     background-color: rgb(61, 117, 61);
     height: 100vh;
     display: flex;
     padding: 2em;
-    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
