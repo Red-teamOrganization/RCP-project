@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { collection,getDocs, setDoc, doc } from "firebase/firestore";
+import { collection,getDocs, setDoc, doc ,getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Products from "../components/Products";
+
+import Monitor from "../components/Monitor";
+
 import "./producer.css";
+
 
 function Consumers() {
   const [conProducts, setConProducts] = useState({
@@ -20,8 +24,8 @@ function Consumers() {
     POTATOES: 0,
     APPLES: 0,
   });
+  const [userProducts,setUserProducts]= useState({})
   
-console.log(sumConProducts , sumProProducts)
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
@@ -55,8 +59,14 @@ console.log(sumConProducts , sumProProducts)
       }
       setSumConProducts({ ...obj });
     }
+    async function getUserProducts(){
+      const data = await getDoc(doc(db, "consumers" , auth.currentUser.uid))
+      setUserProducts({...data.data()})
+    }
+    
     getProduction();
     getConsumption();
+    getUserProducts();
   }, []);
 
   async function handleChange(e) {
@@ -91,8 +101,15 @@ console.log(sumConProducts , sumProProducts)
 
     {product} 
     <div>
+
+    
+      <div>
+        <Monitor userProducts={userProducts}/>
+      </div>
+
       <button onClick={handleSubmit}
       className="submit-button">Submit</button>
+
     </div>
   </div>
   );

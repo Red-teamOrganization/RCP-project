@@ -20,7 +20,6 @@ function Products({
     getUser();
   }, []);
 
-  console.log(availability, totalConsumption, totalProduction);
   return (
     <>
       <h3 className="productName">{name}</h3>
