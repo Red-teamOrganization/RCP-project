@@ -7,7 +7,7 @@ function Monitor({ userProducts }) {
     setProducts(userProducts);
   }, [userProducts]);
 
-  if (!(Object.entries.length > 0)) {
+  if (!(Object.entries(userProducts).length > 0)) {
     return (
       <>
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -20,7 +20,7 @@ function Monitor({ userProducts }) {
                 <th scope="col" className="py-3 px-6">
                   <div className="flex items-center">
                     Quantity
-                    <a href="#">
+                    <a>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="ml-1 w-3 h-3"
@@ -70,7 +70,7 @@ function Monitor({ userProducts }) {
             <th scope="col" className="py-3 px-6">
               <div className="flex items-center">
                 Quantity
-                <a href="#">
+                <a>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="ml-1 w-3 h-3"
