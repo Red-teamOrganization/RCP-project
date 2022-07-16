@@ -23,7 +23,6 @@ export default function Login() {
   }
 
   async function handleSubmit(e) {
-
     e.preventDefault();
     setData({ ...data, error: null, loading: true });
     if (!email || !password) {
@@ -31,7 +30,6 @@ export default function Login() {
     }
     try {
     await signInWithEmailAndPassword(auth, email, password);
-     
       setData({
         email: "",
         password: "",
@@ -55,7 +53,6 @@ export default function Login() {
           <div>
           <img src={logo} width={"150px"} className="mx-auto" alt="" />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
