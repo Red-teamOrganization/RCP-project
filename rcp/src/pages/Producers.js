@@ -11,7 +11,7 @@ import Products from "../components/Products";
 import "./producer.css";
 import Monitor from "../components/Monitor";
 
-function Producers() {
+function Producers({name}) {
   const [proProducts, setProProducts] = useState({
     TOMATOES: 0,
     POTATOES: 0,
