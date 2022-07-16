@@ -7,6 +7,7 @@ function Monitor({userProducts}) {
     
         
   return (
+    
     <table>
         
     </table>
