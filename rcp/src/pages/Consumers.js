@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection,getDocs, setDoc, doc ,getDoc } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Products from "../components/Products";
 
@@ -24,46 +24,46 @@ function Consumers() {
     POTATOES: 0,
     APPLES: 0,
   });
-  const [userProducts,setUserProducts]= useState({})
-  
+  const [userProducts, setUserProducts] = useState({})
+
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
-      const result = data.docs.map((doc)=>doc.data())
+      const result = data.docs.map((doc) => doc.data())
       const obj = {};
 
-      for(let i = 0 ; i < result.length ; i++){
-        for(let key in result[i]){
-          if(obj[key]) {
-              obj[key] += result[i][key]
+      for (let i = 0; i < result.length; i++) {
+        for (let key in result[i]) {
+          if (obj[key]) {
+            obj[key] += result[i][key]
           } else {
-              obj[key] = result[i][key]
+            obj[key] = result[i][key]
           }
         }
       }
-      
+
       setSumProProducts({ ...obj });
     }
     async function getConsumption() {
       const data = await getDocs(collection(db, "consumers"));
       const obj = {};
-      const result = data.docs.map((doc)=>doc.data())
-      for(let i = 0 ; i < result.length ; i++){
-        for(let key in result[i]){
-          if(obj[key]) {
-              obj[key] += result[i][key]
+      const result = data.docs.map((doc) => doc.data())
+      for (let i = 0; i < result.length; i++) {
+        for (let key in result[i]) {
+          if (obj[key]) {
+            obj[key] += result[i][key]
           } else {
-              obj[key] = result[i][key]
+            obj[key] = result[i][key]
           }
         }
       }
       setSumConProducts({ ...obj });
     }
-    async function getUserProducts(){
-      const data = await getDoc(doc(db, "consumers" , auth.currentUser.uid))
-      setUserProducts({...data.data()})
+    async function getUserProducts() {
+      const data = await getDoc(doc(db, "consumers", auth.currentUser.uid))
+      setUserProducts({ ...data.data() })
     }
-    
+
     getProduction();
     getConsumption();
     getUserProducts();
@@ -97,21 +97,21 @@ function Consumers() {
   });
   return (
     <div className="producerCONPage">
-    <h1 className="producerCONHeader">CONSUMER page</h1>
+      <h1 className="producerCONHeader">CONSUMER page</h1>
 
-    {product} 
-    <div>
-
-    
+      {product}
       <div>
-        <Monitor userProducts={userProducts}/>
+
+
+        <button onClick={handleSubmit}
+          className="submit-button">Submit</button>
+
       </div>
-
-      <button onClick={handleSubmit}
-      className="submit-button">Submit</button>
-
+      <br />
+      <div>
+        <Monitor userProducts={userProducts} />
+      </div>
     </div>
-  </div>
   );
 }
 

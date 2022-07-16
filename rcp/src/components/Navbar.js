@@ -39,7 +39,7 @@ export default function Navbar() {
       newItems[active] = true
       setActiveNavItems(newItems)
     }
-    console.log(location.pathname)
+
     setActive(location.pathname)
   }, [location])
 
@@ -69,7 +69,6 @@ export default function Navbar() {
               </div>
               {user ? (
                 <>
-                  {console.log("main is", navItems[2])}
                   <Link
                     to="/main"
                     href={loginNav.href}
