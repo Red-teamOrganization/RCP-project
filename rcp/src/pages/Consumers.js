@@ -104,6 +104,7 @@ function Consumers() {
   });
   return (
     <>
+
       <div className="producerCONPage">
         <h1 className="producerCONHeader">CONSUMER page</h1>
         <div>{product}</div>
@@ -115,6 +116,7 @@ function Consumers() {
           <Monitor userProducts={userProducts} />
         </div>
       </div>
+
     </>
   );
 }

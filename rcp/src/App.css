@@ -1,15 +1,16 @@
-.footer {
-  width: 100%;
-  display: flex;
-  background-color: black;
-  justify-content: space-around;
-  align-items: center;
-  position: static;
-  bottom: 0;
+
+.footer{
+    width: 100%;
+    display: flex;
+    background-color: black;
+    justify-content: space-around;
+    align-items: center;
 }
-.contactUs {
-  width: 30%;
-  color: white;
+
+.contactUs{
+    width: 30%;
+    color: white;
+
 }
 .hover:hover {
   color: rgb(61, 117, 61);

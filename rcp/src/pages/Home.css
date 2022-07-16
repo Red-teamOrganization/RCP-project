@@ -65,13 +65,7 @@ h1 {
   font-size: 1.5rem;
 }
 
-.contactUs {
-  width: 30%;
-  color: white;
-}
-.hover:hover {
-  color: rgb(61, 117, 61);
-}
+
 
 @media only screen and (max-width: 800px) {
   .mainPage {
