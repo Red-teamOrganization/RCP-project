@@ -57,7 +57,7 @@ function Producers() {
       setSumConProducts({ ...obj });
     }
     async function getUserProducts(){
-      const data = await getDoc(doc(db, "consumers" , auth.currentUser.uid))
+      const data = await getDoc(doc(db, "producers" , auth.currentUser.uid))
       setUserProducts({...data.data()})
     }
     getProduction();
