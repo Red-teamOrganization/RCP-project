@@ -107,12 +107,11 @@ function Producers() {
         <h1 className="producerCONHeader">PRODUCER page</h1>
         <div>
           {product}
-
-          <div>
             <button onClick={handleSubmit} className="submit-button">
               Submit
             </button>
-          </div>
+            </div>
+            <div>
           <Monitor userProducts={userProducts} />
         </div>
       </div>
