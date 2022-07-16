@@ -1,12 +1,10 @@
-
-
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 /* This example requires Tailwind CSS v2.0+ */
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { AuthContext } from "../context/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import logo from "../images/logo.png";
@@ -22,12 +20,28 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const navItems = [{ name: "Login", href: "/login", current: false },
+  { name: "Sign Up", href: "/signup", current: false },
+  { name: "Main", href: "/main", current: false },
+  ]
+  const [activeNavItems, setActiveNavItems] = useState({ "/login": false, "/signup": false, "/main": false, "/logout": false })
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   async function handleSignout() {
     await signOut(auth);
     navigate("/login");
   }
+  const location = useLocation();
+
+  useEffect(() => {
+    function setActive(active) {
+      let newItems = navItems
+      newItems[active] = true
+      setActiveNavItems(newItems)
+    }
+    console.log(location.pathname)
+    setActive(location.pathname)
+  }, [location])
 
   return (
     <Disclosure as="nav" className="bg-white">
@@ -49,44 +63,77 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link to="/">
-                    <img src={logo} width={"63px"}  alt="" />
+                    <img src={logo} width={"63px"} alt="" />
                   </Link>
                 </div>
               </div>
-
               {user ? (
-                <button className="btn" onClick={handleSignout}>
-                  Logout
-                </button>
-              ) : (
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
-                    <Link
-                      to="/login"
-                      href={loginNav.href}
-                      className={classNames(
-                        "text-gray-900 hover:bg-gray-700 hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
-                      aria-current="page"
-                    >
-                      {loginNav.name}
-                    </Link>
-                    <Link
-                      to="/signup"
-                      href={signupNav.href}
-                      className={classNames(
-                        "bg-gray-900 text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
-                      aria-current="page"
-                    >
-                      {signupNav.name}
-                    </Link>
-
+                <>
+                  {console.log("main is", navItems[2])}
+                  <Link
+                    to="/main"
+                    href={loginNav.href}
+                    className={classNames(
+                      activeNavItems["/main"]
+                        ?
+                        "bg-green-700 text-white"
+                        :
+                        "text-green-900 hover:bg-green-700 hover:text-white",
+                      "px-3 py-2 rounded-md text-sm font-medium"
+                    )}
+                    aria-current="page"
+                  >
+                    Main
+                  </Link>
+                  <div
+                    to="/login"
+                    href={loginNav.href}
+                    className={classNames(
+                      "text-green-900 hover:bg-green-900 hover:text-white",
+                      "px-3 py-2 rounded-md text-sm font-medium"
+                    )}
+                    aria-current="page"
+                    onClick={handleSignout}
+                  >
+                    Logout
                   </div>
-                </div>
+                </>
+                // <button className="btn" onClick={handleSignout}>
+                //   Logout
+                // </button>
+              ) : (
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <div className="hidden sm:block sm:ml-6">
+                    <div className="flex space-x-4">
+                      <Link
+                        to="/login"
+                        href={loginNav.href}
+                        className={classNames(
+                          activeNavItems["/login"]
+                            ? "bg-green-700 text-white"
+                            : "text-gray-900 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current="page"
+                      >
+                        {loginNav.name}
+                      </Link>
+                      <Link
+                        to="/signup"
+                        href={signupNav.href}
+                        className={classNames(
+                          activeNavItems["/signup"]
+                            ? "bg-green-700 text-white"
+                            : "text-gray-900 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current="page"
+                      >
+                        {signupNav.name}
+                      </Link>
+
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

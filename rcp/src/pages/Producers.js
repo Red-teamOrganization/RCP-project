@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection,getDocs, setDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Products from "../components/Products";
+import "./producer.css"
 
 function Producers() {
   const [proProducts, setProProducts] = useState({
@@ -70,6 +71,7 @@ function Producers() {
       POTATOES: 0,
       APPLES: 0,
     });
+    
   }
 
   const product = Object.keys(proProducts).map((product, i) => {
@@ -85,10 +87,13 @@ function Producers() {
     );
   });
   return (
-    <div>
-      {product}
+    <div className="producerCONPage">
+      <h1 className="producerCONHeader">PRODUCER page</h1>
+
+      {product} 
       <div>
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}
+        className="submit-button">Submit</button>
       </div>
     </div>
   );
