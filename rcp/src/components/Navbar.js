@@ -167,18 +167,4 @@ export default function Navbar() {
   );
 }
 
-// function Navbar() {
-//   return (
-//     <nav>
-//       <h3>
-//         <Link to="/">RCP</Link>
-//       </h3>
-//       <div>
-//         <Link to="/signup">Signup</Link>
-//         <Link to="/login">Login</Link>
-//       </div>
-//     </nav>
-//   );
-// }
 
-// export default Navbar;
