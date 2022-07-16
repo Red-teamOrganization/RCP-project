@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { compareProducts } from "../utils/util";
 
 
 
@@ -53,9 +54,11 @@ function Monitor({ userProducts }) {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(products).map((item, i) => {
-            return getRow(item, i)
-          })}
+          {Object.entries(products)
+            .sort(compareProducts)
+            .map((item, i) => {
+              return getRow(item, i)
+            })}
 
         </tbody>
       </table>
