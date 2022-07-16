@@ -14,7 +14,6 @@ function Products({name, quantity, handleChange, totalConsumption, totalProducti
     getUser();
   }, []);
 
-  console.log(availability, totalConsumption,totalProduction)
   return (
     <div> 
         <h3>{name}</h3>
