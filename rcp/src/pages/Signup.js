@@ -4,7 +4,6 @@ import { auth, db } from "../firebase";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from '@heroicons/react/solid';
-import './Home.css';
 import LaodingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
 import Footer from "../components/Footer";
@@ -171,7 +170,7 @@ export default function Signup() {
         </div>
         
       </div>
-      <Footer />
+      <Footer classPosition="footer"/>
     </>
   )
 }

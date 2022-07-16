@@ -4,9 +4,8 @@ import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from '@heroicons/react/solid'
 import LoadingComponent from "../components/LoadingComponent";
-import './Home.css';
 import logo from "../images/logo.png";
-import Footer from "../components/Footer";
+import FooterLogin from "../components/FooterLogin";
 
 export default function Login() {
 
@@ -50,7 +49,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 margin-bottom-7">
+      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-md w-full space-y-8">
           <div>
           <img src={logo} width={"150px"} className="mx-auto" alt="" />
@@ -112,7 +111,7 @@ export default function Login() {
           </form>
         </div>
       </div>
-      <Footer />
+      <FooterLogin />
     </>
   )
 }

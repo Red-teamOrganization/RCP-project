@@ -1,3 +1,4 @@
+import "../pages/Home.css";
 function MainHome(){
     
     return( <main className='mainPage'>
