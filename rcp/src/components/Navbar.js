@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 /* This example requires Tailwind CSS v2.0+ */
@@ -7,6 +8,7 @@ import { AuthContext } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import logo from "../images/logo.png";
 
 const navigation = [
   { name: "Login", href: "/login", current: false },
@@ -46,12 +48,18 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link to="/">
-                    <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+
+                    <img src={logo} width={"63px"}  alt="" />
+                  </Link>
+                  <Link to="/">
+                    <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate ">
+
                       RCP
                     </h2>
                   </Link>
                 </div>
               </div>
+
               {user ? (
                 <button className="btn" onClick={handleSignout}>
                   Logout
@@ -83,6 +91,7 @@ export default function Navbar() {
                         {signupNav.name}
                       </Link>
                     </div>
+
                   </div>
                 </div>
               )}
