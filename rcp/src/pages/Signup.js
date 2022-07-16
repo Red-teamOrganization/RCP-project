@@ -147,7 +147,7 @@ export default function Signup() {
 
             {error
               ?
-              <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+              <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                 {error}
               </div>
 
@@ -161,7 +161,7 @@ export default function Signup() {
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                {loading ? "Creating ..." : "Signup"}
+                {loading ? "Creating ..." : "Sign up"}
               </button>
             </div>
           </form>

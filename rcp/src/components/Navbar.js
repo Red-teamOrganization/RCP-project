@@ -1,9 +1,15 @@
-import React from "react";
+
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 /* This example requires Tailwind CSS v2.0+ */
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { AuthContext } from "../context/auth";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import logo from "../images/logo.png";
+
 const navigation = [
   { name: "Login", href: "/login", current: false },
   { name: "Sign Up", href: "/signup", current: true },
@@ -15,6 +21,13 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  async function handleSignout() {
+    await signOut(auth);
+    navigate("/login");
+  }
+
   return (
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
@@ -35,44 +48,53 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link to="/">
+
                     <img src={logo} width={"63px"}  alt="" />
                   </Link>
                   <Link to="/">
                     <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate ">
+
                       RCP
                     </h2>
                   </Link>
                 </div>
               </div>
 
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
-                    <Link
-                      to="/login"
-                      href={loginNav.href}
-                      className={classNames(
-                        "text-gray-900 hover:bg-gray-700 hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
-                      aria-current="page"
-                    >
-                      {loginNav.name}
-                    </Link>
-                    <Link
-                      to="/signup"
-                      href={signupNav.href}
-                      className={classNames(
-                        "bg-gray-900 text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
-                      aria-current="page"
-                    >
-                      {signupNav.name}
-                    </Link>
+              {user ? (
+                <button className="btn" onClick={handleSignout}>
+                  Logout
+                </button>
+              ) : (
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <div className="hidden sm:block sm:ml-6">
+                    <div className="flex space-x-4">
+                      <Link
+                        to="/login"
+                        href={loginNav.href}
+                        className={classNames(
+                          "text-gray-900 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current="page"
+                      >
+                        {loginNav.name}
+                      </Link>
+                      <Link
+                        to="/signup"
+                        href={signupNav.href}
+                        className={classNames(
+                          "bg-gray-900 text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current="page"
+                      >
+                        {signupNav.name}
+                      </Link>
+                    </div>
+
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
