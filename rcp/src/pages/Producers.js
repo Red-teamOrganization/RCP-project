@@ -76,7 +76,7 @@ function Producers({name}) {
   }, []);
 
   async function handleChange(e) {
-    setProProducts({ ...proProducts, [e.target.name]: e.target.value  });
+    setProProducts({ ...proProducts, [e.target.name]: e.target.value });
   }
   async function handleSubmit(e) {
     e.preventDefault();
@@ -108,16 +108,17 @@ function Producers({name}) {
         <h1 className="producerCONHeader">PRODUCER page</h1>
         <form onSubmit={handleSubmit}>
           {product}
-
-          <button className="submit-button">Submit</button>
+          <div className="submit-container">
+            <button className="submit-button">Submit</button>
+          </div>
         </form>
-          <div>
+        <div>
           <h4>Your Products this Month</h4>
-          <Monitor userProducts={userProducts} yearly={false}/>
+          <Monitor userProducts={userProducts} yearly={false} />
           <h4>Total Production per Year</h4>
-          <Monitor userProducts={sumProProducts} yearly={true}/>
+          <Monitor userProducts={sumProProducts} yearly={true} />
           <h4>Total Consumption per Year</h4>
-          <Monitor userProducts={sumConProducts} yearly={true}/>
+          <Monitor userProducts={sumConProducts} yearly={true} />
 
         </div>
       </div>
