@@ -37,7 +37,9 @@ function Products({
           placeholder="0"
           className="inputProducer"
         />
-        <label className="weight" htmlFor={name}>kg</label>
+        <label className="weight" htmlFor={name}>
+          kg
+        </label>
       </form>
       {user.isProducer ? (
         market ? (
@@ -48,7 +50,7 @@ function Products({
       ) : availability ? (
         <h5 className="consumerMessage">"The product is available"</h5>
       ) : (
-        <h5 className="consumerMessage" >"The product is not available"</h5>
+        <h5 className="consumerMessage">"The product is not available"</h5>
       )}
     </>
   );

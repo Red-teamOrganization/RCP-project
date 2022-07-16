@@ -1,60 +1,64 @@
-.producerCONPage{
-    background-color: rgb(61, 117, 61);
-    height: 100vh;
-    display: flex;
-    padding: 2em;
-    flex-direction: column;
-    align-items: center;
+.producerCONPage {
+  background-color: rgb(61, 117, 61);
+  height: 100vh;
+  display: flex;
+  padding: 2em;
+  flex-direction: column;
+  align-items: center;
 }
-.producerCONHeader{
-text-align: center;
-color: white;
-margin-bottom: 2em;
+.producerCONHeader {
+  text-align: center;
+  color: white;
+  margin-bottom: 2em;
 }
-.submit-button{
-    background: linear-gradient(90deg, rgba(63,251,66,1) 15%, rgba(64,150,65,1) 72%);
-    padding: 1em;
-    width: 10em;
-    border: 2px solid greenyellow;
-    border-radius: 10px;
-    color: white;
-    margin-top: 1em;
+.submit-button {
+  background: linear-gradient(
+    90deg,
+    rgba(63, 251, 66, 1) 15%,
+    rgba(64, 150, 65, 1) 72%
+  );
+  padding: 1em;
+  width: 10em;
+  border: 2px solid greenyellow;
+  border-radius: 10px;
+  color: white;
+  margin-top: 1em;
 }
-.producerCONForm{
-    display: flex;
-    align-items: center;
+.producerCONForm {
+  display: flex;
+  align-items: center;
 }
-.productName{
-    color:white;
-    text-align: center;
-    margin-top: 1em;
+.productName {
+  color: white;
+  text-align: center;
+  margin-top: 1em;
 }
-.labels{
-    color:white;
-    margin-bottom: 1em;
-    text-align: center;
+.labels {
+  color: white;
+  margin-bottom: 1em;
+  text-align: center;
 }
-.inputProducer{
-    width: 100%;
-   color: white;
-   background-color: rgb(42, 37, 37);
-   border-radius: 10px;
-   outline:none;
-   border: 0px;
+.inputProducer {
+  width: 100%;
+  color: white;
+  background-color: rgb(42, 37, 37);
+  border-radius: 10px;
+  outline: none;
+  border: 0px;
 }
-.weight{
-    color: white;
+.weight {
+  color: white;
 }
-.producerMessage{
-    color:white;
-    margin-top: 0.5em;
-    text-align: center;
+.producerMessage {
+  color: white;
+  margin-top: 0.5em;
+  text-align: center;
 }
-.consumerMessage{
-    color:white;
-    margin-top: 0.5em;
-    text-align: center;
+.consumerMessage {
+  color: white;
+  margin-top: 0.5em;
+  text-align: center;
 }
-.submit-button:hover{
-    opacity: 0.8;
+.submit-button:hover {
+  opacity: 0.8;
 }

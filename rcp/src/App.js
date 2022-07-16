@@ -5,15 +5,12 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css"
-
-
+import "./App.css";
 
 import AuthProvider from "./context/auth";
 
 function App() {
   return (
-
     <AuthProvider>
       <BrowserRouter>
         <Navbar />
@@ -26,7 +23,6 @@ function App() {
         <Footer />
       </BrowserRouter>
     </AuthProvider>
-
   );
 }
 
