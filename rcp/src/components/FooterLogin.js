@@ -1,8 +1,8 @@
-import "../pages/Home.css";
 import logo from "../images/logo.png";
-function Footer(){
+import "../pages/Home.css";
+function FooterLogin(){
     return(  
-    <footer className="footer">
+    <footer className="footer-b0">
     <img className='footerLogo' width={'80px'} src={logo} alt="" srcset="" />
     <ul className='contactUs'>
          <h2>CONTACT US</h2>
@@ -15,4 +15,4 @@ function Footer(){
   </footer>
   )
 }
-export default Footer;
+export default FooterLogin;
