@@ -1,11 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { compareProducts } from "../utils/util";
 
-function Monitor({userProducts, yearly}) {
+function Monitor({ userProducts, yearly }) {
   const [products, setProducts] = useState({});
   useEffect(() => {
     setProducts(userProducts);
   }, [userProducts]);
+
+  function getRow(rowData, index) {
+    console.log(rowData, index);
+    return (
+      <tr
+        key={index}
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+      >
+        <th
+          scope="row"
+          className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {rowData[0]}
+        </th>
+        <td className="py-4 px-6">{yearly ? rowData[1] * 12 : rowData[1]}</td>
+      </tr>
+    );
+  }
 
   if (!(Object.entries(userProducts).length > 0)) {
     return (
@@ -98,21 +116,4 @@ function Monitor({userProducts, yearly}) {
   );
 }
 
-function getRow(rowData, index, yearly) {
-  console.log(rowData, index);
-  return (
-    <tr
-      key={index}
-      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-    >
-      <th
-        scope="row"
-        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-      >
-        {rowData[0]}
-      </th>
-      <td className="py-4 px-6">{yearly?(rowData[1]*12):rowData[1]}</td>
-    </tr>
-  );
-}
 export default Monitor;
