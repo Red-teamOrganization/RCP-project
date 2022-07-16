@@ -107,20 +107,18 @@ function Consumers({name}) {
     <>
       <div className="producerCONPage">
         <h1 className="producerCONHeader">CONSUMER page</h1>
-
-        <div>
-        {product}
-        <button onClick={handleSubmit} className="submit-button">
-          Submit
-        </button>
+        <div className="submit-container">
+          {product}
+          <button onClick={handleSubmit} className="submit-button">
+            Submit
+          </button>
         </div>
 
         <div>
-          <h4>Your Consumption this Month</h4>
-          <Monitor userProducts={userProducts} yearly={false}/>
-          <h4>Your Consumption this Year</h4>
+          <h2>Your Consumption this Month</h2>
+          <Monitor userProducts={userProducts} yearly={false} />
+          <h2>Your Consumption this Year</h2>
           <Monitor userProducts={userProducts} yearly={true} />
-
         </div>
       </div>
     </>
