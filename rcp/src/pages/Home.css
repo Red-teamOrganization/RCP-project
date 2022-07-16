@@ -69,6 +69,18 @@ h1{
     background-color: black;
     justify-content: space-around;
     align-items: center;
+    position: absolute;
+
+}
+.footer-b0{
+    width: 100%;
+    display: flex;
+    background-color: black;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+
 }
 .contactUs{
     width: 30%;
@@ -77,6 +89,7 @@ h1{
 .hover:hover{
 color:  rgb(61, 117, 61);
 }
+
 
 @media only screen and (max-width: 800px)  {
 .mainPage{
