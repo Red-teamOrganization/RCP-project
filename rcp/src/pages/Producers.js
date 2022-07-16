@@ -111,7 +111,12 @@ function Producers() {
           <button className="submit-button">Submit</button>
         </form>
           <div>
-          <Monitor userProducts={userProducts} />
+          <h4>Your Products this Month</h4>
+          <Monitor userProducts={userProducts} yearly={false}/>
+          <h4>Total Production per Year</h4>
+          <Monitor userProducts={sumProProducts} yearly={true}/>
+          <h4>Total Consumption per Year</h4>
+          <Monitor userProducts={sumConProducts} yearly={true}/>
         </div>
       </div>
     </>

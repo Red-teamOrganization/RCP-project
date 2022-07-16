@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { compareProducts } from "../utils/util";
 
-function Monitor({ userProducts }) {
+function Monitor({userProducts, yearly}) {
   const [products, setProducts] = useState({});
   useEffect(() => {
     setProducts(userProducts);
@@ -86,10 +86,10 @@ function Monitor({ userProducts }) {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(products)
+          {Object.entries(userProducts)
             .sort(compareProducts)
             .map((item, i) => {
-              return getRow(item, i)
+              return getRow(item, i, yearly)
             })}
 
         </tbody>
@@ -98,7 +98,7 @@ function Monitor({ userProducts }) {
   );
 }
 
-function getRow(rowData, index) {
+function getRow(rowData, index, yearly) {
   console.log(rowData, index);
   return (
     <tr
@@ -111,7 +111,7 @@ function getRow(rowData, index) {
       >
         {rowData[0]}
       </th>
-      <td className="py-4 px-6">{rowData[1]}</td>
+      <td className="py-4 px-6">{yearly?(rowData[1]*12):rowData[1]}</td>
     </tr>
   );
 }

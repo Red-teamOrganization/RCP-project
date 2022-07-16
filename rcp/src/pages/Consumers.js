@@ -114,7 +114,11 @@ function Consumers() {
 
         <br />
         <div>
-          <Monitor userProducts={userProducts} />
+          <h4>Your Consumption this Month</h4>
+          <Monitor userProducts={userProducts} yearly={false}/>
+          <h4>Your Consumption this Year</h4>
+          <Monitor userProducts={userProducts} yearly={true} />
+
         </div>
       </div>
     </>
