@@ -13,7 +13,7 @@ import Monitor from "../components/Monitor";
 
 import "./producer.css";
 
-function Consumers() {
+function Consumers({name}) {
   const [conProducts, setConProducts] = useState({
     TOMATOES: 0,
     POTATOES: 0,
