@@ -108,6 +108,7 @@ function Producers() {
         <h1 className="producerCONHeader">PRODUCER page</h1>
         <form onSubmit={handleSubmit}>
           {product}
+
           <button className="submit-button">Submit</button>
         </form>
           <div>
@@ -117,6 +118,7 @@ function Producers() {
           <Monitor userProducts={sumProProducts} yearly={true}/>
           <h4>Total Consumption per Year</h4>
           <Monitor userProducts={sumConProducts} yearly={true}/>
+
         </div>
       </div>
     </>
