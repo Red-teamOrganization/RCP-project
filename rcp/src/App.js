@@ -6,6 +6,7 @@ import Main from "./pages/Main";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import PrivateRoute from "./components/PrivateRoute";
 
 import AuthProvider from "./context/auth";
 
@@ -18,7 +19,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/main" element={<Main />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/main" element={<Main />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
