@@ -28,6 +28,7 @@ width: 100%;
     color: white;
     margin-top: 1em;
     margin-bottom: 1em;
+    margin-left: 20%;
 }
 .submit-button-con{
     background: linear-gradient(90deg, rgba(63,251,66,1) 15%, rgba(64,150,65,1) 72%);
@@ -164,7 +165,6 @@ width: 46%;
     }
     
   }
-
 
   @media only screen and (max-width: 600px) {
  
