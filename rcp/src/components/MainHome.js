@@ -4,7 +4,7 @@ function MainHome() {
     <main className="mainPage">
       <div className="aboutUs">
         <h1>THE ReCiPe Project</h1>
-        <p className="content">
+        <p className="content-aboutus">
           We call our project R.C.P. and it stands for Responsible Consumption
           Production. The way we like to read it is RECIPE because it is a
           recipe for a better society. Our goal is to reduce the waste of food
