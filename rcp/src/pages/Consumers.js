@@ -30,7 +30,11 @@ function Consumers({ name }) {
     APPLES: 0,
   });
   const [userProducts, setUserProducts] = useState({});
-  const [availableProducts, setAvailableProducts] = useState({});
+  const [availableProducts, setAvailableProducts] = useState({
+    TOMATOES: 0,
+    POTATOES: 0,
+    APPLES: 0,
+  });
   console.log(availableProducts);
   useEffect(() => {
     async function getProduction() {
@@ -94,7 +98,7 @@ function Consumers({ name }) {
   }, [sumProProducts]);
 
   async function handleChange(e) {
-    setConProducts({ ...conProducts, [e.target.name]: e.target.value });
+    setConProducts({ ...conProducts, [e.target.name]: parseInt(e.target.value) });
   }
   async function handleSubmit(e) {
     e.preventDefault();
