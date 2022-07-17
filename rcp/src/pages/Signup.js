@@ -67,7 +67,7 @@ export default function Signup() {
 
   return (
     <>
-      <div className="min-h-full signup-login-wrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 h-screen">
         <div className="max-w-md w-full space-y-8">
           <div>
             <img src={logo} width={"150px"} className="mx-auto" alt="" />
