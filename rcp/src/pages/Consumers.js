@@ -124,6 +124,7 @@ function Consumers({ name }) {
     <>
       <div className="producerCONPage">
         <div className="producerCONHeader">
+         <i class="fa-solid fa-person text-xl"></i>
           <h1>Welcome {name}!!!</h1>
           <p>You have login as a consumer</p>
         </div>
@@ -133,8 +134,6 @@ function Consumers({ name }) {
             Submit
           </button>
         </div>
-
-
         <div className="monitors">
           <div className="monitor">
           <h4 className="tableHeaders">Your Consumption this Month</h4>
