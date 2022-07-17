@@ -109,7 +109,7 @@ export default function MainHome() {
         </div>
       </div>
       <div className="text-center bg-green-900">
-        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+        <p className="pt-4 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
           Features
         </p>
       </div>
