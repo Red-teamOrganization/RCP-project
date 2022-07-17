@@ -86,7 +86,7 @@ function Consumers({ name }) {
           [key]:
             sumProProducts[key] - sumConProducts[key] < 0
               ? 0
-              : sumProProducts[key] - sumConProducts[key],
+              : sumProProducts[key] - sumConProducts[key]
         }));
       }
     }
