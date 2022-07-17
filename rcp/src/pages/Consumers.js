@@ -121,16 +121,16 @@ function Consumers({name}) {
         </button>
         </div>
 
-        <div className="consumerMonitors">
-          <div className="consumerMonitor">
+        <div className="monitors">
+          <div className="monitor">
           <h4 className="tableHeaders">Your Consumption this Month</h4>
           <Monitor userProducts={userProducts} yearly={false}/>
           </div>
-          <div className="consumerMonitor">
+          <div className="monitor">
           <h4 className="tableHeaders">Your Consumption this Year</h4>
           <Monitor userProducts={userProducts} yearly={true} />
           </div>
-          <div className="consumerMonitor">
+          <div className="monitor">
           <h4 className="tableHeaders">Available Products in Market</h4>
           <Monitor userProducts={availableProducts} yearly={false}/>
           </div>
