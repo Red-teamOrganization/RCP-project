@@ -100,8 +100,8 @@ function Producers({name}) {
   return (
     <>
       <div className="producerCONPage">
-
        <div className="producerCONHeader">
+       <i class="fa-solid fa-hat-cowboy text-xl"></i>
        <h1>Welcome {name}!!!</h1>
         <p>You have login as a producer.</p>
        </div>
