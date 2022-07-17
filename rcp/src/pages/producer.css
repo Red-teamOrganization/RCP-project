@@ -27,7 +27,18 @@ width: 100%;
     border-radius: 10px;
     color: white;
     margin-top: 1em;
-    margin-left: 5.5em;
+    margin-bottom: 1em;
+}
+.submit-button-con{
+    background: linear-gradient(90deg, rgba(63,251,66,1) 15%, rgba(64,150,65,1) 72%);
+    padding: 1em;
+    width: 12em;
+    border: 2px solid greenyellow;
+    border-radius: 10px;
+    color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 20%;
 }
 .producerCONForm{
     display: flex;
@@ -84,6 +95,9 @@ width: 46%;
 .submit-button:hover{
     opacity: 0.8;
 }
+.submit-button-con:hover{
+    opacity: 0.8;
+}
 @media only screen and (max-width: 1400px) {
     .producerCONPage{
         height: 120vh;
@@ -105,7 +119,7 @@ width: 46%;
   }
   @media only screen and (max-width: 800px) {
     .producerCONPage{
-        height: 130vh;
+        height: 150vh;
     }
     .consumerMonitors{
         display: block;
@@ -125,15 +139,22 @@ width: 46%;
 
 @media only screen and (max-width: 750px) {
     .producerCONPage{
-        height: 190vh;
+        height: 210vh;
+        justify-content: space-between;
     }
     .consumerMonitors{
         display: block;
-       
+        margin-left: 30%;
+    }
+    .form-con{
+        margin-left: 23%;
+    }
+    .form-pro{
+        margin-left: 23%;
     }
     .producerMonitors{
         display: block;
-        
+        margin-left: 30%;
     }
     .producerMonitor{
         width: 100%;
@@ -141,16 +162,25 @@ width: 46%;
     .consumerMonitor{
     width: 100%;
     }
+    
   }
 
-@media only screen and (max-width: 600px){
-    .producerCONPage{
-        background-color: rgb(61, 117, 61);
-        height: 100%;
-        display: flex;
-        padding: 2em;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-around;
-    }   
-}
+
+  @media only screen and (max-width: 600px) {
+ 
+    .consumerMonitors{
+        margin-left: 20%;
+    }
+    .form-con{
+        margin-left: 10%;
+    }
+    .form-pro{
+        margin-left: 5%;
+    }
+    .producerMonitors{
+        margin-left: 20%;
+    }
+  
+    
+  }
+

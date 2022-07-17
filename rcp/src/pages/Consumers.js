@@ -104,9 +104,9 @@ function Consumers({name}) {
         <h1 className="producerCONHeader">Welcome {name}!!!</h1>
         <p className="producerCONHeader">You have login as a consumer</p>
 
-        <div>
+        <div className="form-con">
         {product}
-        <button onClick={handleSubmit} className="submit-button">
+        <button onClick={handleSubmit} className="submit-button-con">
           Submit
         </button>
         </div>

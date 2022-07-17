@@ -100,9 +100,11 @@ function Producers({name}) {
   return (
     <>
       <div className="producerCONPage">
+
         <h1 className="producerCONHeader">Welcome {name}!!!</h1>
         <p className="producerCONHeader">You have login as a producer.</p>
         <form onSubmit={handleSubmit}>
+
           {product}
           <div className="submit-container">
             <button className="submit-button">Submit</button>
