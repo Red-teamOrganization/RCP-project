@@ -114,9 +114,9 @@ function Producers({name}) {
                 <h4 className="tableHeaders">Your Products this Month</h4>
           <Monitor userProducts={userProducts} yearly={false}/>
           </div>
-            <div className="monitor">  <h4 className="tableHeaders">Total Production per Year</h4>
+            <div className="monitor">  <h4 className="tableHeaders">Total Production of Market Yearly</h4>
           <Monitor userProducts={sumProProducts} yearly={true}/></div>
-            <div className="monitor"> <h4 className="tableHeaders">Total Consumption per Year</h4>
+            <div className="monitor"> <h4 className="tableHeaders">Total Consumption of Market Yearly</h4>
           <Monitor userProducts={sumConProducts} yearly={true}/> </div>
        
       
