@@ -26,6 +26,7 @@
   background-repeat: no-repeat;
   background-blend-mode: overlay;
   border-radius: 5px;
+  
 }
 .producerRole {
   margin-top: 2em;
@@ -41,6 +42,7 @@
   background-blend-mode: overlay;
   border-radius: 5px;
 }
+  
 
 .consumerRole {
   margin-top: 2em;
@@ -55,11 +57,18 @@
   background-repeat: no-repeat;
   background-blend-mode: overlay;
   border-radius: 5px;
+  
 }
 .content {
   margin-top: 20%;
   font-size: 1.2rem;
   color: rgb(253, 251, 251);
+}
+.content-aboutus {
+  margin-top: 7%;
+  font-size: 1.2rem;
+  color: rgb(253, 251, 251);
+  
 }
 h1 {
   font-size: 1.5rem;
@@ -73,13 +82,16 @@ h1 {
   }
   .aboutUs {
     width: 100%;
+    overflow: auto;
   }
 
   .consumerRole {
     width: 100%;
+    overflow: auto;
   }
 
   .producerRole {
     width: 100%;
+    overflow: auto;
   }
 }
