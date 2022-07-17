@@ -101,9 +101,10 @@ function Consumers({name}) {
   return (
     <>
       <div className="producerCONPage">
-        <h1 className="producerCONHeader">Welcome {name}!!!</h1>
-        <p className="producerCONHeader">You have login as a consumer</p>
-
+      <div className="producerCONHeader">
+        <h1>Welcome {name}!!!</h1>
+        <p>You have login as a consumer</p>
+        </div>
         <div className="form-con">
         {product}
         <button onClick={handleSubmit} className="submit-button-con">

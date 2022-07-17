@@ -101,14 +101,17 @@ function Producers({name}) {
     <>
       <div className="producerCONPage">
 
-        <h1 className="producerCONHeader">Welcome {name}!!!</h1>
-        <p className="producerCONHeader">You have login as a producer.</p>
-        <form onSubmit={handleSubmit}>
+       <div className="producerCONHeader">
+       <h1>Welcome {name}!!!</h1>
+        <p>You have login as a producer.</p>
+       </div>
+       
+        <form onSubmit={handleSubmit} className="form-pro">
 
           {product}
-          <div className="submit-container">
+         
             <button className="submit-button">Submit</button>
-          </div>
+          
         </form>
 
           <div className="producerMonitors">
