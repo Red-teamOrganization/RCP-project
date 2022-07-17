@@ -30,7 +30,8 @@ function Consumers({name}) {
     APPLES: 0,
   });
   const [userProducts, setUserProducts] = useState({});
-
+  const [availableProducts,setAvailableProducts] = useState({})
+  console.log(availableProducts)
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
@@ -64,10 +65,17 @@ function Consumers({name}) {
       }
       setSumConProducts({ ...obj });
     }
+    function getAvailableProducts(){
+      
+        for (let key in sumProProducts) {
+            setAvailableProducts((current)=>({...current,[key]:(sumProProducts[key]-sumConProducts[key]) < 0 ? 0: (sumProProducts[key]-sumConProducts[key]) }))
+        }
+      }
     const unsub = onSnapshot(doc(db, "consumers", auth.currentUser.uid),(doc) => {setUserProducts({ ...doc.data() })});
 
     getProduction();
     getConsumption();
+    getAvailableProducts();
     return () => unsub();
   }, []);
 
@@ -113,12 +121,17 @@ function Consumers({name}) {
         </div>
 
         <div className="consumerMonitors">
-          <div className="consumerMonitor"><h4 className="tableHeaders">Your Consumption this Month</h4>
+          <div className="consumerMonitor">
+          <h4 className="tableHeaders">Your Consumption this Month</h4>
           <Monitor userProducts={userProducts} yearly={false}/>
           </div>
           <div className="consumerMonitor">
           <h4 className="tableHeaders">Your Consumption this Year</h4>
           <Monitor userProducts={userProducts} yearly={true} />
+          </div>
+          <div className="consumerMonitor">
+          <h4 className="tableHeaders">Available Products in Market</h4>
+          <Monitor userProducts={availableProducts} yearly={false}/>
           </div>
          
 
