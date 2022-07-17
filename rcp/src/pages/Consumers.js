@@ -13,7 +13,7 @@ import Monitor from "../components/Monitor";
 
 import "./producer.css";
 
-function Consumers({name}) {
+function Consumers({ name }) {
   const [conProducts, setConProducts] = useState({
     TOMATOES: 0,
     POTATOES: 0,
@@ -30,7 +30,8 @@ function Consumers({name}) {
     APPLES: 0,
   });
   const [userProducts, setUserProducts] = useState({});
-
+  const [availableProducts, setAvailableProducts] = useState({});
+  console.log(availableProducts);
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
@@ -64,12 +65,33 @@ function Consumers({name}) {
       }
       setSumConProducts({ ...obj });
     }
-    const unsub = onSnapshot(doc(db, "consumers", auth.currentUser.uid),(doc) => {setUserProducts({ ...doc.data() })});
 
-    getProduction();
+    const unsub = onSnapshot(
+      doc(db, "consumers", auth.currentUser.uid),
+      (doc) => {
+        setUserProducts({ ...doc.data() });
+      }
+    );
+
     getConsumption();
+    getProduction();
+
     return () => unsub();
   }, []);
+  useEffect(() => {
+    function getAvailableProducts() {
+      for (let key in sumProProducts) {
+        setAvailableProducts((current) => ({
+          ...current,
+          [key]:
+            sumProProducts[key] - sumConProducts[key] < 0
+              ? 0
+              : sumProProducts[key] - sumConProducts[key],
+        }));
+      }
+    }
+    getAvailableProducts();
+  }, [sumProProducts]);
 
   async function handleChange(e) {
     setConProducts({ ...conProducts, [e.target.name]: e.target.value });
@@ -101,26 +123,31 @@ function Consumers({name}) {
   return (
     <>
       <div className="producerCONPage">
-        <h1 className="producerCONHeader">Welcome {name}!!!</h1>
-        <p className="producerCONHeader">You have login as a consumer</p>
-
-        <div className="form-con">
-        {product}
-        <button onClick={handleSubmit} className="submit-button-con">
-          Submit
-        </button>
+        <div className="producerCONHeader">
+         <i class="fa-solid fa-person text-xl"></i>
+          <h1>Welcome {name}!!!</h1>
+          <p>You have login as a consumer</p>
         </div>
-
-        <div className="consumerMonitors">
-          <div className="consumerMonitor"><h4 className="tableHeaders">Your Consumption this Month</h4>
+        <div className="form-con">
+          {product}
+          <button onClick={handleSubmit} className="submit-button-con">
+            Submit
+          </button>
+        </div>
+        <div className="monitors">
+          <div className="monitor">
+          <h4 className="tableHeaders">Your Consumption this Month</h4>
           <Monitor userProducts={userProducts} yearly={false}/>
           </div>
-          <div className="consumerMonitor">
+          <div className="monitor">
           <h4 className="tableHeaders">Your Consumption this Year</h4>
           <Monitor userProducts={userProducts} yearly={true} />
           </div>
-         
+          <div className="monitor">
+          <h4 className="tableHeaders">Available Products in Market</h4>
+          <Monitor userProducts={availableProducts} yearly={false}/>
 
+          </div>
         </div>
       </div>
     </>

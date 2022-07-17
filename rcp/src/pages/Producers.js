@@ -100,30 +100,26 @@ function Producers({name}) {
   return (
     <>
       <div className="producerCONPage">
-
-        <h1 className="producerCONHeader">Welcome {name}!!!</h1>
-        <p className="producerCONHeader">You have login as a producer.</p>
-        <form onSubmit={handleSubmit}>
-
+       <div className="producerCONHeader">
+       <i className="fa-solid fa-hat-cowboy text-xl"></i>
+       <h1>Welcome {name}!!!</h1>
+        <p>You have login as a producer.</p>
+       </div>
+        <form onSubmit={handleSubmit} className="form-pro">
           {product}
-          <div className="submit-container">
             <button className="submit-button">Submit</button>
-          </div>
         </form>
-
-          <div className="producerMonitors">
-            <div className="producerMonitor"> 
+          <div className="monitors">
+            <div className="monitor"> 
                 <h4 className="tableHeaders">Your Products this Month</h4>
           <Monitor userProducts={userProducts} yearly={false}/>
           </div>
-            <div className="producerMonitor">  <h4 className="tableHeaders">Total Production per Year</h4>
+            <div className="monitor">  <h4 className="tableHeaders">Total Production of Market Yearly</h4>
           <Monitor userProducts={sumProProducts} yearly={true}/></div>
-            <div className="producerMonitor"> <h4 className="tableHeaders">Total Consumption per Year</h4>
+            <div className="monitor"> <h4 className="tableHeaders">Total Consumption of Market Yearly</h4>
           <Monitor userProducts={sumConProducts} yearly={true}/> </div>
        
-        
-         
-
+      
         </div>
       </div>
     </>
