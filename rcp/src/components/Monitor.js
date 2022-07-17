@@ -9,7 +9,7 @@ function Monitor({ userProducts, yearly }) {
 
 
 
-  if (!(Object.entries(userProducts).length > 0)) {
+  if (!(Object.entries(products).length > 0)) {
     return (
       <>
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -75,7 +75,7 @@ function Monitor({ userProducts, yearly }) {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(userProducts)
+          {Object.entries(products)
             .sort(compareProducts)
             .map((item, i) => {
               return getRow(item, i, yearly);

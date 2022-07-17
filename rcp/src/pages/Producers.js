@@ -63,12 +63,7 @@ function Producers({name}) {
       setSumConProducts({ ...obj });
     }
 
-    const unsub = onSnapshot(
-      doc(db, "producers", auth.currentUser.uid),
-      (doc) => {
-        setUserProducts({ ...doc.data() });
-      }
-    );
+    const unsub = onSnapshot(doc(db, "producers", auth.currentUser.uid),(doc) => {setUserProducts({ ...doc.data() })});
 
     getProduction();
     getConsumption();

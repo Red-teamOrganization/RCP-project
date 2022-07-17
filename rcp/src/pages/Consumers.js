@@ -64,12 +64,7 @@ function Consumers({name}) {
       }
       setSumConProducts({ ...obj });
     }
-    const unsub = onSnapshot(
-      doc(db, "consumers", auth.currentUser.uid),
-      (doc) => {
-        setUserProducts({ ...doc.data() });
-      }
-    );
+    const unsub = onSnapshot(doc(db, "consumers", auth.currentUser.uid),(doc) => {setUserProducts({ ...doc.data() })});
 
     getProduction();
     getConsumption();
@@ -107,12 +102,12 @@ function Consumers({name}) {
     <>
       <div className="producerCONPage">
         <h1 className="producerCONHeader">CONSUMER page</h1>
-        <div className="submit-container">
+        <form onSubmit={handleSubmit}>
           {product}
-          <button onClick={handleSubmit} className="submit-button">
-            Submit
-          </button>
-        </div>
+          <div className="submit-container">
+            <button className="submit-button">Submit</button>
+          </div>
+        </form>
 
         <div>
           <h2>Your Consumption this Month</h2>
