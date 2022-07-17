@@ -4,7 +4,10 @@ import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import "../pages/Home.css";
 import heroimage from "./../images/recipe.jpeg"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import zakaria from "../images/zakaria.jfif";
+import anilson from "../images/anilson.png";
+import dionisis from "../images/dionisis.jpg";
 
 export default function MainHome() {
   return (
@@ -143,21 +146,21 @@ export default function MainHome() {
       <div className='p-6 w-full' style={{ display: "flex", justifyContent: "space-around", alignContent: "center", flexWrap: "wrap" }}>
 
         <a href="#" class="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={heroimage} alt="" />
+          <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={dionisis} alt="" />
           <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Dionisis</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The Capitain, the one that comands the route of the <></>ship by leading the backend</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The Captain, the one that commands the route of the <></>ship by leading the backend</p>
           </div>
         </a>
         <a href="#" class="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <img class="object-cover w-full  rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={heroimage} alt="" />
+          <img class="object-cover w-full  rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={zakaria} alt="" />
           <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Zakaria</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The eye in the sky, that catch every design aspects and bring the app up to high levels of astectics</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The eye in the sky, that catch every design aspects and bring the app up to high levels of ascetics</p>
           </div>
         </a>
         <a href="#" class="w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={heroimage} alt="" />
+          <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={anilson} alt="" />
           <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Anilson</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The silent bug catcher, and a feature proposal</p>
@@ -169,44 +172,4 @@ export default function MainHome() {
   )
 }
 
-// function MainHome_() {
-//   return (
-//     <main className="mainPage">
-//       <div className="aboutUs">
-//         <h1>THE ReCiPe Project</h1>
-//         <p className="content">
-//           We call our project R.C.P. and it stands for Responsible Consumption
-//           Production. The way we like to read it is RECIPE because it is a
-//           recipe for a better society. Our goal is to reduce the waste of food
-//           and help people have better prices and producers have more efficient
-//           production and foolproof work.
-//           <br />
-//           <br />
-//           This application plan to gather data of the total production and the
-//           total consumption. Small societies to big countries can use that data
-//           to reduce food waste, adjust the prices of goods and create new job
-//           opportunities.
-//         </p>
 
-//       </div>
-      // <aside className="producerRole">
-      //   <h1>PRODUCER ROLE</h1>
-      //   <p className="content">
-      //     Producers provide the ReCiPe with his current estimated production and
-      //     can have valuable data back from other producers but from consumers
-      //     needs too. That way he can adjust his production and he can be
-      //     prepared for the upcoming years and evolve professionally.
-      //   </p>
-      // </aside>
-      // <aside className="consumerRole">
-      //   <h1>CONSUMER ROLE</h1>
-      //   <p className="content">
-      //     Consumer provide ReCiPe with his monthly needs and he can see which
-      //     products are available or not tha way can adjust his current needs and
-      //     consume products that are available and plenty in the market. That way
-      //     can achieve better prices and help in food waste.
-      //   </p>
-      // </aside>
-//     </main>
-//   );
-// }
