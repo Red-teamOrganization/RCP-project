@@ -14,7 +14,7 @@ function Main() {
     getUser();
   }, []);
 
-  return <div>{user.isProducer ? <Producers /> : <Consumers />}</div>;
+  return <div>{user.isProducer ? <Producers name={user.name}/> : <Consumers name={user.name}/>}</div>;
 }
 
 export default Main;

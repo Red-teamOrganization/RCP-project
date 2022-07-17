@@ -13,7 +13,7 @@ import Monitor from "../components/Monitor";
 
 import "./producer.css";
 
-function Consumers() {
+function Consumers({name}) {
   const [conProducts, setConProducts] = useState({
     TOMATOES: 0,
     POTATOES: 0,
@@ -64,12 +64,7 @@ function Consumers() {
       }
       setSumConProducts({ ...obj });
     }
-    const unsub = onSnapshot(
-      doc(db, "consumers", auth.currentUser.uid),
-      (doc) => {
-        setUserProducts({ ...doc.data() });
-      }
-    );
+    const unsub = onSnapshot(doc(db, "consumers", auth.currentUser.uid),(doc) => {setUserProducts({ ...doc.data() })});
 
     getProduction();
     getConsumption();
@@ -107,6 +102,7 @@ function Consumers() {
     <>
       <div className="producerCONPage">
         <h1 className="producerCONHeader">CONSUMER page</h1>
+
         <div>
         {product}
         <button onClick={handleSubmit} className="submit-button">
@@ -123,6 +119,7 @@ function Consumers() {
           <Monitor userProducts={userProducts} yearly={true} />
           </div>
          
+
         </div>
       </div>
     </>

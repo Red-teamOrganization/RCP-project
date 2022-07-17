@@ -11,7 +11,7 @@ import Products from "../components/Products";
 import "./producer.css";
 import Monitor from "../components/Monitor";
 
-function Producers() {
+function Producers({name}) {
   const [proProducts, setProProducts] = useState({
     TOMATOES: 0,
     POTATOES: 0,
@@ -63,12 +63,7 @@ function Producers() {
       setSumConProducts({ ...obj });
     }
 
-    const unsub = onSnapshot(
-      doc(db, "producers", auth.currentUser.uid),
-      (doc) => {
-        setUserProducts({ ...doc.data() });
-      }
-    );
+    const unsub = onSnapshot(doc(db, "producers", auth.currentUser.uid),(doc) => {setUserProducts({ ...doc.data() })});
 
     getProduction();
     getConsumption();
@@ -76,7 +71,7 @@ function Producers() {
   }, []);
 
   async function handleChange(e) {
-    setProProducts({ ...proProducts, [e.target.name]: e.target.value  });
+    setProProducts({ ...proProducts, [e.target.name]: e.target.value });
   }
   async function handleSubmit(e) {
     e.preventDefault();
@@ -108,9 +103,11 @@ function Producers() {
         <h1 className="producerCONHeader">PRODUCER page</h1>
         <form onSubmit={handleSubmit}>
           {product}
-
-          <button className="submit-button">Submit</button>
+          <div className="submit-container">
+            <button className="submit-button">Submit</button>
+          </div>
         </form>
+
           <div className="producerMonitors">
             <div className="producerMonitor"> 
                 <h4 className="tableHeaders">Your Products this Month</h4>
@@ -123,6 +120,7 @@ function Producers() {
        
         
          
+
         </div>
       </div>
     </>
