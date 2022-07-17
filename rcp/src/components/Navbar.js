@@ -188,8 +188,6 @@ export default function Navbar() {
                     )}
                     aria-current={item.current ? "page" : undefined}
                   >
-                    {console.log(`${item.href}`)}
-
                     {item.name}
                   </Disclosure.Button>
                 ))

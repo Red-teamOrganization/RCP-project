@@ -31,7 +31,6 @@ function Consumers({ name }) {
   });
   const [userProducts, setUserProducts] = useState({});
   const [availableProducts, setAvailableProducts] = useState({});
-  console.log(availableProducts);
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
