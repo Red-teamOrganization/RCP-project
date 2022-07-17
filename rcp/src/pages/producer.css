@@ -16,11 +16,12 @@ width: 100%;
 .submit-button{
     background: linear-gradient(90deg, rgba(63,251,66,1) 15%, rgba(64,150,65,1) 72%);
     padding: 1em;
-    width: 10em;
+    width: 12em;
     border: 2px solid greenyellow;
     border-radius: 10px;
     color: white;
     margin-top: 1em;
+    margin-left: 5.5em;
 }
 .producerCONForm{
     display: flex;
@@ -57,7 +58,82 @@ width: 100%;
     margin-top: 0.5em;
     text-align: center;
 }
+.consumerMonitors{
+    display: flex;
+    justify-content: space-between;
+}
+.producerMonitors{
+    display: flex;
+    justify-content: space-between;
+}
+.producerMonitor{
+    width: 32%;
+}
+.consumerMonitor{
+width: 46%;
+}
+.tableHeaders{
+    color: white;
+}
 .submit-button:hover{
     opacity: 0.8;
 }
+@media only screen and (max-width: 1400px) {
+    .producerCONPage{
+        height: 120vh;
+    }
+    .consumerMonitors{
+        display: block;
+       
+    }
+    .producerMonitors{
+        display: block;
+        
+    }
+    .producerMonitor{
+        width: 100%;
+    }
+    .consumerMonitor{
+    width: 100%;
+    }
+  }
+  @media only screen and (max-width: 800px) {
+    .producerCONPage{
+        height: 130vh;
+    }
+    .consumerMonitors{
+        display: block;
+       
+    }
+    .producerMonitors{
+        display: block;
+        
+    }
+    .producerMonitor{
+        width: 100%;
+    }
+    .consumerMonitor{
+    width: 100%;
+    }
+  }
+
+@media only screen and (max-width: 750px) {
+    .producerCONPage{
+        height: 190vh;
+    }
+    .consumerMonitors{
+        display: block;
+       
+    }
+    .producerMonitors{
+        display: block;
+        
+    }
+    .producerMonitor{
+        width: 100%;
+    }
+    .consumerMonitor{
+    width: 100%;
+    }
+  }
 
