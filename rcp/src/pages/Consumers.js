@@ -103,9 +103,9 @@ function Consumers({name}) {
       <div className="producerCONPage">
         <h1 className="producerCONHeader">CONSUMER page</h1>
 
-        <div>
+        <div className="form-con">
         {product}
-        <button onClick={handleSubmit} className="submit-button">
+        <button onClick={handleSubmit} className="submit-button-con">
           Submit
         </button>
         </div>

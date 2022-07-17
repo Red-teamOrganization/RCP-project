@@ -101,7 +101,7 @@ function Producers({name}) {
     <>
       <div className="producerCONPage">
         <h1 className="producerCONHeader">PRODUCER page</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form-pro'>
           {product}
           <div className="submit-container">
             <button className="submit-button">Submit</button>
