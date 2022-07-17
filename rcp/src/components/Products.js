@@ -32,7 +32,7 @@ function Products({
           type="number"
           name={name}
           id={name}
-          value={quantity}
+          // value={quantity}
           onChange={handleChange}
           placeholder="0"
           className="inputProducer"

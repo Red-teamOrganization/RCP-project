@@ -166,4 +166,27 @@ width: 100%;
   
     
   }
+  @media only screen and (max-width: 450px) {
+    .producerCONPage{
+        height: 300vh;
+    }
+  
+    .form-con{
+        margin-left: 10%;
+    }
+    .form-pro{
+        margin-left: 5%;
+    }
+    .monitors{
+        margin-left: 10%;
+    }
+    .submit-button-con{
+      
+        margin-left: 10%;
+    }
+    .submit-button{
+        margin-left: 10%;
+    }
+  }
+
 
