@@ -102,6 +102,7 @@ function Consumers({name}) {
     <>
       <div className="producerCONPage">
       <div className="producerCONHeader">
+      <i class="fa-solid fa-person text-xl"></i>
         <h1>Welcome {name}!!!</h1>
         <p>You have login as a consumer</p>
         </div>
