@@ -74,7 +74,7 @@ export default function Navbar() {
                 </div>
               </div>
               {user ? (
-                <>
+                <div className="hidden sm:flex">
                   <Link
                     to="/main"
                     href={loginNav.href}
@@ -93,14 +93,14 @@ export default function Navbar() {
                     href={loginNav.href}
                     className={classNames(
                       "text-green-900 hover:bg-green-700 hover:text-white",
-                      "px-3 py-2 rounded-md text-sm font-medium"
+                      "px-3 py-2 rounded-md text-sm font-medium mx-2"
                     )}
                     aria-current="page"
                     onClick={handleSignout}
                   >
                     Logout
                   </div>
-                </>
+                </div>
               ) : (
                 // <button className="btn" onClick={handleSignout}>
                 //   Logout
@@ -138,32 +138,68 @@ export default function Navbar() {
                   </div>
                 </div>
               )}
+
             </div>
           </div>
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+              {user
+                ? (
+                  <>
+
+                    <Link to="main"
+                      style={{ display: "block" }}
+                      className={classNames(
+                        activeNavItems["/main"]
+                          ? "w-full bg-green-700 text-white"
+                          : "text-green-900 hover:bg-green-700 hover:text-white",
+                        "px-3 py-2 rounded-md text-sm font-medium"
+                      )}
+                      aria-current="page"
+                    >
+                      Main
+                    </Link>
+
+                    <div
+                      to="/login"
+                      href={loginNav.href}
+                      className={classNames(
+                        "text-green-900 hover:bg-green-700 hover:text-white",
+                        "px-3 py-2 rounded-md text-sm font-medium"
+                      )}
+                      aria-current="page"
+                      onClick={handleSignout}
+                    >
+                      Logout
+                    </div>
+                  </>
+                )
+                : navigation.map((item) => (
+                  <Disclosure.Button
+                    key={item.name}
+                    as="a"
+                    href={item.href}
+                    className={classNames(
+                      activeNavItems[`${item.href}`]
+                        ? "bg-green-700 text-white"
+                        : "text-gray-980 hover:bg-green-700 hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {console.log(`${item.href}`)}
+
+                    {item.name}
+                  </Disclosure.Button>
+                ))
+              }
             </div>
           </Disclosure.Panel>
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   );
 }
 
