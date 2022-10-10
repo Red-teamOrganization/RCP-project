@@ -8,3 +8,5 @@
 We call our project R.C.P. and it stands for Responsible Consumption Production. The way we like to read it is RECIPE because it is a recipe for a better society. Our goal is to reduce the waste of food and help people have better prices and producers have more efficient production and foolproof work.
 
 This application plan to gather data of the total production and the total consumption. Small societies to big countries can use that data to reduce food waste, adjust the prices of goods and create new job opportunities.
+
+DEMO: https://rcpproject.web.app/
