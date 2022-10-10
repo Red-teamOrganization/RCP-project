@@ -1,6 +1,6 @@
 require('dotenv').config()
 require('./database/connection')
-
+const userRoutes = require('../routes/users.api')
 const express = require('express')
 const cors= require('cors')
 const path = require('path')
@@ -16,5 +16,5 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
 
-
+app.use("/user",userRoutes)
 module.exports = app 
