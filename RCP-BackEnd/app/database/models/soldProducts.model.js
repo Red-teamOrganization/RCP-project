@@ -51,11 +51,11 @@ const soldProductsSchema = mongoose.Schema(
 );
 
 soldProductsSchema.methods.toJSON = function () {
-  const postsData = this.toObject();
-  delete postsData.__v;
-  return postsData;
+  const productsData = this.toObject();
+  delete productsData.__v;
+  return productsData;
 };
 
-const posts = mongoose.model("soldProducts", soldProductsSchema);
+const soldProducts = mongoose.model("soldProducts", soldProductsSchema);
 
-module.exports = posts;
+module.exports = soldProducts;
