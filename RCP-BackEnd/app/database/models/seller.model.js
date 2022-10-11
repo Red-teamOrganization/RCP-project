@@ -1,16 +1,14 @@
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+// const validator = require('validator');
+
+// const check = validator.isLatLong("29.9627976,30.9072928")
+// console.log(check)
 
 const sellerSchema = mongoose.Schema(
   {
     name: { type: String, trim:true, required: true },
-    age: {
-      type: Number,
-      default: 21,
-      min: 18,
-      required: true,
-    },
     email: {
       type: String,
       trim: true,
@@ -23,48 +21,22 @@ const sellerSchema = mongoose.Schema(
       trim: true,
       required: true,
     },
-    gender: {
-      type: String,
-      trim: true,
-      enum: ["male", "female", "prefer not to say"],
-      lowercase: true,
+    description:{
+      type: String, 
+      trim:true, 
     },
-    savedPosts: [
-      {
-        postId: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-        },
-        title: {
-          type: String,
-          trim: true,
-          required: true,
-        },
-        author: {
-          type: String,
-          trim: true,
-          required: true,
-        },
-        snippet: {
-          type: String,
-          trim: true,
-          required: true,
-        },
-        content: {
-          type: String,
-          trim: true,
-          required: true,
-        },
-      },
-    ],
-    likedPosts: [
-      {
-        postId: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-        },
-      },
-    ],
+    location:{
+       type:String,
+       trim: true,
+       enum:['Berlin','Dortmund','Hamburg','Bayern'],
+       required:true,
+    },
+    userType : {
+     type:String,
+     trim: true , 
+     required:true,
+     enum:'seller'
+    },
     tokens: [
       {
         token: { type: String, required: true },
@@ -75,9 +47,9 @@ const sellerSchema = mongoose.Schema(
 );
 
 sellerSchema.methods.toJSON = function () {
-  const userData = this.toObject();
-  delete userData.__v;
-  return userData;
+  const sellerData = this.toObject();
+  delete sellerData.__v;
+  return sellerData;
 };
 
 sellerSchema.pre("save", async function () {
@@ -90,12 +62,20 @@ sellerSchema.pre("save", async function () {
 
 
 sellerSchema.methods.generateToken = async function () {
-  const user = this;
-  const token = jwt.sign({ _id: user._id }, "zBlogPosts");
-  if (user.tokens.length == 3) throw new Error("maximum logged in devices 3");
-  user.tokens = user.tokens.concat({ token }); //make all tokens of user in array
-  await user.save();
+  const seller = this;
+  const token = jwt.sign({ _id: seller._id }, "RCP");
+  if (seller.tokens.length == 3) throw new Error("maximum logged in devices 3");
+  seller.tokens = seller.tokens.concat({ token }); //make all tokens of seller in array
+  await seller.save();
   return token;
+};
+
+sellerSchema.statics.login = async (email, pass) => {
+  const sellerData = await Seller.findOne({ email });
+  if (!sellerData) throw new Error("invalid email");
+  const isValid = await bcryptjs.compare(pass, sellerData.password);
+  if (!isValid) throw new Error("invalid password");
+  return sellerData;
 };
 
 const Seller = mongoose.model("Seller", sellerSchema);
