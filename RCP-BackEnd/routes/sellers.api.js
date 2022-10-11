@@ -8,6 +8,8 @@ router.post("/logIn", sellerController.logIn);
 
 router.get("/logOut",sellerAuth, sellerController.logOut);
 
+router.get("/sellerProfile",sellerAuth, sellerController.sellerProfile);
+
 router.get("/logOutAll",sellerAuth, sellerController.logOutAll);
 
 
