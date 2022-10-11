@@ -1,9 +1,9 @@
-const userModel = require("../database/models/user.model");
+const sellerModel = require("../database/models/seller.model");
 
-class User {
+class Seller {
   static signUp = async (req, res) => {
     try {
-      const user = new userModel(req.body);
+      const user = new sellerModel(req.body);
       const token = await user.generateToken();
       await user.save();
       res.status(200).send({
@@ -22,4 +22,4 @@ class User {
 
 }
 
-module.exports = User;
+module.exports = Seller;
