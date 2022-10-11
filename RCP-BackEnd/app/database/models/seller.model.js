@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const userSchema = mongoose.Schema(
+const sellerSchema = mongoose.Schema(
   {
     name: { type: String, trim:true, required: true },
     age: {
@@ -74,13 +74,13 @@ const userSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.methods.toJSON = function () {
+sellerSchema.methods.toJSON = function () {
   const userData = this.toObject();
   delete userData.__v;
   return userData;
 };
 
-userSchema.pre("save", async function () {
+sellerSchema.pre("save", async function () {
   const data = this;
   if (data.isModified("password")) {
     data.password = await bcryptjs.hash(data.password, 12);
@@ -89,7 +89,7 @@ userSchema.pre("save", async function () {
 
 
 
-userSchema.methods.generateToken = async function () {
+sellerSchema.methods.generateToken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user._id }, "zBlogPosts");
   if (user.tokens.length == 3) throw new Error("maximum logged in devices 3");
@@ -98,6 +98,6 @@ userSchema.methods.generateToken = async function () {
   return token;
 };
 
-const User = mongoose.model("User", userSchema);
+const Seller = mongoose.model("Seller", sellerSchema);
 
-module.exports = User;
+module.exports = Seller;
