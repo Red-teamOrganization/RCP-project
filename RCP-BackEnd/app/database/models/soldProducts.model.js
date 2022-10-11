@@ -31,7 +31,7 @@ const soldProductsSchema = mongoose.Schema(
     yearOfSold: {
       type: Number,
       min:2000,
-      max:2022,
+      max:new Date().getFullYear(),
       required: true, 
     },
    
