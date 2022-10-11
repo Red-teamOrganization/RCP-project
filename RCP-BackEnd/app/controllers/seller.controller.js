@@ -19,6 +19,21 @@ class Seller {
       });
     }
   };
+  static sellerProfile = async (req, res) => {
+    try {
+      res.status(200).send({
+        apiStatus: true,
+        data: req.seller,
+        message: "seller profile",
+      });
+    } catch (e) {
+      res.status(500).send({
+        apiStatus: false,
+        data: e,
+        message: e.message,
+      });
+    }
+  };
   static logIn = async (req, res) => {
     try {
       const sellerData = await sellerModel.login(req.body.email, req.body.password);
