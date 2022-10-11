@@ -3,6 +3,7 @@ const soldProductsController = require("../app/controllers/soldProducts.controll
 const sellerAuth = require("../app/middleware/sellerAuth")
 
 router.post("/addSoldProduct",sellerAuth, soldProductsController.addProduct);
+router.get("/mySoldProducts",sellerAuth, soldProductsController.mySoldProducts);
 
 
 module.exports = router;

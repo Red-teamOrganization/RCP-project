@@ -49,23 +49,23 @@ class SoldProducts {
     }
   };
 
-//   static myPosts = async (req, res) => {
-//     try {
-//       await req.user.populate("myPosts");
+  static mySoldProducts = async (req, res) => {
+    try {
+      await req.seller.populate("mySoldProducts");
 
-//       res.status(200).send({
-//         apiStatus: true,
-//         data: req.user.myPosts,
-//         message: "user posts fetched",
-//       });
-//     } catch (e) {
-//       res.status(500).send({
-//         apiStatus: false,
-//         data: e,
-//         message: e.message,
-//       });
-//     }
-//   };
+      res.status(200).send({
+        apiStatus: true,
+        data: req.seller.mySoldProducts,
+        message: "seller products fetched",
+      });
+    } catch (e) {
+      res.status(500).send({
+        apiStatus: false,
+        data: e,
+        message: e.message,
+      });
+    }
+  };
 
 //   static deletePost = async (req, res) => {
 //     try {

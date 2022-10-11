@@ -78,6 +78,12 @@ sellerSchema.statics.login = async (email, pass) => {
   return sellerData;
 };
 
+sellerSchema.virtual("mySoldProducts", {
+  ref: "soldProducts",
+  localField: "_id",
+  foreignField: "sellerId",
+});
+
 const Seller = mongoose.model("Seller", sellerSchema);
 
 module.exports = Seller;
