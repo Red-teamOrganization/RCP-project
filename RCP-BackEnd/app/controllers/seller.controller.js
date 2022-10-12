@@ -1,5 +1,6 @@
 const sellerModel = require("../database/models/seller.model");
-
+const path = require("path");
+const fs = require("fs");
 class Seller {
   static signUp = async (req, res) => {
     try {
@@ -34,6 +35,55 @@ class Seller {
       });
     }
   };
+
+  static sellerLogoUpload = async (req, res) => {
+    try {
+      let oldImg;
+      
+      if (! req.file.path ) throw new Error('no input image');
+
+      if (req.seller.image) oldImg = path.join(__dirname, "../../", req.seller.image);
+      else oldImg = null;
+
+      if (oldImg) fs.unlinkSync(oldImg); 
+      
+      req.seller.image = req.file.path;
+
+      await req.seller.save();
+
+      res.status(200).send({
+        apiStatus: true,
+        data: req.seller,
+      });
+    } catch (e) {
+      res.status(500).send({
+        apiStatus: false,
+        date: e,
+        message: e.message,
+      });
+    }
+  };
+
+  static addSellerDescription = async (req , res)=>{
+    try{
+        req.seller.description = req.body.description;
+        await req.seller.save()
+        res.status(200).send({
+          apiStatus: true,
+          data: req.seller,
+        });
+      
+    }
+    catch(e){
+      res.status(500).send({
+        apiStatus: false,
+        date: e,
+        message: e.message,
+      });
+    }
+   
+  }
+
   static logIn = async (req, res) => {
     try {
       const sellerData = await sellerModel.login(req.body.email, req.body.password);
