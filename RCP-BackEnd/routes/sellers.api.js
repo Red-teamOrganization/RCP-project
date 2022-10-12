@@ -9,12 +9,14 @@ router.post("/logIn", sellerController.logIn);
 router.get("/logOut",sellerAuth, sellerController.logOut);
 
 router.get("/sellerProfile",sellerAuth, sellerController.sellerProfile);
+
 router.post(
     "/sellerProfile/sellerLogo",
     sellerAuth,
     upload.single("logo"),
     sellerController.sellerLogoUpload
   );
+router.post("/sellerProfile/sellerDescription",sellerAuth,sellerController.addSellerDescription);
 router.get("/logOutAll",sellerAuth, sellerController.logOutAll);
 
 

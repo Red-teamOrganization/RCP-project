@@ -35,7 +35,7 @@ class Seller {
       });
     }
   };
-  
+
   static sellerLogoUpload = async (req, res) => {
     try {
       let oldImg;
@@ -63,6 +63,26 @@ class Seller {
       });
     }
   };
+
+  static addSellerDescription = async (req , res)=>{
+    try{
+        req.seller.description = req.body.description;
+        await req.seller.save()
+        res.status(200).send({
+          apiStatus: true,
+          data: req.seller,
+        });
+      
+    }
+    catch(e){
+      res.status(500).send({
+        apiStatus: false,
+        date: e,
+        message: e.message,
+      });
+    }
+   
+  }
 
   static logIn = async (req, res) => {
     try {
