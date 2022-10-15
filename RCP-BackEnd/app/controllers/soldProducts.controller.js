@@ -226,50 +226,59 @@ class SoldProducts {
     }
   };
 
-  //   static deletePost = async (req, res) => {
-  //     try {
-  //       await postModel.findOneAndDelete({
-  //         _id: req.params.id,
-  //         userId: req.user._id,
-  //       });
-  //       await req.user.populate("myPosts");
-  //       await req.user.save();
-  //       res.status(200).send({
-  //         apiStatus: true,
-  //         data: req.user.myPosts,
-  //         message: "post deleted",
-  //       });
-  //     } catch (e) {
-  //       res.status(500).send({
-  //         apiStatus: false,
-  //         data: e,
-  //         message: e.message,
-  //       });
-  //     }
-  //   };
+    static deleteSoldProduct = async (req, res) => {
+      try {
+        await soldProductsModel.findOneAndDelete({
+          _id: req.params.id,
+          sellerId: req.seller._id,
+        });
+        await req.seller.populate("mySoldProducts");
+        await req.seller.save();
+        res.status(200).send({
+          apiStatus: true,
+          data: req.seller.mySoldProducts,
+          message: "sold product deleted",
+        });
+      } catch (e) {
+        res.status(500).send({
+          apiStatus: false,
+          data: e,
+          message: e.message,
+        });
+      }
+    };
 
-  //   static editPost = async (req, res) => {
-  //     try {
-  //       const updates = Object.keys(req.body);
-  //       const post = await postModel.findOne({
-  //         _id: req.params.id,
-  //         userId: req.user._id,
-  //       });
-  //       updates.forEach((key) => (post[key] = req.body[key]));
-  //       await post.save();
-  //       res.status(200).send({
-  //         apiStatus: true,
-  //         data: post,
-  //         message: "post edited",
-  //       });
-  //     } catch (e) {
-  //       res.status(500).send({
-  //         apiStatus: false,
-  //         data: e,
-  //         message: e.message,
-  //       });
-  //     }
-  //   };
+    static editSoldProduct = async (req, res) => {
+      try {
+        const updates = Object.keys(req.body);
+        const product = await soldProductsModel.findOne({
+          _id: req.params.id,
+          sellerId: req.seller._id,
+        });
+        
+        const myProducts = await soldProductsModel.find({ sellerId: req.seller._id,});
+        updates.forEach((key) => (product[key] = req.body[key]));
+      
+        myProducts.forEach(myProduct=>{
+         if(myProduct.productName==product.productName && myProduct.yearOfSold == product.yearOfSold){
+          throw new Error("this product has entered before in the same year")
+         }
+        })
+      
+        await product.save();
+        res.status(200).send({
+          apiStatus: true,
+          data: product,
+          message: "sold product edited",
+        });
+      } catch (e) {
+        res.status(500).send({
+          apiStatus: false,
+          data: e,
+          message: e.message,
+        });
+      }
+    };
 }
 
 module.exports = SoldProducts;
