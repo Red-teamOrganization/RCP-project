@@ -3,23 +3,7 @@ const soldProductsModel = require("../database/models/soldProducts.model");
 const sellerModel = require("../database/models/seller.model");
 
 class SoldProducts {
-  //   static allPosts = async (req, res) => {
-  //     try {
-  //       const posts = await postModel.find().sort({createdAt:-1});
 
-  //       res.status(200).send({
-  //         apiStatus: true,
-  //         data: posts,
-  //         message: "all posts fetched",
-  //       });
-
-  //     } catch (e) {
-  //       res.status(500).send({
-  //         apiStatus: false,
-  //         message: e.message,
-  //       });
-  //     }
-  //   };
   static addProduct = async (req, res) => {
     try {
       const sellerProducts = await soldProductsModel.find({
