@@ -2,6 +2,7 @@ const router = require("express").Router();
 const sellerController = require("../app/controllers/seller.controller");
 const sellerAuth = require("../app/middleware/sellerAuth")
 const upload = require("../app/middleware/file.upload");
+
 router.post("/signUp", sellerController.signUp);
 
 router.post("/logIn", sellerController.logIn);

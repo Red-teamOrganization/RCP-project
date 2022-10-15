@@ -84,6 +84,12 @@ sellerSchema.virtual("mySoldProducts", {
   foreignField: "sellerId",
 });
 
+sellerSchema.virtual("myDonations", {
+  ref: "sellerDonations",
+  localField: "_id",
+  foreignField: "donatorId",
+});
+
 const Seller = mongoose.model("Seller", sellerSchema);
 
 module.exports = Seller;

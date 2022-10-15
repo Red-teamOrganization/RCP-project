@@ -38,13 +38,6 @@ const sellerDonationSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    yearOfSold: {
-      type: Number,
-      min:2000,
-      max:new Date().getFullYear(),
-      required: true, 
-    },
-   
     category: {
       type: String,
       enum: [
@@ -66,6 +59,6 @@ sellerDonationSchema.methods.toJSON = function () {
   return donationsData;
 };
 
-const sellerDonations = mongoose.model("soldProducts", sellerDonationSchema);
+const sellerDonations = mongoose.model("sellerDonations", sellerDonationSchema);
 
 module.exports = sellerDonations;
