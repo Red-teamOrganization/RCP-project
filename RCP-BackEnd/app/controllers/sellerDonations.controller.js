@@ -91,37 +91,43 @@ class SellerDonation {
       }
      };
 
-  //   static editSoldProduct = async (req, res) => {
-  //     try {
-  //       const updates = Object.keys(req.body);
-  //       const product = await soldProductsModel.findOne({
-  //         _id: req.params.id,
-  //         sellerId: req.seller._id,
-  //       });
+    static editDonation = async (req, res) => {
+      try {
+        const updates = Object.keys(req.body);
+        const sellerDonation = await sellerDonationModel.findOne({
+          _id: req.params.id,
+          donatorId: req.seller._id,
+        });
         
-  //       const myProducts = await soldProductsModel.find({ sellerId: req.seller._id,});
-  //       updates.forEach((key) => (product[key] = req.body[key]));
+        const charity = await charityModel.findById(sellerDonation.charityId)
+    
+        const donation = charity.donations.find(don=>don.donationId==req.params.id)
+        if(donation.checked){
+          throw new Error("the charity has already receive your donation")
+        }
       
-  //       myProducts.forEach(myProduct=>{
-  //        if(myProduct.productName==product.productName && myProduct.yearOfSold == product.yearOfSold){
-  //         throw new Error("this product has entered before in the same year")
-  //        }
-  //       })
+    
+        updates.forEach((key) => (sellerDonation[key] = req.body[key]));
+        updates.forEach((key) => (donation[key] = req.body[key]));
       
-  //       await product.save();
-  //       res.status(200).send({
-  //         apiStatus: true,
-  //         data: product,
-  //         message: "sold product edited",
-  //       });
-  //     } catch (e) {
-  //       res.status(500).send({
-  //         apiStatus: false,
-  //         data: e,
-  //         message: e.message,
-  //       });
-  //     }
-  //   };
+
+        await req.seller.populate("myDonations");
+        await sellerDonation.save();
+        await charity.save();
+
+        res.status(200).send({
+          apiStatus: true,
+          data: sellerDonation,
+          message: "donation edited",
+        });
+      } catch (e) {
+        res.status(500).send({
+          apiStatus: false,
+          data: e,
+          message: e.message,
+        });
+      }
+    }
   
   }
   

@@ -8,4 +8,7 @@ router.get("/myDonations",sellerAuth, sellerDonationController.myDonations);
 
 router.delete("/deleteDonation/:id",sellerAuth,sellerDonationController.deleteDonation)
 
+
+router.patch("/editDonation/:id",sellerAuth,sellerDonationController.editDonation)
+
 module.exports = router;
