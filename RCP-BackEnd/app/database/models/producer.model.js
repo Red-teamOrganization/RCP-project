@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 // const check = validator.isLatLong("29.9627976,30.9072928")
 // console.log(check)
 
-const sellerSchema = mongoose.Schema(
+const producerSchema = mongoose.Schema(
   {
     name: { type: String, trim:true, required: true },
     email: {
@@ -35,7 +35,7 @@ const sellerSchema = mongoose.Schema(
      type:String,
      trim: true , 
      required:true,
-     enum:'seller'
+     enum:'producer'
     },
     tokens: [
       {
@@ -46,13 +46,13 @@ const sellerSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-sellerSchema.methods.toJSON = function () {
-  const sellerData = this.toObject();
-  delete sellerData.__v;
-  return sellerData;
+producerSchema.methods.toJSON = function () {
+  const producerData = this.toObject();
+  delete producerData.__v;
+  return producerData;
 };
 
-sellerSchema.pre("save", async function () {
+producerSchema.pre("save", async function () {
   const data = this;
   if (data.isModified("password")) {
     data.password = await bcryptjs.hash(data.password, 12);
@@ -61,35 +61,35 @@ sellerSchema.pre("save", async function () {
 
 
 
-sellerSchema.methods.generateToken = async function () {
-  const seller = this;
-  const token = jwt.sign({ _id: seller._id }, "RCP");
-  if (seller.tokens.length == 3) throw new Error("maximum logged in devices 3");
-  seller.tokens = seller.tokens.concat({ token }); //make all tokens of seller in array
-  await seller.save();
+producerSchema.methods.generateToken = async function () {
+  const producer = this;
+  const token = jwt.sign({ _id: producer._id }, "RCP");
+  if (producer.tokens.length == 3) throw new Error("maximum logged in devices 3");
+  producer.tokens = producer.tokens.concat({ token }); //make all tokens of producer in array
+  await producer.save();
   return token;
 };
 
-sellerSchema.statics.login = async (email, pass) => {
-  const sellerData = await Seller.findOne({ email });
-  if (!sellerData) throw new Error("invalid email");
-  const isValid = await bcryptjs.compare(pass, sellerData.password);
+producerSchema.statics.login = async (email, pass) => {
+  const producerData = await Producer.findOne({ email });
+  if (!producerData) throw new Error("invalid email");
+  const isValid = await bcryptjs.compare(pass, producerData.password);
   if (!isValid) throw new Error("invalid password");
-  return sellerData;
+  return producerData;
 };
 
-sellerSchema.virtual("mySoldProducts", {
-  ref: "soldProducts",
+producerSchema.virtual("myProducts", {
+  ref: "producerProducts",
   localField: "_id",
-  foreignField: "sellerId",
+  foreignField: "producerId",
 });
 
-sellerSchema.virtual("myDonations", {
-  ref: "sellerDonations",
+producerSchema.virtual("myDonations", {
+  ref: "producerDonations",
   localField: "_id",
   foreignField: "donatorId",
 });
 
-const Seller = mongoose.model("Seller", sellerSchema);
+const Producer = mongoose.model("Producer", producerSchema);
 
-module.exports = Seller;
+module.exports = Producer;
