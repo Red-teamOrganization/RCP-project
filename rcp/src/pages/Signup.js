@@ -95,7 +95,7 @@ export default function Signup() {
                   type="name"
                   autoComplete="name"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Name"
                   value={name}
                   onChange={handleChange}
@@ -112,7 +112,7 @@ export default function Signup() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                   value={email}
                   onChange={handleChange}
@@ -129,14 +129,38 @@ export default function Signup() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                   value={password}
                   onChange={handleChange}
                 />
               </div>
 
-              <div className="flex items-center py-4">
+              <br />
+
+              {/* <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select an option</label> */}
+              <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected="">Location</option>
+                <option value="US">Berlin</option>
+                <option value="CA">Hamburg</option>
+                <option value="FR">Dortmund</option>
+                <option value="DE">Bayern</option>
+              </select>
+
+              <br />
+
+
+              <div>
+                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected="">Your Role</option>
+                  <option value="US">Producer</option>
+                  <option value="CA">Seller</option>
+                  <option value="FR">Charity</option>
+                </select>
+              </div>
+
+              <br />
+              {/* <div className="flex items-center py-4">
                 <input
                   id="isProducer"
                   name="isProducer"
@@ -151,7 +175,7 @@ export default function Signup() {
                 >
                   Check if you are a producer
                 </label>
-              </div>
+              </div> */}
             </div>
 
             {error ? (

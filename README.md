@@ -1,7 +1,7 @@
 <div align="center"><h1>The ReCiPe Project</h1></div>
 
 <div align="center">
-<img src="https://rcp-app-6c78d.web.app/static/media/logo.ab200c05b9a36a4262f3.png">
+<img src="https://rcpproject.web.app/static/media/logo.ab200c05b9a36a4262f3.png">
  </div>
  
 
