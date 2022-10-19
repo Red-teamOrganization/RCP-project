@@ -2,6 +2,12 @@ require('dotenv').config()
 require('./database/connection')
 const sellerRoutes = require('../routes/sellers.api')
 const soldProductsRoutes = require('../routes/sellerProducts.api')
+const charityRoutes = require('../routes/charity.api')
+const sellerDonationsRoutes = require('../routes/sellerDonations.api')
+const producerRoutes = require('../routes/producer.api')
+const producedProductsRoutes = require('../routes/producerProducts.api')
+const producerDonationsRoutes = require('../routes/producerDonations.api')
+
 const express = require('express')
 const cors= require('cors')
 const path = require('path')
@@ -19,4 +25,10 @@ app.use(express.json())
 
 app.use("/seller",sellerRoutes)
 app.use("/soldProducts",soldProductsRoutes)
+app.use("/charity",charityRoutes)
+app.use("/sellerDonations",sellerDonationsRoutes)
+app.use("/producer",producerRoutes)
+app.use("/producedProducts",producedProductsRoutes)
+app.use("/producerDonations",producerDonationsRoutes)
+
 module.exports = app 
