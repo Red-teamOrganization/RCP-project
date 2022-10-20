@@ -21,4 +21,5 @@ router.post("/sellerProfile/sellerDescription",sellerAuth,sellerController.addSe
 router.get("/logOutAll",sellerAuth, sellerController.logOutAll);
 
 
+
 module.exports = router;

@@ -24,6 +24,8 @@ class SellerDonation {
         category:req.body.category,
         checked:false,
       })
+      req.seller.numberOfDonations += 1
+      await req.seller.save();
       await charity.save();
       await donationData.save();
       res.status(200).send({
@@ -72,7 +74,7 @@ class SellerDonation {
         });
         const index = charity.donations.findIndex(don=> don.donationId == req.params.id)
         charity.donations.splice(index,1)
-
+        req.seller.numberOfDonations -= 1
         await req.seller.populate("myDonations");
         await req.seller.save();
         await charity.save();

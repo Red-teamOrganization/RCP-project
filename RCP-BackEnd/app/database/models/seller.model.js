@@ -37,6 +37,10 @@ const sellerSchema = mongoose.Schema(
      required:true,
      enum:'seller'
     },
+    numberOfDonations:{
+      type:Number,
+      default:0,
+    },
     tokens: [
       {
         token: { type: String, required: true },

@@ -1,4 +1,5 @@
 const sellerModel = require("../database/models/seller.model");
+const producerModel = require("../database/models/producer.model")
 const path = require("path");
 const fs = require("fs");
 class Seller {
@@ -138,6 +139,8 @@ class Seller {
       });
     }
   };
+
+
 
 }
 

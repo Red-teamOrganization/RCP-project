@@ -37,6 +37,10 @@ const producerSchema = mongoose.Schema(
      required:true,
      enum:'producer'
     },
+    numberOfDonations:{
+      type:Number,
+      default:0,
+    },
     tokens: [
       {
         token: { type: String, required: true },
