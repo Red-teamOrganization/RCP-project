@@ -1,24 +1,25 @@
 const router = require("express").Router();
 const sellerController = require("../app/controllers/seller.controller");
-const sellerAuth = require("../app/middleware/sellerAuth")
 const upload = require("../app/middleware/file.upload");
+const UserController = require("../app/controllers/user.controller");
+const userAuth = require("../app/middleware/userAuth");
 
 router.post("/signUp", sellerController.signUp);
 
-router.post("/logIn", sellerController.logIn);
+router.post("/logIn", UserController.logIn);
 
-router.get("/logOut",sellerAuth, sellerController.logOut);
+router.get("/logOut", userAuth, UserController.logOut);
 
-router.get("/sellerProfile",sellerAuth, sellerController.sellerProfile);
+router.get("/sellerProfile", userAuth, sellerController.sellerProfile);
 
 router.post(
-    "/sellerProfile/sellerLogo",
-    sellerAuth,
-    upload.single("logo"),
-    sellerController.sellerLogoUpload
-  );
-router.post("/sellerProfile/sellerDescription",sellerAuth,sellerController.addSellerDescription);
-router.get("/logOutAll",sellerAuth, sellerController.logOutAll);
+  "/sellerProfile/sellerLogo",
+  userAuth,
+  upload.single("logo"),
+  sellerController.sellerLogoUpload
+);
+router.post("/sellerProfile/sellerDescription", userAuth, sellerController.addSellerDescription);
+router.get("/logOutAll", userAuth, UserController.logOutAll);
 
 
 

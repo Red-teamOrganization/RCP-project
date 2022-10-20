@@ -1,17 +1,21 @@
 const charityModel = require("../database/models/charity.model");
 const path = require("path");
 const fs = require("fs");
+const User = require("../database/models/user.model");
 
 class Charity {
   static signUp = async (req, res) => {
     try {
-      const charity = new charityModel(req.body);
-      const token = await charity.generateToken();
-      await charity.save();
+
+      const user = new User(req.body);
+      const token = await user.generateToken();
+      await user.save();
+      const charity = new charityModel();
+      charity.user = user;
       res.status(200).send({
         apiStatus: true,
-        data: { charity, token },
-        message: "charity added successfully",
+        data: { user, token },
+        message: "user added successfully",
       });
     } catch (e) {
       res.status(500).send({
@@ -21,11 +25,12 @@ class Charity {
       });
     }
   };
+
   static charityProfile = async (req, res) => {
     try {
       res.status(200).send({
         apiStatus: true,
-        data: req.charity,
+        data: req.entity,
         message: "charity profile",
       });
     } catch (e) {
@@ -40,21 +45,21 @@ class Charity {
   static charityLogoUpload = async (req, res) => {
     try {
       let oldImg;
-      
-      if (! req.file.path ) throw new Error('no input image');
 
-      if (req.charity.image) oldImg = path.join(__dirname, "../../", req.charity.image);
+      if (!req.file.path) throw new Error('no input image');
+
+      if (req.entity.image) oldImg = path.join(__dirname, "../../", req.entity.image);
       else oldImg = null;
 
-      if (oldImg) fs.unlinkSync(oldImg); 
-      
-      req.charity.image = req.file.path;
+      if (oldImg) fs.unlinkSync(oldImg);
 
-      await req.charity.save();
+      req.entity.image = req.file.path;
+
+      await req.entity.save();
 
       res.status(200).send({
         apiStatus: true,
-        data: req.charity,
+        data: req.entity,
       });
     } catch (e) {
       res.status(500).send({
@@ -65,102 +70,103 @@ class Charity {
     }
   };
 
-  static addCharityDescription = async (req , res)=>{
-    try{
-        req.charity.description = req.body.description;
-        await req.charity.save()
-        res.status(200).send({
-          apiStatus: true,
-          data: req.charity,
-        });
-      
+  static addCharityDescription = async (req, res) => {
+    try {
+      req.entity.description = req.body.description;
+      await req.entity.save()
+      res.status(200).send({
+        apiStatus: true,
+        data: req.entity,
+      });
+
     }
-    catch(e){
+    catch (e) {
       res.status(500).send({
         apiStatus: false,
         date: e,
         message: e.message,
       });
     }
-   
+
   }
 
-  static checkDonation = async (req , res)=>{
-    try{
-       let don = req.charity.donations.find((donation)=>donation._id == req.params.id)
-       don.checked = !don.checked;
-        await req.charity.save()
-        res.status(200).send({
-          apiStatus: true,
-          data: req.charity.donations,
-        });
-      
+  static checkDonation = async (req, res) => {
+    try {
+      let don = req.entity.donations.find((donation) => donation._id == req.params.id)
+      don.checked = !don.checked;
+      await req.entity.save()
+      res.status(200).send({
+        apiStatus: true,
+        data: req.entity.donations,
+      });
+
     }
-    catch(e){
+    catch (e) {
       res.status(500).send({
         apiStatus: false,
         date: e,
         message: e.message,
       });
     }
-   
+
   }
 
-  static logIn = async (req, res) => {
-    try {
-      const charityData = await charityModel.login(req.body.email, req.body.password);
-      const token = await charityData.generateToken();
-      res.status(200).send({
-        apiStatus: true,
-        data: { charityData, token },
-        message: "logged in as charity",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e,
-        message: e.message,
-      });
-    }
-  };
+  // static logIn = async (req, res) => {
+  //   try {
+  //     const user = await User.login(req.body.email, req.body.password);
+  //     const token = await user.generateToken();
+  //     res.status(200).send({
+  //       apiStatus: true,
+  //       data: { user, token },
+  //       message: `logged in as ${user.userType}`,
+  //     });
+  //   } catch (e) {
+  //     res.status(500).send({
+  //       apiStatus: false,
+  //       data: e,
+  //       message: e.message,
+  //     });
+  //   }
+  // };
 
-  static logOut = async (req, res) => {
-    try {
-      let index = req.charity.tokens.findIndex((token) => token == req.sellerToken);
-      req.charity.tokens.splice(index, 1);
-      await req.charity.save();
-      res.status(200).send({
-        apiStatus: true,
-        data: req.seller,
-        message: "charity logged out ",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e,
-        message: e.message,
-      });
-    }
-  };
+  // static logOut = async (req, res) => {
+  //   try {
+  //     let index = req.user.tokens.findIndex((token) => token == req.userToken);
+  //     req.usertokens.splice(index, 1);
+  //     await req.entity.save();
+  //     res.status(200).send({
+  //       apiStatus: true,
+  //       data: req.seller,
+  //       message: "charity logged out ",
+  //     });
+  //   } catch (e) {
+  //     res.status(500).send({
+  //       apiStatus: false,
+  //       data: e,
+  //       message: e.message,
+  //     });
+  //   }
+  // };
 
-  static logOutAll = async (req, res) => {
-    try {
-      req.charity.tokens = [];
-      await req.charity.save();
-      res.status(200).send({
-        apiStatus: true,
-        data: req.charity,
-        message: "charity logged out from all devices",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e,
-        message: e.message,
-      });
-    }
-  };
- 
+  // static logOutAll = async (req, res) => {
+  //   try {
+  //     console.log(req.user)
+  //     req.user.tokens = [];
+  //     await req.user.save();
+  //     res.status(200).send({
+  //       apiStatus: true,
+  //       data: req.user,
+  //       message: "user logged out from all devices",
+  //     });
+  //   } catch (e) {
+  //     res.status(500).send({
+  //       apiStatus: false,
+  //       data: e,
+  //       message: e.message,
+  //     });
+  //   }
+  // };
+
 
 }
 

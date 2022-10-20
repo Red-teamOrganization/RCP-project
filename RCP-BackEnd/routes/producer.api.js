@@ -1,24 +1,25 @@
 const router = require("express").Router();
 const producerController = require("../app/controllers/producer.controller");
-const producerAuth = require("../app/middleware/producer.Auth")
 const upload = require("../app/middleware/file.upload");
+const UserController = require("../app/controllers/user.controller");
+const userAuth = require("../app/middleware/userAuth");
 
 router.post("/signUp", producerController.signUp);
 
-router.post("/logIn", producerController.logIn);
+router.post("/logIn", UserController.logIn);
 
-router.get("/logOut",producerAuth, producerController.logOut);
+router.get("/logOut", userAuth, UserController.logOut);
 
-router.get("/producerProfile",producerAuth, producerController.producerProfile);
+router.get("/producerProfile", userAuth, producerController.producerProfile);
 
 router.post(
-    "/producerProfile/producerLogo",
-    producerAuth,
-    upload.single("logo"),
-    producerController.producerLogoUpload
-  );
-router.post("/producerProfile/producerDescription",producerAuth,producerController.addProducerDescription);
-router.get("/logOutAll",producerAuth, producerController.logOutAll);
+  "/producerProfile/producerLogo",
+  userAuth,
+  upload.single("logo"),
+  producerController.producerLogoUpload
+);
+router.post("/producerProfile/producerDescription", userAuth, producerController.addProducerDescription);
+router.get("/logOutAll", userAuth, UserController.logOutAll);
 
 
 module.exports = router;
