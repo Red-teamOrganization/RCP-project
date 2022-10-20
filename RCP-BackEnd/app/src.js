@@ -7,7 +7,7 @@ const sellerDonationsRoutes = require('../routes/sellerDonations.api')
 const producerRoutes = require('../routes/producer.api')
 const producedProductsRoutes = require('../routes/producerProducts.api')
 const producerDonationsRoutes = require('../routes/producerDonations.api')
-
+const homeRoutes = require('../routes/home.api')
 const express = require('express')
 const cors= require('cors')
 const path = require('path')
@@ -30,5 +30,6 @@ app.use("/sellerDonations",sellerDonationsRoutes)
 app.use("/producer",producerRoutes)
 app.use("/producedProducts",producedProductsRoutes)
 app.use("/producerDonations",producerDonationsRoutes)
+app.use(homeRoutes)
 
 module.exports = app 

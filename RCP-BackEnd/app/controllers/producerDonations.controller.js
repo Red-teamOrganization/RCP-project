@@ -1,12 +1,13 @@
 const producerDonationModel = require("../database/models/producerDonations.model");
 const charityModel = require("../database/models/charity.model")
-class SellerDonation {
+class ProducerDonation {
   static addProducerDonation = async (req, res) => {
     try {
       const charity = await charityModel.findOne({name:req.body.charityName})
       if(charity.location != req.producer.location) {
         throw new Error('you must enter a charity in your location')
       }
+      
       const donationData = new producerDonationModel({
         ...req.body,
         charityId:charity._id,
@@ -24,6 +25,8 @@ class SellerDonation {
         category:req.body.category,
         checked:false,
       })
+      req.producer.numberOfDonations += 1
+      await req.producer.save();
       await charity.save();
       await donationData.save();
       res.status(200).send({
@@ -72,7 +75,8 @@ class SellerDonation {
         });
         const index = charity.donations.findIndex(don=> don.donationId == req.params.id)
         charity.donations.splice(index,1)
-
+        req.producer.numberOfDonations -= 1
+        await req.producer.save();
         await req.producer.populate("myDonations");
         await req.producer.save();
         await charity.save();
@@ -131,5 +135,5 @@ class SellerDonation {
   
   }
   
-  module.exports = SellerDonation;
+  module.exports = ProducerDonation;
   

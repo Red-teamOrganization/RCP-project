@@ -35,7 +35,7 @@ const charitySchema = mongoose.Schema(
      enum:'charity'
     },
     donations:[
-        { 
+        {   
             donatorId: {
               type: mongoose.Schema.Types.ObjectId,
               required: true,
