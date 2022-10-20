@@ -5,13 +5,14 @@ const fs = require("fs");
 class Seller {
   static signUp = async (req, res) => {
     try {
-      const seller = new sellerModel(req.body);
-      const token = await seller.generateToken();
-      await seller.save();
+
+      const user = new User(req.body);
+      const token = await user.generateToken();
+      await user.save();
       res.status(200).send({
         apiStatus: true,
-        data: { seller, token },
-        message: "seller added successfully",
+        data: { user, token },
+        message: "user added successfully",
       });
     } catch (e) {
       res.status(500).send({
@@ -25,7 +26,7 @@ class Seller {
     try {
       res.status(200).send({
         apiStatus: true,
-        data: req.seller,
+        data: req.entity,
         message: "seller profile",
       });
     } catch (e) {
@@ -40,21 +41,21 @@ class Seller {
   static sellerLogoUpload = async (req, res) => {
     try {
       let oldImg;
-      
-      if (! req.file.path ) throw new Error('no input image');
 
-      if (req.seller.image) oldImg = path.join(__dirname, "../../", req.seller.image);
+      if (!req.file.path) throw new Error('no input image');
+
+      if (req.entity.image) oldImg = path.join(__dirname, "../../", req.entity.image);
       else oldImg = null;
 
-      if (oldImg) fs.unlinkSync(oldImg); 
-      
-      req.seller.image = req.file.path;
+      if (oldImg) fs.unlinkSync(oldImg);
 
-      await req.seller.save();
+      req.entity.image = req.file.path;
+
+      await req.entity.save();
 
       res.status(200).send({
         apiStatus: true,
-        data: req.seller,
+        data: req.entity,
       });
     } catch (e) {
       res.status(500).send({
@@ -65,80 +66,80 @@ class Seller {
     }
   };
 
-  static addSellerDescription = async (req , res)=>{
-    try{
-        req.seller.description = req.body.description;
-        await req.seller.save()
-        res.status(200).send({
-          apiStatus: true,
-          data: req.seller,
-        });
-      
+  static addSellerDescription = async (req, res) => {
+    try {
+      req.entity.description = req.body.description;
+      await req.entity.save()
+      res.status(200).send({
+        apiStatus: true,
+        data: req.entity,
+      });
+
     }
-    catch(e){
+    catch (e) {
       res.status(500).send({
         apiStatus: false,
         date: e,
         message: e.message,
       });
     }
-   
+
   }
 
-  static logIn = async (req, res) => {
-    try {
-      const sellerData = await sellerModel.login(req.body.email, req.body.password);
-      const token = await sellerData.generateToken();
-      res.status(200).send({
-        apiStatus: true,
-        data: { sellerData, token },
-        message: "logged in as seller",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e,
-        message: e.message,
-      });
-    }
-  };
+  // static logIn = async (req, res) => {
+  //   try {
+  //     const sellerData = await sellerModel.login(req.body.email, req.body.password);
+  //     const token = await sellerData.generateToken();
+  //     res.status(200).send({
+  //       apiStatus: true,
+  //       data: { sellerData, token },
+  //       message: "logged in as seller",
+  //     });
+  //   } catch (e) {
+  //     res.status(500).send({
+  //       apiStatus: false,
+  //       data: e,
+  //       message: e.message,
+  //     });
+  //   }
+  // };
 
-  static logOut = async (req, res) => {
-    try {
-      let index = req.seller.tokens.findIndex((token) => token == req.sellerToken);
-      req.seller.tokens.splice(index, 1);
-      await req.seller.save();
-      res.status(200).send({
-        apiStatus: true,
-        data: req.seller,
-        message: "seller logged out ",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e,
-        message: e.message,
-      });
-    }
-  };
+  // static logOut = async (req, res) => {
+  //   try {
+  //     let index = req.entity.tokens.findIndex((token) => token == req.entityToken);
+  //     req.entity.tokens.splice(index, 1);
+  //     await req.entity.save();
+  //     res.status(200).send({
+  //       apiStatus: true,
+  //       data: req.entity,
+  //       message: "seller logged out ",
+  //     });
+  //   } catch (e) {
+  //     res.status(500).send({
+  //       apiStatus: false,
+  //       data: e,
+  //       message: e.message,
+  //     });
+  //   }
+  // };
 
-  static logOutAll = async (req, res) => {
-    try {
-      req.seller.tokens = [];
-      await req.seller.save();
-      res.status(200).send({
-        apiStatus: true,
-        data: req.seller,
-        message: "seller logged out from all devices",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e,
-        message: e.message,
-      });
-    }
-  };
+  // static logOutAll = async (req, res) => {
+  //   try {
+  //     req.entity.tokens = [];
+  //     await req.entity.save();
+  //     res.status(200).send({
+  //       apiStatus: true,
+  //       data: req.entity,
+  //       message: "seller logged out from all devices",
+  //     });
+  //   } catch (e) {
+  //     res.status(500).send({
+  //       apiStatus: false,
+  //       data: e,
+  //       message: e.message,
+  //     });
+  //   }
+  // };
 
 
 
