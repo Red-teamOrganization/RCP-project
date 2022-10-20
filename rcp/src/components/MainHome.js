@@ -25,9 +25,19 @@ import { Navigation } from "swiper";
 
 export default function MainHome() {
   const [honorList, setHonorList] = useState([]);
+  const[charities,setCharities]=useState([]);
 
   const fetchHonorList = async () => {
     const response = await fetch("http://localhost:3000/honorList");
+    if (!response.ok) {
+      throw new Error("Data could not be fetched!");
+    } else {
+      return response.json();
+    }
+  };
+
+  const fetchCharities = async () => {
+    const response = await fetch("http://localhost:3000/allCharities");
     if (!response.ok) {
       throw new Error("Data could not be fetched!");
     } else {
@@ -43,7 +53,15 @@ export default function MainHome() {
       .catch((e) => {
         console.log(e.message);
       });
-  }, []);
+
+    fetchCharities()
+    .then((res)=>{
+      setCharities(res.data)
+    })
+    .catch(e=>{
+      console.log(e.message)
+    })
+  }, [honorList,charities]);
 
   return (
     <>
@@ -213,8 +231,8 @@ export default function MainHome() {
         {honorList.map((user, i) => {
              if(user.numberOfDonations>0){
               return (
-                <SwiperSlide key={i}>
-                <div className="flex justify-around">
+                <SwiperSlide>
+                <div className="flex justify-around" key={user._id}>
                {user.image ? (<img
                    className="object-fill w-6/12 h-50"
                    src={"http://localhost:3000/"+user.image.replace("public","")}
@@ -243,7 +261,33 @@ export default function MainHome() {
           Charities
         </p>
       </div>
-
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        {charities.map((charity, i) => {
+            
+              return (
+                <SwiperSlide>
+                <div className="flex justify-around" key={charity._id}>
+               {charity.image ? (<img
+                   className="object-fill w-6/12 h-50"
+                   src={"http://localhost:3000/"+charity.image.replace("public","")}
+                   alt={`slide${i+1}`}
+                 />):(<img
+                 className="object-fill w-6/12 h-50"
+                 src={trustedProducer}
+                 alt={`slide${i+1}`}/>)
+                }
+                 <div className="w-5/12">
+                 <p>{charity.name}</p>
+                 <p>{charity.location}</p>
+                 </div>
+                 </div>
+               </SwiperSlide>
+             );
+             }
+            
+         
+        )}
+      </Swiper>
      
 
       <div className="text-center">
