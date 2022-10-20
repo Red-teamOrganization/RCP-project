@@ -4,94 +4,11 @@
   list-style: none;
   box-sizing: border-box;
 }
-.mainPage {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 5em;
-  justify-content: space-around;
-  background-color: rgb(61, 117, 61);
-  overflow: auto;
+.swiper-button-next{
+  color:green !important;
 }
 
-.aboutUs {
-  width: 90%;
-  height: 50vh;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  background-image: url(../images/recipe.jpeg);
-  background-size: cover;
-  background-color: rgba(24, 24, 24,0.6);
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  border-radius: 5px;
-  
-}
-.producerRole {
-  margin-top: 2em;
-  width: 40%;
-  height: 50vh;
-  padding: 10px;
-  color: white;
-  text-align: center;
-  background-image: url(../images/producer.jpeg);
-  background-size: cover;
-  background-color: rgba(24, 24, 24,0.6);
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  border-radius: 5px;
-}
-  
-
-.consumerRole {
-  margin-top: 2em;
-  width: 40%;
-  height: 50vh;
-  padding: 10px;
-  color: white;
-  text-align: center;
-  background-image: url(../images/consumer.jpeg);
-  background-size: cover;
-  background-color: rgba(24, 24, 24,0.6);
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  border-radius: 5px;
-  
-}
-.content {
-  margin-top: 20%;
-  font-size: 1.2rem;
-  color: rgb(253, 251, 251);
-}
-.content-aboutus {
-  margin-top: 7%;
-  font-size: 1.2rem;
-  color: rgb(253, 251, 251);
-  
-}
-h1 {
-  font-size: 1.5rem;
+.swiper-button-prev{
+  color:green !important;
 }
 
-
-
-@media only screen and (max-width: 800px) {
-  .mainPage {
-    display: block;
-  }
-  .aboutUs {
-    width: 100%;
-    overflow: auto;
-  }
-
-  .consumerRole {
-    width: 100%;
-    overflow: auto;
-  }
-
-  .producerRole {
-    width: 100%;
-    overflow: auto;
-  }
-}
