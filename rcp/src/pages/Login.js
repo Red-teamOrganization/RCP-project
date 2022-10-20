@@ -13,7 +13,7 @@ export default function Login() {
     email: "",
     password: "",
     error: null,
-    loading: false,
+    loading:false,
   });
 
   const navigate = useNavigate();

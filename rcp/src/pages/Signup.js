@@ -139,23 +139,20 @@ export default function Signup() {
               <br />
 
               {/* <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select an option</label> */}
-              <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected="">Location</option>
-                <option value="US">Berlin</option>
-                <option value="CA">Hamburg</option>
-                <option value="FR">Dortmund</option>
-                <option value="DE">Bayern</option>
+              <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option>Location</option>
+                <option value="berlin">Berlin</option>
+                <option value="hamburg">Hamburg</option>
+                <option value="dortmund">Dortmund</option>
+                <option value="bayern">Bayern</option>
               </select>
-
               <br />
-
-
               <div>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option selected="">Your Role</option>
-                  <option value="US">Producer</option>
-                  <option value="CA">Seller</option>
-                  <option value="FR">Charity</option>
+                <select  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option>Your Role</option>
+                  <option value="producer">Producer</option>
+                  <option value="seller">Seller</option>
+                  <option value="charity">Charity</option>
                 </select>
               </div>
 
