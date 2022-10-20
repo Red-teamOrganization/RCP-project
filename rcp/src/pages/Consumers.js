@@ -35,7 +35,7 @@ function Consumers({ name }) {
     POTATOES: 0,
     APPLES: 0,
   });
-  console.log(availableProducts);
+  
   useEffect(() => {
     async function getProduction() {
       const data = await getDocs(collection(db, "producers"));
