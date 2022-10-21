@@ -1,8 +1,6 @@
 const producerProductsModel = require("../database/models/producerProducts.model");
 
-
-
-class SoldProducts {
+class ProducedProducts {
 
   static addProduct = async (req, res) => {
     try {
@@ -265,4 +263,4 @@ class SoldProducts {
     };
 }
 
-module.exports = SoldProducts;
+module.exports = ProducedProducts;

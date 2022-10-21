@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-const producerModel = require("../database/models/producer.model");
+const User = require("../database/models/user.model");
 
 const producerAuth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("bearer ", ""); 
     const decoded = jwt.verify(token, "RCP"); 
-    const producerData = await producerModel.findOne({
+    const producerData = await User.findOne({
       _id: decoded._id,
       "tokens.token": token,
       "userType": 'producer',

@@ -1,5 +1,5 @@
 const producerDonationModel = require("../database/models/producerDonations.model");
-const charityModel = require("../database/models/charity.model")
+
 class ProducerDonation {
   static addProducerDonation = async (req, res) => {
     try {
