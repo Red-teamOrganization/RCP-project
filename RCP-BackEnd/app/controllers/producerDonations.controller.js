@@ -1,9 +1,10 @@
 const producerDonationModel = require("../database/models/producerDonations.model");
-
+const User = require('../database/models/user.model')
 class ProducerDonation {
   static addProducerDonation = async (req, res) => {
     try {
-      const charity = await charityModel.findOne({name:req.body.charityName})
+      const charity = await User.findOne({name:req.body.charityName})
+
       if(charity.location != req.producer.location) {
         throw new Error('you must enter a charity in your location')
       }
@@ -15,6 +16,7 @@ class ProducerDonation {
         donatorName: req.producer.name,
         location: req.producer.location,
       });
+
       charity.donations.push({ 
         donationId:donationData._id,
         donatorId: req.producer._id,
@@ -25,6 +27,7 @@ class ProducerDonation {
         category:req.body.category,
         checked:false,
       })
+
       req.producer.numberOfDonations += 1
       await req.producer.save();
       await charity.save();
@@ -44,10 +47,10 @@ class ProducerDonation {
 
   static myDonations = async (req, res) => {
     try {
-      await req.producer.populate("myDonations");
+      await req.producer.populate("ProducerDonations");
       res.status(200).send({
         apiStatus: true,
-        data: req.producer.myDonations,
+        data: req.producer.ProducerDonations,
         message: "producer donations fetched",
       });
     } catch (e) {
@@ -63,7 +66,7 @@ class ProducerDonation {
       try {
         const producerDonation = await producerDonationModel.findById(req.params.id)
         
-        const charity = await charityModel.findById(producerDonation.charityId)
+        const charity = await User.findById(producerDonation.charityId)
     
         const donation = charity.donations.find(don=>don.donationId==req.params.id)
         if(donation.checked){
@@ -77,13 +80,13 @@ class ProducerDonation {
         charity.donations.splice(index,1)
         req.producer.numberOfDonations -= 1
         await req.producer.save();
-        await req.producer.populate("myDonations");
+        await req.producer.populate("ProducerDonations");
         await req.producer.save();
         await charity.save();
 
         res.status(200).send({
           apiStatus: true,
-          data: req.producer.myDonations,
+          data: req.producer.ProducerDonations,
           message: "donation deleted",
         });
       } catch (e) {
@@ -103,7 +106,7 @@ class ProducerDonation {
           donatorId: req.producer._id,
         });
         
-        const charity = await charityModel.findById(producerDonation.charityId)
+        const charity = await User.findById(producerDonation.charityId)
     
         const donation = charity.donations.find(don=>don.donationId==req.params.id)
         if(donation.checked){
@@ -115,7 +118,7 @@ class ProducerDonation {
         updates.forEach((key) => (donation[key] = req.body[key]));
       
 
-        await req.producer.populate("myDonations");
+        await req.producer.populate("ProducerDonations");
         await producerDonation.save();
         await charity.save();
 
