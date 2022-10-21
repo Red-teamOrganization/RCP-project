@@ -1,6 +1,4 @@
-const charityModel = require("../database/models/charity.model");
-const sellerModel = require("../database/models/seller.model");
-const producerModel = require("../database/models/producer.model")
+
 
 class Home{
     static honorList = async (req, res) =>{

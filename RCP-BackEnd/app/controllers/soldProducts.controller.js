@@ -1,7 +1,5 @@
 const soldProductsModel = require("../database/models/soldProducts.model");
 
-const sellerModel = require("../database/models/seller.model");
-
 class SoldProducts {
 
   static addProduct = async (req, res) => {

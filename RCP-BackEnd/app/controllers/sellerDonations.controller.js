@@ -1,12 +1,15 @@
 const sellerDonationModel = require("../database/models/sellerDonations.model");
-const charityModel = require("../database/models/charity.model")
+const User = require("../database/models/user.model")
 class SellerDonation {
   static addSellerDonation = async (req, res) => {
     try {
-      const charity = await charityModel.findOne({name:req.body.charityName})
+      const charity = await User.findOne({name:req.body.charityName})
+      const seller = await User.findById(req.seller._id)
+
       if(charity.location != req.seller.location) {
         throw new Error('you must enter a charity in your location')
       }
+
       const donationData = new sellerDonationModel({
         ...req.body,
         charityId:charity._id,
@@ -14,6 +17,7 @@ class SellerDonation {
         donatorName: req.seller.name,
         location: req.seller.location,
       });
+
       charity.donations.push({ 
         donationId:donationData._id,
         donatorId: req.seller._id,
@@ -24,8 +28,10 @@ class SellerDonation {
         category:req.body.category,
         checked:false,
       })
-      req.seller.numberOfDonations += 1
-      await req.seller.save();
+      
+      seller.numberOfDonations+=1
+      console.log(seller.numberOfDonations)
+      await seller.save();
       await charity.save();
       await donationData.save();
       res.status(200).send({
