@@ -30,7 +30,7 @@ class SellerDonation {
       })
       
       seller.numberOfDonations+=1
-      console.log(seller.numberOfDonations)
+
       await seller.save();
       await charity.save();
       await donationData.save();
@@ -49,10 +49,10 @@ class SellerDonation {
 
   static myDonations = async (req, res) => {
     try {
-      await req.seller.populate("myDonations");
+      await req.seller.populate("SellerDonations");
       res.status(200).send({
         apiStatus: true,
-        data: req.seller.myDonations,
+        data: req.seller.SellerDonations,
         message: "seller donations fetched",
       });
     } catch (e) {
@@ -68,9 +68,10 @@ class SellerDonation {
       try {
         const sellerDonation = await sellerDonationModel.findById(req.params.id)
         
-        const charity = await charityModel.findById(sellerDonation.charityId)
+        const charity = await User.findById(sellerDonation.charityId)
     
         const donation = charity.donations.find(don=>don.donationId==req.params.id)
+       
         if(donation.checked){
           throw new Error("the charity has already receive your donation")
         }
@@ -79,15 +80,16 @@ class SellerDonation {
           donatorId: req.seller._id,
         });
         const index = charity.donations.findIndex(don=> don.donationId == req.params.id)
+       
         charity.donations.splice(index,1)
         req.seller.numberOfDonations -= 1
-        await req.seller.populate("myDonations");
+        await req.seller.populate("SellerDonations");
         await req.seller.save();
         await charity.save();
 
         res.status(200).send({
           apiStatus: true,
-          data: req.seller.myDonations,
+          data: req.seller.SellerDonations,
           message: "donation deleted",
         });
       } catch (e) {
@@ -107,7 +109,7 @@ class SellerDonation {
           donatorId: req.seller._id,
         });
         
-        const charity = await charityModel.findById(sellerDonation.charityId)
+        const charity = await User.findById(sellerDonation.charityId)
     
         const donation = charity.donations.find(don=>don.donationId==req.params.id)
         if(donation.checked){
@@ -119,7 +121,7 @@ class SellerDonation {
         updates.forEach((key) => (donation[key] = req.body[key]));
       
 
-        await req.seller.populate("myDonations");
+        await req.seller.populate("SellerDonations");
         await sellerDonation.save();
         await charity.save();
 

@@ -7,8 +7,7 @@ class UserController {
     try {
       const user = new User(req.body);
       const token = await user.generateToken();
-      console.log(req.body.userType)
-      await user.generateFields(req.body.userType)
+     
       await user.save();
       res.status(200).send({
         apiStatus: true,

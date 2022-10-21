@@ -20,7 +20,53 @@ const userSchema = mongoose.Schema({
     trim: true,
     required: true,
     enum: ["charity", "producer", "seller"],
-  },
+  },      donations: [
+            {
+              donatorId: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: "Seller",
+              },
+              donationId: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: "sellerDonations",
+              },
+              donatorName: {
+                type: String,
+                required: true,
+                trim: true,
+              },
+              location: {
+                type: String,
+                required: true,
+              },
+              productName: {
+                type: String,
+                min: 5,
+                max: 10,
+                required: true,
+                trim: true,
+                lowercase: true,
+              },
+              quantity: {
+                type: Number,
+                required: true,
+              },
+              category: {
+                type: String,
+                enum: ["agriculture", "protein", "diary"],
+                lowercase: true,
+                required: true,
+                trim: true,
+              },
+              checked: {
+                type: Boolean,
+                required: true,
+              },
+            },
+          ],
+  numberOfDonations:{ type: Number, default: 0 },
   location: {
     type: String,
     trim: true,
@@ -38,11 +84,20 @@ const userSchema = mongoose.Schema({
     },
   ],
 });
+
 userSchema.methods.toJSON = function () {
-  const producerData = this.toObject();
-  delete producerData.__v;
-  return producerData;
+  const userData = this.toObject();
+  delete userData.__v;
+  if(userData.userType == 'seller' || userData.userType == 'producer')
+  {
+    delete userData.donations
+  }
+  if(userData.userType=="charity"){
+    delete userData.numberOfDonations
+  }
+  return userData;
 };
+
 userSchema.methods.generateToken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user._id, user_type: user.userType }, "RCP");
@@ -109,15 +164,15 @@ userSchema.methods.generateToken = async function () {
     
 //   }
 // };
-userSchema.path('userType').validate(function(value) {
-    // When running in `validate()` or `validateSync()`, the
-    // validator can access the document using `this`.
-    // Does **not** work with update validators.
-    if (this.name.toLowerCase().indexOf('red') !== -1) {
-      return value !== 'red';
-    }
-    return true;
-  });
+// userSchema.path('userType').validate(function(value) {
+//     // When running in `validate()` or `validateSync()`, the
+//     // validator can access the document using `this`.
+//     // Does **not** work with update validators.
+//     if (this.name.toLowerCase().indexOf('red') !== -1) {
+//       return value !== 'red';
+//     }
+//     return true;
+//   });
 
 userSchema.statics.login = async (email, pass) => {
   const user = await User.findOne({ email });
@@ -140,7 +195,7 @@ userSchema.virtual("mySoldProducts", {
   foreignField: "sellerId",
 });
 
-userSchema.virtual("myDonations", {
+userSchema.virtual("SellerDonations", {
   ref: "sellerDonations",
   localField: "_id",
   foreignField: "donatorId",
@@ -152,7 +207,7 @@ userSchema.virtual("myProducts", {
   foreignField: "producerId",
 });
 
-userSchema.virtual("myDonations", {
+userSchema.virtual("ProducerDonations", {
   ref: "producerDonations",
   localField: "_id",
   foreignField: "donatorId",
