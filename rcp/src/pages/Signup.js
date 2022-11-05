@@ -22,8 +22,6 @@ export default function Signup() {
   const navigate = useNavigate();
   const { name, email, password,confirmPassword,  userType , location } = userData;
 
-
-
   useEffect(()=>{
     if(user){
       navigate("/");

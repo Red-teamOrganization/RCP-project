@@ -3,12 +3,14 @@ import { useState } from "react";
 import LoadingComponent from "../components/LoadingComponent"
 
 export default function Charities() {
+  
   const charity = JSON.parse(localStorage.getItem("user"));
   const [showDescriptionForm, setShowDescriptionForm] = useState(false);
   const [description,setDescription] = useState('')
   const [donations , setDonations] = useState([])
   const [loading , setLoading] = useState(true)
   const [editImageForm , setEditImageForm] = useState(false)
+
   useEffect(()=>{
     async function fetchDonations(){
      try{

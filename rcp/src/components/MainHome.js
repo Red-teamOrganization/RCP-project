@@ -56,7 +56,7 @@ export default function MainHome() {
       setCharities(res.data)
     })
   
-  }, [honorList,charities]);
+  }, []);
 
   return (
     <>
