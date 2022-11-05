@@ -1,0 +1,17 @@
+.navItem.active{
+    background-color:rgb(65, 152, 65);
+    color:white;
+    border-radius: 5px;
+    padding: 0.2em;
+}
+
+.navItem{
+    cursor: pointer;
+}
+
+.navItem:hover{
+    background-color:rgb(65, 152, 65);
+    color:white;
+    border-radius: 5px;
+    padding: 0.2em;
+}

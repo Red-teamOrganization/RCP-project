@@ -8,11 +8,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 
-import AuthProvider from "./context/auth";
 
 function App() {
   return (
-    <AuthProvider>
+  
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -25,7 +24,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </AuthProvider>
+    
   );
 }
 

@@ -50,17 +50,12 @@ export default function MainHome() {
       .then((res) => {
         setHonorList(res.data);
       })
-      .catch((e) => {
-        console.log(e.message);
-      });
 
     fetchCharities()
     .then((res)=>{
       setCharities(res.data)
     })
-    .catch(e=>{
-      console.log(e.message)
-    })
+  
   }, [honorList,charities]);
 
   return (
@@ -364,4 +359,5 @@ export default function MainHome() {
       </div>
     </>
   );
+
 }

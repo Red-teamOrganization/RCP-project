@@ -1,45 +1,73 @@
-import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import React, { useState,useEffect} from "react";
+import { useNavigate} from "react-router-dom";
+import { useAuthContext } from '../hooks/useAuthContext'
 import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
-import "./Footer.css"
-
+import "./Footer.css";
 
 export default function Login() {
-  const [data, setData] = useState({
+
+  const [userData, setUserData] = useState({
     email: "",
     password: "",
-    error: null,
-    loading:false,
   });
 
-  const navigate = useNavigate();
-  const { email, password, error, loading } = data;
+  const user = JSON.parse(localStorage.getItem('user'))
 
+ 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { dispatch } = useAuthContext()
+  const navigate = useNavigate();
+  
+  const { email, password } = userData;
+
+   useEffect(()=>{
+    if(user){
+      navigate("/");
+      return
+    }
+  })
   function handleChange(e) {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    setData({ ...data, error: null, loading: true });
-    if (!email || !password) {
-      setData({ ...data, error: "All fields are required" });
-    }
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setData({
+      e.preventDefault();
+
+      if (!email || !password) {
+        setUserData({ ...userData });
+        setError("all fields are required");
+        return;
+      }
+      let response = await fetch("http://localhost:3000/user/logIn", {
+        method: "POSt",
+        body: JSON.stringify(userData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      setLoading(true);
+      if (!data.apiStatus) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+      localStorage.setItem('user',JSON.stringify(data.data))
+      dispatch({type: 'LOGIN', payload: data.data})
+      setUserData({
         email: "",
         password: "",
-        error: null,
-        loading: false,
       });
+      setLoading(false);
       navigate("/main");
+     
     } catch (err) {
-      setData({ ...data, error: err.message, loading: false });
+      setLoading(false);
+      setError(err);
     }
   }
 
@@ -49,13 +77,12 @@ export default function Login() {
 
   return (
     <>
-
       <div className="min-h-full signup-login-wrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-md w-full space-y-8">
           <div>
             <img src={logo} width={"150px"} className="mx-auto" alt="" />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Sign in to your account
+             Log in to your account
             </h2>
           </div>
           <form
@@ -98,14 +125,14 @@ export default function Login() {
               </div>
             </div>
 
-            {error ? (
+            {error && 
               <div
                 className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                 role="alert"
               >
                 {error}
               </div>
-            ) : null}
+            }
             <div>
               <button
                 type="submit"

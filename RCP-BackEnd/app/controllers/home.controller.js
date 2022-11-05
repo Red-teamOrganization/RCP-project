@@ -4,7 +4,6 @@ class Home {
     try {
       let users = await User.find();
       const filtered = users.filter(user=> user.userType === "producer" || user.userType === "seller")
-        console.log(filtered)
       filtered.sort((a, b) =>  b.numberOfDonations - a.numberOfDonations);
 
       res.status(200).send({
