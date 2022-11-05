@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { db, auth } from "../firebase";
-import { getDoc, doc } from "firebase/firestore";
 import Producers from "./Producers";
-import Consumers from "./Consumers";
+import Sellers from "./Sellers";
+import Charities from "./Charities"
 
 function Main() {
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    async function getUser() {
-      const user = await getDoc(doc(db, "users", auth.currentUser.uid));
-      setUser({ ...user.data() });
-    }
-    getUser();
-  }, []);
-
-  return <div>{user.isProducer ? <Producers name={user.name}/> : <Consumers name={user.name}/>}</div>;
+  let userData = JSON.parse(localStorage.getItem('user'))
+   
+  return <div>{userData.user.userType === "producer" ?  <Producers />  : userData.user.userType === "seller" ? <Sellers /> : <Charities  />}</div>;
 }
 
 export default Main;

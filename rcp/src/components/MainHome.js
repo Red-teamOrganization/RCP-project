@@ -50,17 +50,12 @@ export default function MainHome() {
       .then((res) => {
         setHonorList(res.data);
       })
-      .catch((e) => {
-        console.log(e.message);
-      });
 
     fetchCharities()
     .then((res)=>{
       setCharities(res.data)
     })
-    .catch(e=>{
-      console.log(e.message)
-    })
+  
   }, [honorList,charities]);
 
   return (
@@ -231,8 +226,8 @@ export default function MainHome() {
         {honorList.map((user, i) => {
              if(user.numberOfDonations>0){
               return (
-                <SwiperSlide>
-                <div className="flex justify-around" key={user._id}>
+                <SwiperSlide key={user._id}>
+                <div className="flex justify-around" >
                {user.image ? (<img
                    className="object-fill w-6/12 h-50"
                    src={"http://localhost:3000/"+user.image.replace("public","")}
@@ -265,8 +260,8 @@ export default function MainHome() {
         {charities.map((charity, i) => {
             
               return (
-                <SwiperSlide>
-                <div className="flex justify-around" key={charity._id}>
+                <SwiperSlide key={charity._id}>
+                <div className="flex justify-around">
                {charity.image ? (<img
                    className="object-fill w-6/12 h-50"
                    src={"http://localhost:3000/"+charity.image.replace("public","")}
@@ -364,4 +359,5 @@ export default function MainHome() {
       </div>
     </>
   );
+
 }

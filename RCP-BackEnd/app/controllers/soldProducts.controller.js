@@ -90,7 +90,7 @@ class SoldProducts {
           }
         }
       });
-
+   
       res.status(200).send({
         apiStatus: true,
         data: agriculture,

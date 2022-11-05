@@ -21,6 +21,4 @@ router.post("/charityProfile/donationCheck/:id", userAuth, UserController.checkD
 router.get("/logOut", userAuth, UserController.logOut);
 router.get("/logOutAll", userAuth, UserController.logOutAll);
 
-
-
 module.exports = router;

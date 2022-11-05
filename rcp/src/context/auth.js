@@ -1,27 +1,34 @@
-import { createContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
-import LoadingComponent from "../components/LoadingComponent";
 
-export const AuthContext = createContext();
+import { createContext, useReducer , useEffect } from 'react'
 
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+export const AuthContext = createContext()
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
-  }, []);
-  if (loading) {
-    return <LoadingComponent />;
+export const authReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return { user: action.payload }
+    case 'LOGOUT':
+      return { user: null }
+    default:
+      return state
   }
+}
 
+export const AuthContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(authReducer, { 
+    user: null
+  })
+  useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem("user"))
+    if(user){
+      dispatch({type:"LOGIN" , payload:user})
+    }
+  },[])
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
-  );
-};
+    <AuthContext.Provider value={{ ...state, dispatch }}>
+      { children }
+    </AuthContext.Provider>
+  )
 
-export default AuthProvider;
+}
+
