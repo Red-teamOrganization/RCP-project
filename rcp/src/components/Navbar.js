@@ -1,39 +1,35 @@
 import React from "react";
-import {NavLink,Link} from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useNavigate} from "react-router-dom";
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 import logo from "../images/logo.png";
-import "./nav.css"
+import "./nav.css";
 
 export default function Navbar() {
-
-
-  let userData = JSON.parse(localStorage.getItem('user'))
+  let userData = JSON.parse(localStorage.getItem("user"));
   const { user } = useAuthContext();
-  
+
   const navigate = useNavigate();
-  const { dispatch } = useAuthContext()
- 
+  const { dispatch } = useAuthContext();
+
   async function handleLogOut() {
     try {
       let response = await fetch("http://localhost:3000/user/logOut", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          "Authorization":`bearer ${userData.token}`
+          Authorization: `bearer ${userData.token}`,
         },
       });
       await response.json();
       localStorage.removeItem("user");
-      dispatch({ type: 'LOGOUT' })
+      dispatch({ type: "LOGOUT" });
       navigate("/login");
-     
     } catch (err) {
-     console.log(err)
+      console.log(err);
     }
-    
   }
 
   return (
@@ -63,50 +59,32 @@ export default function Navbar() {
               {user ? (
                 <div className="hidden sm:flex">
                   <div className="flex space-x-4">
-                    <NavLink
-                     to="/"
-                   
-                     className="navItem"
-                
-                     >
-                  HOME
-                  </NavLink>
-                  <NavLink
-                    to="/main"
-                    className="navItem"
-                  
-                    aria-current="page"
-                  >
-                    Main
-                  </NavLink>
-                  <div
-                    to="/login"
-                    className="navItem"
-                   
-                    aria-current="page"
-                    onClick={handleLogOut}
-                  >
-                    Logout
-                  </div>
+                    <NavLink to="/" className="navItem">
+                      HOME
+                    </NavLink>
+                    <NavLink to="/main" className="navItem" aria-current="page">
+                      Profile
+                    </NavLink>
+                    <div
+                      to="/login"
+                      className="navItem"
+                      aria-current="page"
+                      onClick={handleLogOut}
+                    >
+                      Logout
+                    </div>
                   </div>
                 </div>
               ) : (
-              
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
-                    <NavLink
-                     to="/"
-                    
-                     className="navItem"
-                    
-                     >
-                    HOME
-                  </NavLink>
+                      <NavLink to="/" className="navItem">
+                        HOME
+                      </NavLink>
                       <NavLink
                         to="/login"
                         className="navItem"
-                      
                         aria-current="page"
                       >
                         Login
@@ -114,7 +92,6 @@ export default function Navbar() {
                       <NavLink
                         to="/signup"
                         className="navItem"
-                       
                         aria-current="page"
                       >
                         Sign up
@@ -123,15 +100,10 @@ export default function Navbar() {
                   </div>
                 </div>
               )}
-
             </div>
           </div>
-
         </>
-      )
-      }
-    </Disclosure >
+      )}
+    </Disclosure>
   );
 }
-
-
