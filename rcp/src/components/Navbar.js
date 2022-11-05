@@ -15,7 +15,7 @@ export default function Navbar() {
   
   const navigate = useNavigate();
   const { dispatch } = useAuthContext()
-
+ 
   async function handleLogOut() {
     try {
       let response = await fetch("http://localhost:3000/user/logOut", {
