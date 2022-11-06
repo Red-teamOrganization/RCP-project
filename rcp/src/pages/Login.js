@@ -5,7 +5,7 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
 import "./Footer.css";
-
+import { toast } from 'react-toastify';
 export default function Login() {
 
   const [userData, setUserData] = useState({
@@ -64,7 +64,9 @@ export default function Login() {
       });
       setLoading(false);
       navigate("/main");
-     
+      toast.success(`welcome back ${data.data.user.name}`,{
+        icon: "😄"
+      })
     } catch (err) {
       setLoading(false);
       setError(err);

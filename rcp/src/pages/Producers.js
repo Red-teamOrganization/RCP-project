@@ -4,24 +4,29 @@ import AddProduct from "../components/AddProduct";
 import EditDonation from "../components/EditDonation";
 import EditProduct from "../components/EditProduct";
 import LoadingComponent from "../components/LoadingComponent";
+import Profile from "../components/Profile";
 import UserDonations from "../components/UserDonations";
 import UserProducts from "../components/UserProducts";
+import { toast } from 'react-toastify';
 // import "./producer.css";
+
 function Producers() {
 const producer = JSON.parse(localStorage.getItem("user"));
-const [showDescriptionForm, setShowDescriptionForm] = useState(false);
-const [description, setDescription] = useState("");
+
 const [producerDonations, setProducerDonations] = useState([]);
 const [producerProducts,setProducerProducts] = useState([]);
+
 const [loading, setLoading] = useState(true);
-const [editImageForm, setEditImageForm] = useState(false);
+
 const [donationFlag, setDonationFlag] = useState(false);
 const [productsFlag , setProductsFlag]=useState(false)
-const [charities, setCharities] = useState([]);
-const [editDonationFormFlag, setEditDonationFormFlag] = useState("");
-const [editProductFormFlag, setEditProductFormFlag] = useState("");
 const [addDonationFlag ,setAddDonationFlag] = useState(false)
 const [addProductFlag ,setAddProductFlag] = useState(false)
+const [editDonationFormFlag, setEditDonationFormFlag] = useState("");
+const [editProductFormFlag, setEditProductFormFlag] = useState("");
+
+const [charities, setCharities] = useState([]);
+
 const [addProducerDonation, setAddProducerDonation] = useState({
     charityName: "",
     productName: "",
@@ -39,9 +44,16 @@ const [addProducerProduct, setAddProducerProduct] = useState({
     category: "",
     yearOfProduction:2000,
   });
+
+const [editedProducerProduct, setEditedProducerProduct] = useState({
+    productName: "",
+    quantity: 0,
+    category: "",
+    yearOfProduction:2000,
+  });
+
 const [addDonationError, setAddDonationError] = useState(null);
-const [deleteDonationError, setDeleteDonationError] = useState(null);
-const [editDonationError ,setEditDonationError] = useState(null);
+
 const [addProducerError,setAddProducerError] = useState(null);
 const [deleteProductError , setDeleteProductError] = useState(null);
 
@@ -64,7 +76,9 @@ const [deleteProductError , setDeleteProductError] = useState(null);
         if (producerDonations.length > 0) {
           setDonationFlag(true);
         }
-
+        if(producerDonations.length === 0){
+          setDonationFlag(false)
+        }
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -106,6 +120,9 @@ const [deleteProductError , setDeleteProductError] = useState(null);
         if (producerProducts.length > 0) {
           setProductsFlag(true);
         }
+        if(producerProducts.length === 0){
+          setProductsFlag(false)
+        }
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -114,19 +131,8 @@ const [deleteProductError , setDeleteProductError] = useState(null);
     fetchProducerProducts();
   },[producerProducts])
 
-  if (loading) {
-    return <LoadingComponent />;
-  }
 
-  function descriptionFormToggle() {
-    setShowDescriptionForm((prev) => !prev);
-  }
-  function toggleEditImageForm() {
-    setEditImageForm((prev) => !prev);
-  }
-  function handleDescriptionChange(e) {
-    setDescription(e.target.value);
-  }
+ 
 
   function toggleEditDonationFormFlag(id) {
     setEditDonationFormFlag(id);
@@ -135,51 +141,6 @@ const [deleteProductError , setDeleteProductError] = useState(null);
     setEditProductFormFlag(id);
   }
  
-
-  async function submitDescriptionChange(e) {
-    try {
-      e.preventDefault();
-      let response = await fetch("http://localhost:3000/user/addDescription", {
-        method: "POSt",
-        body: JSON.stringify({ description }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `bearer ${producer.token}`,
-        },
-      });
-      setLoading(true);
-      let data = await response.json();
-      producer.user["description"] = data.data.description;
-
-      localStorage.setItem("user", JSON.stringify(producer));
-      setShowDescriptionForm(false);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function handleImageEdit(e) {
-    try {
-      let formData = new FormData();
-      formData.append("logo", e.target.files[0]);
-      let response = await fetch("http://localhost:3000/user/logoUpload", {
-        method: "POSt",
-        body: formData,
-        headers: {
-          Authorization: `bearer ${producer.token}`,
-        },
-      });
-
-      let json = await response.json();
-
-      producer.user["image"] = json.data.image;
-      localStorage.setItem("user", JSON.stringify(producer));
-      setEditImageForm(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   function handleAddDonationChange(e) {
     setAddProducerDonation((prev) => {
@@ -192,6 +153,14 @@ const [deleteProductError , setDeleteProductError] = useState(null);
 
   function handleAddProductChange(e) {
     setAddProducerProduct((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  }
+  function handleEditProductChange(e) {
+    setEditedProducerProduct((prev) => {
       return {
         ...prev,
         [e.target.name]: e.target.value,
@@ -247,8 +216,53 @@ const [deleteProductError , setDeleteProductError] = useState(null);
       setLoading(false);
       setAddProducerError(null)
       setAddProductFlag(false)
+      toast.success("product has been added successfully")
     } catch (err) {
       setAddProducerError(err.message);
+      setLoading(false);
+    }
+  }
+  async function handleEditProducerProductSubmit(e,id) {
+    try {
+      e.preventDefault();
+      if (
+        editedProducerProduct.yearOfProduction < 2000 ||
+        editedProducerProduct.quantity === 0 ||
+        editedProducerProduct.productName === "" ||
+        editedProducerProduct.category === ""
+      ) {
+        setEditedProducerProduct({ ...editedProducerProduct });
+        toast.error("all fields are required")
+        return;
+      }
+      let response = await fetch(
+        `http://localhost:3000/producedProducts/editProducedProduct/${id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(editedProducerProduct),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `bearer ${producer.token}`,
+          },
+        }
+      );
+      setLoading(true);
+      let json = await response.json();
+      if (!json.apiStatus) {
+        toast.error(json.message)
+        return;
+      }
+      setEditedProducerProduct({
+        yearOfProduction: 2000,
+        productName: "",
+        quantity: 0,
+        category: "",
+      });
+      setLoading(false);
+      toast.success("your product has been edited successfully")
+      setEditProductFormFlag("")
+    } catch (err) {
+      toast.error(err)
       setLoading(false);
     }
   }
@@ -290,6 +304,10 @@ const [deleteProductError , setDeleteProductError] = useState(null);
       });
       setLoading(false);
       setAddDonationError(null)
+      setAddDonationFlag(false)
+      toast.success(`your ${json.data.productName} has sent to ${json.data.charityName} successfully`,{
+        icon: "🚀"
+      })
     } catch (err) {
       setAddDonationError(err.message);
       setLoading(false);
@@ -308,11 +326,12 @@ const [deleteProductError , setDeleteProductError] = useState(null);
       );
       let json = await response.json();
       if (!json.apiStatus) {
-        setDeleteDonationError(json.message);
+        toast.error(json.message)
         return;
       }
+      toast.info("your donation has been removed")
     } catch (err) {
-      setDeleteDonationError(err.message);
+      toast.error(err)
     }
   }
   async function editProducerDonationSubmit(e,id) {
@@ -325,7 +344,7 @@ const [deleteProductError , setDeleteProductError] = useState(null);
         editedProducerDonation.category === ""
       ) {
         setEditedProducerDonation({ ...editedProducerDonation });
-        setEditDonationError("all fields are required");
+        toast.error("all fields are required")
         return;
       }
       let response = await fetch(
@@ -342,7 +361,7 @@ const [deleteProductError , setDeleteProductError] = useState(null);
       setLoading(true);
       let json = await response.json();
       if (!json.apiStatus) {
-        setEditDonationError(json.message);
+        toast.error(json.message)
         setEditedProducerDonation({
           productName: "",
           quantity: 0,
@@ -383,61 +402,18 @@ const [deleteProductError , setDeleteProductError] = useState(null);
       setDeleteProductError(err.message);
     }
   }
+  
+  if (loading) {
+    return <LoadingComponent />;
+  }
+
   return (
     <>
       <main className="charityPage">
         <section className="charityProfile">
-          <div>
-            <h1>welcome {producer.user.name}</h1>
-            <img
-              src={
-                producer.user.image
-                  ? "http://localhost:3000/" +
-                    producer.user.image.replace("public", "")
-                  : ""
-              }
-              alt=""
-            />
-            <button onClick={toggleEditImageForm}>edit Image</button>
-            {editImageForm && (
-              <input
-                type="file"
-                onChange={(e) => {
-                  handleImageEdit(e);
-                }}
-              />
-            )}
-          </div>
-          <div>
-            {!showDescriptionForm && (
-              <div>
-                {!producer.user.description ? (
-                  <div>add description</div>
-                ) : (
-                  <div>{producer.user.description}</div>
-                )}
-              </div>
-            )}
-            <button onClick={descriptionFormToggle}>edit Description</button>
-            {showDescriptionForm && (
-              <form action="post" onSubmit={submitDescriptionChange}>
-                <input
-                  type="text"
-                  id="charityDescription"
-                  placeholder={
-                    producer.user.description
-                      ? producer.user.description
-                      : "add your description"
-                  }
-                  onChange={(e) => {
-                    handleDescriptionChange(e);
-                  }}
-                />
-                <button>save changes</button>
-              </form>
-            )}
-          </div>
-          <div>{producer.user.location}</div>
+        <Profile
+         user={producer}
+         />
         </section>
         <section>
           <h1>your donations</h1>
@@ -455,12 +431,10 @@ const [deleteProductError , setDeleteProductError] = useState(null);
                   productName={donation.productName}
                   toggleEditDonationFormFlag={toggleEditDonationFormFlag}
                   donationId={donation._id}
-                  deleteDonationError={deleteDonationError}
                   deleteDonation = {deleteProducerDonation}
                   />
                   {donation._id === editDonationFormFlag ? (
                     <EditDonation 
-                    editDonationError={editDonationError}
                      handleEditDonationChange={handleEditDonationChange}
                      editedDonation={editedProducerDonation}
                      setEditDonationFormFlag={setEditDonationFormFlag}
@@ -506,12 +480,12 @@ const [deleteProductError , setDeleteProductError] = useState(null);
                   />
                   {product._id === editProductFormFlag ? (
                     <EditProduct
-                    // editDonationError={editDonationError}
-                    //  handleEditDonationChange={handleEditDonationChange}
-                    //  editedDonation={editedProducerDonation}
-                    //  setEditDonationFormFlag={setEditDonationFormFlag}
-                    //  editDonationSubmit={editProducerDonationSubmit}
-                    //  donationId={donation._id}
+                    handleEditSubmit={handleEditProducerProductSubmit}
+                    editedProduct={editedProducerProduct}
+                    setEditFormFlag={setEditProductFormFlag}
+                    handleEditProductChange={handleEditProductChange}
+                    productId={product._id}
+                    userType={producer.user.userType}
                      />
                   ) : (
                     <></>

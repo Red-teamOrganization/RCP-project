@@ -7,9 +7,11 @@ import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  
   return (
   
       <BrowserRouter>
@@ -23,6 +25,9 @@ function App() {
           </Route>
         </Routes>
         <Footer />
+      
+        <ToastContainer />
+     
       </BrowserRouter>
     
   );

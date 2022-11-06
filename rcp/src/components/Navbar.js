@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import logo from "../images/logo.png";
 import "./nav.css";
-
+import { toast } from 'react-toastify';
 export default function Navbar() {
   let userData = JSON.parse(localStorage.getItem("user"));
   const { user } = useAuthContext();
@@ -27,6 +27,9 @@ export default function Navbar() {
       localStorage.removeItem("user");
       dispatch({ type: "LOGOUT" });
       navigate("/login");
+      toast.success("good bye come back soon",{
+        icon: "😥"
+      })
     } catch (err) {
       console.log(err);
     }
