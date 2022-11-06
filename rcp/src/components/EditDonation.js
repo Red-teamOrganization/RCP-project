@@ -35,7 +35,6 @@ export default function EditDonation(props) {
       </select>
       <button>edit donation</button>
       <span onClick={() => props.setEditDonationFormFlag("")}>cancel</span>
-      {props.editDonationError && <div>{props.editDonationError}</div>}
     </form>
   );
 }

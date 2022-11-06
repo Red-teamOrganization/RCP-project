@@ -5,7 +5,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
 import "./Footer.css"
 import { useEffect } from "react";
-
+import { toast } from 'react-toastify';
 
 export default function Signup() {
   const [userData, setUserData] = useState({
@@ -76,6 +76,9 @@ export default function Signup() {
     });
      setLoading(false)
      navigate("/login");
+     toast.success("one more step to save the world with us please log in",{
+      icon: "😊"
+    })
     }
     catch(err){
       setError(err.message)
