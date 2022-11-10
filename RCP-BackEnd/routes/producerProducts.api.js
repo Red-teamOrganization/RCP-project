@@ -5,9 +5,9 @@ const producerAuth = require("../app/middleware/producer.Auth")
 router.post("/addProducedProduct",producerAuth, producerProductsController.addProduct);
 
 router.get("/myProducedProducts",producerAuth, producerProductsController.myProducedProducts);
-router.get("/allProducerAgricultureProducts",producerProductsController.totalAgricultureProducedProducts)
-router.get("/allProducerDiaryProducts",producerProductsController.totalDiaryProducedProducts)
-router.get("/allProducerProteinProducts",producerProductsController.totalProteinProducedProducts)
+router.post("/allProducerAgricultureProductsByLocation",producerProductsController.totalAgricultureProducedProductsByLocation)
+router.post("/allProducerDiaryProductsByLocation",producerProductsController.totalDiaryProducedProductsByLocation)
+router.post("/allProducerProteinProductsByLocation",producerProductsController.totalProteinProducedProductsByLocation)
 
 router.patch("/editProducedProduct/:id",producerAuth,producerProductsController.editProducedProduct)
 router.delete("/deleteProducedProduct/:id",producerAuth,producerProductsController.deleteProducedProduct)

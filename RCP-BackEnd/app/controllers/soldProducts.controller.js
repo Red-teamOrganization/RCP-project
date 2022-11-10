@@ -54,13 +54,14 @@ class SoldProducts {
     }
   };
 
-  static totalAgricultureSoldProducts = async (req, res) => {
+  static totalAgricultureSoldProductsByLocation = async (req, res) => {
     try {
       const soldProducts = await soldProductsModel.find();
       let agriculture = {};
       let newProduct = [];
+     
       soldProducts.forEach((soldProduct) => {
-        if (soldProduct.category == "agriculture") {
+        if (soldProduct.category == "agriculture" && soldProduct.location == req.body.location) {
           if (agriculture.hasOwnProperty(soldProduct.yearOfSold)) {
            
             for(let i = 0 ; i<agriculture[soldProduct.yearOfSold].length ; i++){
@@ -105,13 +106,13 @@ class SoldProducts {
     }
   };
 
-  static totalDiarySoldProducts = async (req, res) => {
+  static totalDiarySoldProductsByLocation = async (req, res) => {
     try {
       const soldProducts = await soldProductsModel.find();
       let diary={}
       let newProduct = [];
       soldProducts.forEach((soldProduct) => {
-        if (soldProduct.category == "diary") {
+        if (soldProduct.category == "diary" && soldProduct.location == req.body.location) {
           if (diary.hasOwnProperty(soldProduct.yearOfSold)) {
             
             for(let i = 0 ; i<diary[soldProduct.yearOfSold].length ; i++){
@@ -157,13 +158,13 @@ class SoldProducts {
   };
 
   
-  static totalProteinSoldProducts = async (req, res) => {
+  static totalProteinSoldProductsByLocation = async (req, res) => {
     try {
       const soldProducts = await soldProductsModel.find();
       let protein={}
       let newProduct = [];
       soldProducts.forEach((soldProduct) => {
-        if (soldProduct.category == "protein") {
+        if (soldProduct.category == "protein" && soldProduct.location == req.body.location) {
           if (protein.hasOwnProperty(soldProduct.yearOfSold)) {
             
             for(let i = 0 ; i<protein[soldProduct.yearOfSold].length ; i++){
@@ -240,7 +241,7 @@ class SoldProducts {
         
         const myProducts = await soldProductsModel.find({ sellerId: req.seller._id,});
         updates.forEach((key) => (product[key] = req.body[key]));
-      
+    
         myProducts.forEach(myProduct=>{
          if(myProduct.productName==product.productName && myProduct.yearOfSold == product.yearOfSold){
           throw new Error("this product has entered before in the same year")
