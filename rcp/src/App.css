@@ -1,6 +1,12 @@
-
+.loginWrapper{
+  height: calc(100vh - 144px );
+}
+.signUpWrapper{
+  height: calc(110vh - 144px );
+}
 .footer{
     width: 100%;
+    padding: 1em;
     display: flex;
     background-color: black;
     justify-content: space-around;
@@ -10,8 +16,10 @@
 .contactUs{
     width: 30%;
     color: white;
-
 }
 .hover:hover {
   color: rgb(61, 117, 61);
+}
+.footerLogo{
+  border-right: 2px solid white;
 }

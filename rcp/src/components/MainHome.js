@@ -1,13 +1,11 @@
-import React from "react";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
+import AllStatics from "./AllStatics";
 import "../pages/Home.css";
-import heroimage from "./../images/recipe.jpeg";
+import heroImage from "./../images/recipe.jpeg";
 import { Link } from "react-router-dom";
 import zakaria from "../images/zakaria.jfif";
-import anilson from "../images/anilson.png";
-import dionisis from "../images/dionisis.jpg";
 import producerImg from "../images/producer.jpeg";
 import consumerImg from "../images/consumer.jpeg";
 import trustedSeller from "../images/trustedSeller.webp"
@@ -22,6 +20,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper";
+import WholeMarketInsights from "./WholeMarketInsights";
+
 
 export default function MainHome() {
   const [honorList, setHonorList] = useState([]);
@@ -92,7 +92,7 @@ export default function MainHome() {
                   <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div className="px-5 pt-4 flex items-center justify-between">
                       <div>
-                        <img className="h-8 w-auto" src={heroimage} alt="" />
+                        <img className="h-8 w-auto" src={heroImage} alt="" />
                       </div>
                       <div className="-mr-2">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
@@ -150,7 +150,7 @@ export default function MainHome() {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src={heroimage}
+            src={heroImage}
             alt=""
           />
         </div>
@@ -216,9 +216,14 @@ export default function MainHome() {
           </p>
         </div>
       </div>
-
+     <section className="allStatics">
+     <AllStatics/>
+     </section>
+     <section className="wholeMarketInsights">
+      <WholeMarketInsights />
+     </section>
       <div className="text-center">
-        <p className="m-10 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <p className="m-10 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
           Our honor list
         </p>
       </div>
@@ -227,20 +232,29 @@ export default function MainHome() {
              if(user.numberOfDonations>0){
               return (
                 <SwiperSlide key={user._id}>
-                <div className="flex justify-around" >
+                <div className="flex justify-around items-center" >
                {user.image ? (<img
-                   className="object-fill w-6/12 h-50"
+                   className="object-fill w-3/12 h-30"
                    src={"http://localhost:3000/"+user.image.replace("public","")}
                    alt={`slide${i+1}`}
                  />):(<img
-                 className="object-fill w-6/12 h-50"
+                 className="object-fill w-3/12 h-30"
                  src={user.userType==="seller"? trustedSeller : trustedProducer}
                  alt={`slide${i+1}`}/>)
                 }
 
-                 <div className="w-5/12">
-                 <p>{user.name}</p>
-                 <p>{user.userType}</p>
+                 <div className="w-5/12 bg-green-900 p-5 text-white rounded">
+                 <h1 className="text-center text-xl mb-2">{user.name.toUpperCase()}</h1>
+                 <div className="flex justify-between items-center">
+                 <div>
+                 <p className="mb-1"><i className="fa-regular fa-user"></i> {user.userType}</p>
+                 <p><i className="fa-solid fa-location-dot"></i> {user.location}</p>
+                 </div>
+                 <div>
+                 <h3>Number of donates</h3>
+                 <p className=" border-2  border-yellow-700 numberOfDonations rounded-full">{user.numberOfDonations}</p>
+                 </div>
+                 </div>
                  </div>
                  </div>
                </SwiperSlide>
@@ -252,76 +266,47 @@ export default function MainHome() {
       </Swiper>
 
       <div className="text-center">
-        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <p className="mt-5 mb-5 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
           Charities
         </p>
       </div>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {charities.map((charity, i) => {
-            
               return (
                 <SwiperSlide key={charity._id}>
                 <div className="flex justify-around">
                {charity.image ? (<img
-                   className="object-fill w-6/12 h-50"
+                   className="object-fill w-3/12 h-30"
                    src={"http://localhost:3000/"+charity.image.replace("public","")}
                    alt={`slide${i+1}`}
                  />):(<img
-                 className="object-fill w-6/12 h-50"
+                 className="object-fill w-3/12 h-30"
                  src={trustedProducer}
                  alt={`slide${i+1}`}/>)
                 }
-                 <div className="w-5/12">
-                 <p>{charity.name}</p>
-                 <p>{charity.location}</p>
+                <div className="w-5/12 bg-green-900 p-5 text-white rounded relative">
+                <h1 className="text-center text-xl mb-2">{charity.name.toUpperCase()}</h1>
+                 <div>
+                 <p className="text-center"><i class="fa-solid fa-feather"></i> {charity.description}</p>
+                 <p className="absolute bottom-0 left-0 bg-blue-400 p-2 rounded-bl rounded-tr"><i className="fa-solid fa-location-dot"></i> {charity.location}</p>
+                 </div>
                  </div>
                  </div>
                </SwiperSlide>
              );
              }
-            
-         
         )}
       </Swiper>
-     
-
       <div className="text-center">
-        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <p className="mt-5 mb-3 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
           The Team
         </p>
       </div>
 
-      <div
-        className="p-6 w-full"
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="p-6 w-full flex content-center justify-around">
         <a
           href="/"
-          className="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
-          <img
-            className="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-            src={dionisis}
-            alt=""
-          />
-          <div className="flex flex-col justify-between p-4 leading-normal">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Dionisis
-            </h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              The Captain, the one that commands the route of the <></>ship by
-              leading the backend
-            </p>
-          </div>
-        </a>
-        <a
-          href="/"
-          className="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-green-100 dark:border-green-700 dark:bg-green-800 dark:hover:bg-green-700"
         >
           <img
             className="object-cover w-full  rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
@@ -329,30 +314,11 @@ export default function MainHome() {
             alt=""
           />
           <div className="flex flex-col justify-between p-4 leading-normal">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-white ">
               Zakaria
             </h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              The eye in the sky, that catch every design aspects and bring the
-              app up to high levels of ascetics
-            </p>
-          </div>
-        </a>
-        <a
-          href="/"
-          className="w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
-          <img
-            className="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-            src={anilson}
-            alt=""
-          />
-          <div className="flex flex-col justify-between p-4 leading-normal">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Anilson
-            </h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              The silent bug catcher, and a feature proposal
+            <p className="mb-3 font-normal text-white">
+              creator of the project from back to front hope you have nice experience using it and to help in saving wasted food from all around the world
             </p>
           </div>
         </a>

@@ -8,6 +8,7 @@ import Profile from "../components/Profile";
 import UserDonations from "../components/UserDonations";
 import UserProducts from "../components/UserProducts";
 import { toast } from 'react-toastify';
+import ProducerMarketInsights from "../components/ProducerMarketInsights";
 // import "./producer.css";
 
 function Producers() {
@@ -503,6 +504,9 @@ const [deleteProductError , setDeleteProductError] = useState(null);
           error={addProducerError}
           userType={producer.user.userType}
           />}
+        </section>
+        <section>
+          <ProducerMarketInsights />
         </section>
       </main>
     </>
