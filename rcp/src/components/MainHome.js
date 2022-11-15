@@ -266,7 +266,7 @@ export default function MainHome() {
       </Swiper>
 
       <div className="text-center">
-        <p className="mt-5 mb-5 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
+        <p className="m-10 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
           Charities
         </p>
       </div>
@@ -318,7 +318,7 @@ export default function MainHome() {
               Zakaria
             </h5>
             <p className="mb-3 font-normal text-white">
-              creator of the project from back to front hope you have nice experience using it and to help in saving wasted food from all around the world
+              creator of the website from back to front hope you have nice experience using it and to help in saving wasted food from all around the world
             </p>
           </div>
         </a>
