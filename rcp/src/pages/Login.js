@@ -6,6 +6,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
 import { toast } from 'react-toastify';
 import "./login.css"
+
 export default function Login() {
 
   const [userData, setUserData] = useState({
@@ -78,8 +79,7 @@ export default function Login() {
   }
 
   return (
-    <>
-      <div className=" loginWrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 loginPage">
+      <div className=" pageWrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 loginPage">
         <div className="max-w-md w-full space-y-5 loginContainer">
           <div className="loginHeader">
             <img src={logo} width={"150px"} className="mx-auto" alt="" />
@@ -146,6 +146,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-    </>
+    
   );
 }

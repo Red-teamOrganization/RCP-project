@@ -1,9 +1,7 @@
-.loginWrapper{
-  height: calc(100vh - 144px );
+.pageWrapper{
+ flex-grow: 1;
 }
-.signUpWrapper{
-  height: calc(110vh - 144px );
-}
+
 .footer{
     width: 100%;
     padding: 1em;
@@ -11,6 +9,8 @@
     background-color: black;
     justify-content: space-around;
     align-items: center;
+    margin-top: auto;
+    margin-bottom:0 ;
 }
 
 .contactUs{

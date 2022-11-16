@@ -9,7 +9,7 @@ import UserDonations from "../components/UserDonations";
 import UserProducts from "../components/UserProducts";
 import { toast } from 'react-toastify';
 import SellerMarketInsights from "../components/SellerMarketInsights";
-// import "./seller.css";
+import "./seller.css";
 
 function Sellers() {
 const seller = JSON.parse(localStorage.getItem("user"));
@@ -410,8 +410,8 @@ const [deleteProductError , setDeleteProductError] = useState(null);
 
   return (
     <>
-      <main className="charityPage">
-        <section className="charityProfile">
+      <main className="sellerPage">
+        <section className="sellerProfile">
         <Profile
          user={seller}
          />
