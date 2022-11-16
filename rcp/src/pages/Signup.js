@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
-import "./Footer.css"
 import { useEffect } from "react";
 import { toast } from 'react-toastify';
+import "./signUp.css"
 
 export default function Signup() {
   const [userData, setUserData] = useState({
@@ -50,7 +50,7 @@ export default function Signup() {
         setError("check that you enter the confirm password right")
         return;
       }
-    
+      
       let response = await fetch("http://localhost:3000/user/signUp",{
         method:'POSt',
         body: JSON.stringify(userData),
@@ -58,14 +58,13 @@ export default function Signup() {
           'Content-type': 'application/json; charset=UTF-8',
        },
       })
-      
+      setLoading(true)
      let data = await response.json();
      if(!data.apiStatus){
-       setError("this account or user name has been entered before")
+       setError(data.message)
+       setLoading(false)
        return;
      }
-     setLoading(true)
-     
      setUserData({
       name: "",
       email: "",
@@ -93,99 +92,87 @@ export default function Signup() {
 
   return (
     <>
-      <div className="min-h-full signup-login-wrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
+      <div className=" signUpWrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 signUpPage">
+        <div className="max-w-md w-full space-y-5 signUpContainer">
+          <div className="signUpHeader">
             <img src={logo} width={"150px"} className="mx-auto" alt="" />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
               Create an account
             </h2>
           </div>
           <form
-            className="mt-8 space-y-6"
+            className="mt-8 space-y-6 signUpForm"
             action="#"
             method="POST"
             onSubmit={handleSubmit}
           >
-            <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="name" className="sr-only">
-                  Name
-                </label>
                 <input
                   id="name"
                   name="name"
                   type="text"
                   autoComplete="name"
                   required
-                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                  placeholder="Name"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  placeholder="Enter your Name must be unique"
                   value={name}
                   onChange={handleChange}
                 />
               </div>
-              <br />
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
                 <input
                   id="email-address"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  placeholder="Enter your Email address"
                   value={email}
                   onChange={handleChange}
                 />
               </div>
-              <br />
-              <div>
+              <div className="flex">
                 <input
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-t-md relative block w-60 px-3 py-2 mr-1 border border-gray-300 placeholder-black text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                   value={password}
                   onChange={handleChange}
                 />
-              </div>
-              <div>
-        
+             
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-t-md relative block w-60 px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={handleChange}
                 />
-              </div>
-
-              <br />
-              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               </div>
+              <div>
+              <select className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
               value={location}
               onChange={handleChange}
               name="location"
               id="location"
                >
-                <option>Location</option>
+                <option className="text-gray-900">Your Location</option>
                 <option value="Berlin">Berlin</option>
                 <option value="Hamburg">Hamburg</option>
                 <option value="Dortmund">Dortmund</option>
                 <option value="Bayern">Bayern</option>
               </select>
-              <br />
+              </div>
               <div>
-                <select  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <select  className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 onChange={handleChange}
                 name='userType'
                 id="userType"
@@ -198,9 +185,7 @@ export default function Signup() {
                 </select>
               </div>
 
-              <br />
-           
-            </div>
+            
 
             {error && (
               <div
@@ -222,7 +207,7 @@ export default function Signup() {
                     aria-hidden="true"
                   />
                 </span>
-                {loading ? "Creating ..." : "Sign up"}
+               Sign up
               </button>
             </div>
           </form>

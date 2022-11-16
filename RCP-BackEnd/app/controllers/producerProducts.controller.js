@@ -54,13 +54,13 @@ class ProducedProducts {
     }
   };
 
-  static totalAgricultureProducedProducts = async (req, res) => {
+  static totalAgricultureProducedProductsByLocation = async (req, res) => {
     try {
       const producedProducts = await producerProductsModel.find();
       let agriculture = {};
       let newProduct = [];
       producedProducts.forEach((producedProduct) => {
-        if (producedProduct.category == "agriculture") {
+        if (producedProduct.category == "agriculture" && req.body.location == producedProduct.location) {
           if (agriculture.hasOwnProperty(producedProduct.yearOfProduction)) {
            
             for(let i = 0 ; i<agriculture[producedProduct.yearOfProduction].length ; i++){
@@ -105,13 +105,13 @@ class ProducedProducts {
     }
   };
 
-  static totalDiaryProducedProducts = async (req, res) => {
+  static totalDiaryProducedProductsByLocation = async (req, res) => {
     try {
       const producedProducts = await producerProductsModel.find();
       let diary={}
       let newProduct = [];
       producedProducts.forEach((producedProduct) => {
-        if (producedProduct.category == "diary") {
+        if (producedProduct.category == "diary" && req.body.location == producedProduct.location) {
           if (diary.hasOwnProperty(producedProduct.yearOfProduction)) {
             
             for(let i = 0 ; i<diary[producedProduct.yearOfProduction].length ; i++){
@@ -157,13 +157,13 @@ class ProducedProducts {
   };
 
   
-  static totalProteinProducedProducts = async (req, res) => {
+  static totalProteinProducedProductsByLocation = async (req, res) => {
     try {
       const producedProducts = await producerProductsModel.find();
       let protein={}
       let newProduct = [];
       producedProducts.forEach((producedProduct) => {
-        if (producedProduct.category == "protein") {
+        if (producedProduct.category == "protein" && req.body.location == producedProduct.location) {
           if (protein.hasOwnProperty(producedProduct.yearOfProduction)) {
             
             for(let i = 0 ; i<protein[producedProduct.yearOfProduction].length ; i++){

@@ -9,7 +9,7 @@ import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import '@tremor/react/dist/esm/tremor.css';
 function App() {
   
   return (
@@ -25,9 +25,7 @@ function App() {
           </Route>
         </Routes>
         <Footer />
-      
         <ToastContainer />
-     
       </BrowserRouter>
     
   );

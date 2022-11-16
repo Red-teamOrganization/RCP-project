@@ -4,8 +4,9 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
-import "./Footer.css";
 import { toast } from 'react-toastify';
+import "./login.css"
+
 export default function Login() {
 
   const [userData, setUserData] = useState({
@@ -78,12 +79,11 @@ export default function Login() {
   }
 
   return (
-    <>
-      <div className="min-h-full signup-login-wrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-        <div className="max-w-md w-full space-y-8">
-          <div>
+      <div className=" pageWrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 loginPage">
+        <div className="max-w-md w-full space-y-5 loginContainer">
+          <div className="loginHeader">
             <img src={logo} width={"150px"} className="mx-auto" alt="" />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-center text-3xl font-extrabold">
              Log in to your account
             </h2>
           </div>
@@ -96,9 +96,6 @@ export default function Login() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
                 <input
                   id="email-address"
                   name="email"
@@ -111,9 +108,6 @@ export default function Login() {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
                 <input
                   id="password"
                   name="password"
@@ -152,6 +146,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-    </>
+    
   );
 }

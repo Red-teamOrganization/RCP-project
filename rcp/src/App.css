@@ -1,17 +1,25 @@
+.pageWrapper{
+ flex-grow: 1;
+}
 
 .footer{
     width: 100%;
+    padding: 1em;
     display: flex;
     background-color: black;
     justify-content: space-around;
     align-items: center;
+    margin-top: auto;
+    margin-bottom:0 ;
 }
 
 .contactUs{
     width: 30%;
     color: white;
-
 }
 .hover:hover {
   color: rgb(61, 117, 61);
+}
+.footerLogo{
+  border-right: 2px solid white;
 }

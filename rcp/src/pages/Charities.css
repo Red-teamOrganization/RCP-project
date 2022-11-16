@@ -1,0 +1,39 @@
+.toggleSideBar{
+    width: 20px;
+    height: 75px;
+    border-top-right-radius: 510px;
+    border-bottom-right-radius: 510px;
+    background: #ECA03D;
+    color:white;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.profileImage{
+	width:150px;
+	height:150px;
+	right:10%;
+	top:11%;
+	border-radius: 50%;
+}
+
+.activeDonations{
+	color:white !important;
+}
