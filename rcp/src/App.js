@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@tremor/react/dist/esm/tremor.css';
+import Error404 from "./pages/Error404";
 function App() {
   
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/main" element={<Main />} />
           </Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />
         <ToastContainer />

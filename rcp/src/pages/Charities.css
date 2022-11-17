@@ -1,3 +1,4 @@
+
 .toggleSideBar{
     width: 20px;
     height: 75px;
@@ -7,6 +8,7 @@
     color:white;
     font-size: 1.3rem;
     font-weight: bold;
+	
 }
 
 .fade-in {
@@ -26,12 +28,11 @@
 	}
 }
 
-.profileImage{
-	width:150px;
-	height:150px;
-	right:10%;
-	top:11%;
-	border-radius: 50%;
+.emptyDonations{
+	background-color: rgb(183, 107, 107);
+	text-align: center;
+	color:white;
+	padding: 2em;
 }
 
 .activeDonations{

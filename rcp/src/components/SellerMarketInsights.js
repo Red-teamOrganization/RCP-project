@@ -1,18 +1,14 @@
 import React, { useState , useEffect  } from 'react'
 import { Card, Title, LineChart } from "@tremor/react";
 import { Toggle, ToggleItem } from "@tremor/react";
-import {
-  CheckIcon,
-  CollectionIcon,
-  ReceiptRefundIcon,
-} from "@heroicons/react/outline";
+
 
 export default function SellerMarketInsights() {
   const seller = JSON.parse(localStorage.getItem('user'))
   const[agriculturalSoldProducts , setAgriculturalSoldProducts] = useState([])
   const[proteinSoldProducts , setProteinSoldProducts] = useState([])
   const[diarySoldProducts,setDiarySoldProducts] = useState([])
-  const [itemRendered , setItemRenderd] = useState(1)
+  const [itemRendered , setItemRendered] = useState(1)
   const [yearOfSold,setYearOfSold] = useState(new Date().getFullYear())
   const dataFormatter = (number) =>
   `${Intl.NumberFormat("kg").format(number).toString()}kg`;
@@ -96,19 +92,24 @@ useEffect(()=>{
 
 return (
     <div>
-      <h1>market insights</h1>
-  
-      <input type="number" value={yearOfSold} onChange={handleYearChange}/>
-  
-    <Toggle defaultValue={1} handleSelect={(value) => setItemRenderd(value)}  color="green">
-      <ToggleItem value={1} text="Agricultural"  icon={CollectionIcon} />
-      <ToggleItem value={2} text="Protein" icon={CheckIcon} />
-      <ToggleItem value={3} text="Diary" icon={ReceiptRefundIcon} />
+    
+    <Toggle defaultValue={1} handleSelect={(value) => setItemRendered(value)}  color="green">
+      <ToggleItem value={1} text="Agricultural"  />
+      <ToggleItem value={2} text="Protein"  />
+      <ToggleItem value={3} text="Diary"  />
+      <div className="flex items-center">
+          <Title className="ml-5" color="emerald">filter by year</Title>
+          <input type="number" value={yearOfSold} onChange={handleYearChange}/>
+        </div>
     </Toggle>
     {
       itemRendered === 1 ? <>
         {agriculturalSoldProducts ?
-        <Card>
+        <Card
+        maxWidth="max-w-7xl"
+        decoration="top"
+        decorationColor="green"
+        >
         <Title>Agriculture sold products in ({yearOfSold}) at {seller.user.location}</Title>
         <LineChart
           data={agriculturalSoldProducts}
@@ -120,12 +121,22 @@ return (
           yAxisWidth="w-10"
         />
         </Card>
-        : <Title> no entered agricultural sold products for {yearOfSold} at {seller.user.location}</Title>
+        :  <div
+        className="p-4 my-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
+        role="alert"
+      >
+        no entered agricultural sold products for {yearOfSold} at {seller.user.location}
+      </div>
+       
         }
       </>:
       itemRendered === 2 ? <>
         {proteinSoldProducts ?
-        <Card>
+        <Card
+        maxWidth="max-w-7xl"
+            decoration="top"
+            decorationColor="red"
+        >
         <Title>Protein sold products in ({yearOfSold}) at {seller.user.location}</Title>
         <LineChart
           data={proteinSoldProducts}
@@ -137,12 +148,21 @@ return (
           yAxisWidth="w-10"
         />
         </Card>
-        : <Title> no entered protein sold products for {yearOfSold} at {seller.user.location}</Title>
+        : <div
+        className="p-4 my-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
+        role="alert"
+      >
+        no entered protein sold products for {yearOfSold} at {seller.user.location}
+      </div>
         }
       </> :
        <>
         {diarySoldProducts ?
-        <Card>
+        <Card
+        maxWidth="max-w-7xl"
+        decoration="top"
+        decorationColor="blue"
+        >
         <Title>Diary sold products in ({yearOfSold}) at {seller.user.location}</Title>
         <LineChart
           data={diarySoldProducts}
@@ -154,7 +174,12 @@ return (
           yAxisWidth="w-10"
         />
         </Card>
-        : <Title> no entered diary sold products for {yearOfSold} at {seller.user.location}</Title>
+        : <div
+        className="p-4 my-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
+        role="alert"
+      >
+        no entered diary sold products for {yearOfSold} at {seller.user.location}
+      </div>
         }
        </>
     }

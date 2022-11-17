@@ -2,12 +2,15 @@
 export default function EditProduct(props) {
   return (
     <>
-    <form onSubmit={(e)=>{
+    <form 
+    className="w-4/12 mx-auto flex flex-col"
+    onSubmit={(e)=>{
       props.handleEditSubmit(e,props.productId)
       }}>
     <input
       type="text"
-      placeholder="enter product name"
+      className="rounded mb-1 border-gray-300 placeholder-gray-900  rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text"
+      placeholder="product name"
       value={props.editedProduct.productName}
       onChange={props.handleEditProductChange}
       name="productName"
@@ -15,35 +18,37 @@ export default function EditProduct(props) {
     />
     <input
       type="number"
-      placeholder="enter product quantity"
-      value={props.editedProduct.quantity}
+      placeholder="quantity in kg"
       onChange={props.handleEditProductChange}
       name="quantity"
       id="quantity"
+      className="block rounded mb-1 border-gray-300 placeholder-gray-900  rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text"
     />
   <input
       type="number"
-      placeholder="enter product quantity"
-      value={props.userType === "producer" ? props.editedProduct.yearOfProduction : props.editedProduct.yearOfSold}
+      placeholder={props.userType === "producer" ? "year of production" : "year of sold"}
       onChange={props.handleEditProductChange}
       name={props.userType === "producer" ? "yearOfProduction" : "yearOfSold"}
       id="year"
+      className="rounded mb-1 border-gray-300 placeholder-gray-900  rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text"
     />
     <select
-      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      className="rounded mb-1 border-gray-300 placeholder-gray-900  rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text"
       onChange={props.handleEditProductChange}
       name="category"
       id="category"
       value={props.editedProduct.category}
+     
     >
       <option>category of product</option>
       <option value="agriculture">agriculture</option>
       <option value="protein">protein</option>
       <option value="diary">diary</option>
     </select>
-    <button>edit product</button>
+    <button className="bg-blue-900 p-2 rounded text-white">save edit</button>
+    <div className="text-gray-600 cursor-pointer" onClick={() => props.setEditFormFlag("")}>discard edit</div>
   </form>
-  <span onClick={() => props.setEditFormFlag("")}>cancel</span>
+ 
   </>
   )
 }

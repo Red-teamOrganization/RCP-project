@@ -4,6 +4,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import Profile from "../components/Profile";
 import { toast } from "react-toastify";
 import "./Charities.css";
+import ProfileWave from "../components/ProfileWave";
 
 export default function Charities() {
   const charity = JSON.parse(localStorage.getItem("user"));
@@ -12,6 +13,7 @@ export default function Charities() {
   const [toggleSideBar, setToggleSideBar] = useState(true);
   const [toggleContent, setToggleContent] = useState(true);
   const [toggleDonations, setToggleDonations] = useState(false);
+  const [filteredDonations,setFilteredDonations]=useState([])
   useEffect(() => {
     async function fetchDonations() {
       try {
@@ -29,13 +31,24 @@ export default function Charities() {
         console.log(err);
       }
     }
-
+    const filterDonations = function(){
+      if(toggleDonations){
+        setFilteredDonations(donations.filter(donation=> donation.checked))
+      }
+      else{
+        setFilteredDonations(donations.filter(donation=>!donation.checked))
+      }
+    }
     fetchDonations();
-  }, [donations, charity.token]);
+    filterDonations();
+
+  }, [donations, charity.token,toggleDonations]);
 
   if (loading) {
     return <LoadingComponent />;
   }
+
+
 
   async function checkDonation(id) {
     try {
@@ -64,29 +77,8 @@ export default function Charities() {
   }
 
   return (
-    <div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="wave"
-        viewBox="0 0 1440 320"
-      >
-        <path
-          fill="#047857"
-          fill-opacity="1"
-          d="M0,288L30,272C60,256,120,224,180,218.7C240,213,300,235,360,229.3C420,224,480,192,540,165.3C600,139,660,117,720,101.3C780,85,840,75,900,96C960,117,1020,171,1080,208C1140,245,1200,267,1260,250.7C1320,235,1380,181,1410,154.7L1440,128L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"
-        ></path>
-        
-      </svg>
-      <img
-          className="absolute z-[100] profileImage"
-          src={
-            charity.user.image
-              ? "http://localhost:3000/" +
-                charity.user.image.replace("public", "")
-              : ""
-          }
-          alt=""
-        />
+    <>
+      <ProfileWave />
       <main className="charityPage flex items-center justify-between">
         <div className="flex  items-center">
           {toggleSideBar && (
@@ -175,9 +167,9 @@ export default function Charities() {
         </div>
         {toggleContent ? (
           <section className="charityDonations w-6/12   mr-2 mb-2">
-            <ul className="flex justify-around border-b bg-yellow-500 rounded  border-white p-1">
+            <ul className="flex justify-around border-b bg-yellow-500 rounded  border-white p-1 coolFont">
               <li
-                className={`border-r border-white w-5/12 text-emerald-900 cursor-pointer ${
+                className={`border-r border-white w-5/12 text-emerald-900 cursor-pointer  ${
                   toggleDonations && "activeDonations"
                 }`}
                 onClick={() => {
@@ -197,24 +189,34 @@ export default function Charities() {
                 <i className="fa-solid fa-check"></i> UnChecked Donations
               </li>
             </ul>
-            {toggleDonations
-              ? donations.map((donation) => {
-                  if (donation.checked) {
+            {filteredDonations.map((donation) => {
                     return (
                       <div
                         key={donation._id}
-                        className="flex bg-emerald-500 text-white  mb-1 p-2 justify-around items-center rounded"
+                        className={`flex  mb-1 p-2 justify-around items-center rounded text-white ${toggleDonations ? "bg-emerald-500" :"bg-red-500 "}`}
                       >
-                        <i className="fa-regular fa-user"></i>
-                        <div className="w-6/12">
-                          <div> {donation.donatorName}</div>
-                          <div>{donation.productName}</div>
-                          <div>{donation.quantity}</div>
+                        <div className="w-4/12 coolFont">
+                          <div>
+                            <i className="fa-regular fa-user"></i>{" "}
+                            {donation.donatorName}
+                          </div>
+                          <div>
+                            {donation.category === "agriculture" ? (
+                              <i className="fa-solid fa-wheat-awn"></i>
+                            ) : donation.category === "protein" ? (
+                              <i className="fa-solid fa-drumstick-bite"></i>
+                            ) : (
+                              <i className="fa-solid fa-cow"></i>
+                            )}{" "}
+                            {donation.productName}
+                          </div>
                         </div>
-
+                        <div className="w-3/12 coolFont">
+                          {donation.quantity} kg
+                        </div>
                         <input
                           type="checkbox"
-                          className="rounded border-0"
+                          className="rounded border-0 cursor-pointer"
                           checked={donation.checked}
                           onChange={() => {
                             checkDonation(donation._id);
@@ -222,37 +224,9 @@ export default function Charities() {
                         />
                       </div>
                     );
-                  } else {
-                    return <></>;
-                  }
-                })
-              : donations.map((donation) => {
-                  if (!donation.checked) {
-                    return (
-                      <div
-                        key={donation._id}
-                        className="flex bg-red-500  mb-1 p-2 justify-around items-center rounded text-white"
-                      >
-                        <div className="w-4/12">
-                          <div>{donation.donatorName}</div>
-                          <div>{donation.productName}</div>
-                          <div>{donation.quantity}</div>
-                        </div>
-
-                        <input
-                          type="checkbox"
-                          className="rounded border-0"
-                          checked={donation.checked}
-                          onChange={() => {
-                            checkDonation(donation._id);
-                          }}
-                        />
-                      </div>
-                    );
-                  } else {
-                    return <></>;
-                  }
-                })}
+            
+                  })}
+                  {filteredDonations.length===0 && <div className="emptyDonations rounded coolFont">you have no {toggleDonations ? "checked " : "unchecked "}donations</div>}
           </section>
         ) : (
           <section className="charityProfile w-6/12">
@@ -260,6 +234,6 @@ export default function Charities() {
           </section>
         )}
       </main>
-    </div>
+      </>
   );
 }

@@ -234,11 +234,11 @@ export default function MainHome() {
                 <SwiperSlide key={user._id}>
                 <div className="flex justify-around items-center" >
                {user.image ? (<img
-                   className="object-fill w-3/12 h-30"
+                   className="object-fill w-3/12 h-30 rounded"
                    src={"http://localhost:3000/"+user.image.replace("public","")}
                    alt={`slide${i+1}`}
                  />):(<img
-                 className="object-fill w-3/12 h-30"
+                 className="object-fill w-3/12 h-30 rounded"
                  src={user.userType==="seller"? trustedSeller : trustedProducer}
                  alt={`slide${i+1}`}/>)
                 }
@@ -275,18 +275,18 @@ export default function MainHome() {
                 <SwiperSlide key={charity._id}>
                 <div className="flex justify-around">
                {charity.image ? (<img
-                   className="object-fill w-3/12 h-30"
+                   className="object-fill w-3/12 h-30 rounded"
                    src={"http://localhost:3000/"+charity.image.replace("public","")}
                    alt={`slide${i+1}`}
                  />):(<img
-                 className="object-fill w-3/12 h-30"
+                 className="object-fill w-3/12 h-30 rounded"
                  src={trustedProducer}
                  alt={`slide${i+1}`}/>)
                 }
                 <div className="w-5/12 bg-green-900 p-5 text-white rounded relative">
                 <h1 className="text-center text-xl mb-2">{charity.name.toUpperCase()}</h1>
                  <div>
-                 <p className="text-center"><i class="fa-solid fa-feather"></i> {charity.description}</p>
+                 <p className="text-center"><i className="fa-solid fa-feather"></i> {charity.description}</p>
                  <p className="absolute bottom-0 left-0 bg-blue-400 p-2 rounded-bl rounded-tr"><i className="fa-solid fa-location-dot"></i> {charity.location}</p>
                  </div>
                  </div>
