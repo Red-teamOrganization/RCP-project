@@ -2,6 +2,7 @@ import React, {useState}from 'react'
 import { toast } from 'react-toastify';
 import ImageUpload from "./ImageUpload";
 import LoadingComponent from "../components/LoadingComponent";
+import noUserImage from "../images/noUser.png"
 import "./profileWave.css"
 
 export default function ProfileWave() {
@@ -60,7 +61,7 @@ export default function ProfileWave() {
             user.user.image
               ? "http://localhost:3000/" +
                 user.user.image.replace("public", "")
-              : ""
+              : noUserImage
           }
           alt=""
         />

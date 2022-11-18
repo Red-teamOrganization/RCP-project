@@ -9,7 +9,7 @@ import UserDonations from "../components/UserDonations";
 import UserProducts from "../components/UserProducts";
 import { toast } from "react-toastify";
 import ProducerMarketInsights from "../components/ProducerMarketInsights";
-import "./producer.css";
+
 import ProfileWave from "../components/ProfileWave";
 
 function Producers() {
