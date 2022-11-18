@@ -1,5 +1,8 @@
 import {useState, useEffect } from "react"
 import CountUp from 'react-countup';
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+
 export default function AllStatics() {
 
  const [totalProducedProducts,setTotalProducedProducts] = useState({})
@@ -18,6 +21,7 @@ export default function AllStatics() {
   return (
     <div>
       <h1 className="text-center mt-10 mb-10 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">All Statics</h1>
+      <AnimationOnScroll animateIn="animate__bounceIn" initiallyVisible={true}>
       <div className="flex flex-wrap justify-around mb-20">
       <div className="w-30 rounded  border-2 border-green-700">
         <h2 className="bg-green-300 p-5 text-xl text-center text-green-900 font-bold rounded-tl rounded-tr">All Agriculture</h2>
@@ -26,7 +30,7 @@ export default function AllStatics() {
         <i className="fa-brands fa-product-hunt text-xs block tracking-[0.2em]">roduction</i>
         <CountUp 
          end={totalProducedProducts.agriculture}
-         duration={5}
+         duration={10}
          className="text-lg"
          />
          </div>
@@ -34,7 +38,7 @@ export default function AllStatics() {
          <i className="fa-solid fa-copyright text-xs block tracking-[0.2em]">onsumption</i>
          <CountUp 
          end={totalSoldProducts.agriculture}
-         duration={5}
+         duration={10}
          className="text-lg"
          />
          </div>
@@ -47,7 +51,7 @@ export default function AllStatics() {
         <i className="fa-brands fa-product-hunt text-xs block tracking-[0.2em]">roduction</i>
         <CountUp 
          end={totalProducedProducts.protein}
-         duration={5}
+         duration={10}
          className="text-lg"
          />
          </div>
@@ -55,7 +59,7 @@ export default function AllStatics() {
          <i className="fa-solid fa-copyright text-xs block tracking-[0.2em]">onsumption</i>
          <CountUp 
          end={totalSoldProducts.protein}
-         duration={5}
+         duration={10}
          className="text-lg"
          />
          </div>
@@ -68,7 +72,7 @@ export default function AllStatics() {
         <i className="fa-brands fa-product-hunt text-xs block tracking-[0.2em]">roduction</i>
         <CountUp 
          end={totalProducedProducts.diary}
-         duration={5}
+         duration={10}
          className="text-lg"
          />
          </div>
@@ -76,13 +80,14 @@ export default function AllStatics() {
          <i className="fa-solid fa-copyright text-xs block tracking-[0.2em]">onsumption</i>
          <CountUp 
          end={totalSoldProducts.diary}
-         duration={5}
+         duration={10}
          className="text-lg"
          />
          </div>
          </div>
         </div>
       </div>
+      </AnimationOnScroll>
     </div>
   )
 }

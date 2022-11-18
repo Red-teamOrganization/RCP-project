@@ -13,6 +13,8 @@ import trustedProducer from "../images/trustedProducer.jpg"
 import charityImg from "../images/charity.jpg";
 import { useState } from "react";
 import { useEffect } from "react";
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -116,7 +118,7 @@ export default function MainHome() {
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                   <span className="xl:inline">The </span>{" "}
-                  <span className="text-green-600 xl:inline">ReCiPe </span>
+                 <span className="text-green-600 xl:inline">ReCiPe </span>
                   Project
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
@@ -155,55 +157,67 @@ export default function MainHome() {
           />
         </div>
       </div>
+     
       <div className="p-5 text-center bg-green-900">
-        <p className="text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+      <AnimationOnScroll animateOnce={true} animateIn="animate__bounceIn">
+           <p className="text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
           Features
         </p>
+        </AnimationOnScroll>
       </div>
       <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4">
+      <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft" >  
         <img
           className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
           src={producerImg}
           alt=""
         />
+        </AnimationOnScroll>
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight "  >
         <div className="flex flex-col justify-between p-4 leading-normal ml-10">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Producers
           </h5>
           <p className="mb-3 font-normal text-white md:w-96">
             Producers provide the ReCiPe with his current estimated production
-            and can have valuable data back from other producers but from
-            consumers needs too. That way he can adjust his production and he
+            and can have valuable data back from other producers. That way he can adjust his production and he
             can be prepared for the upcoming years and evolve professionally.
           </p>
         </div>
+        </AnimationOnScroll>
       </div>
-
+      
       <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4 pb-8">
+      <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft" >  
         <div className="flex flex-col justify-between p-4 leading-normal mr-10">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Seller
           </h5>
           <p className="mb-3 font-normal text-white md:w-96">
-            Producers provide the ReCiPe with his current estimated production
-            and can have valuable data back from other producers but from
-            consumers needs too. That way he can adjust his production and he
+            Sellers provide the ReCiPe with his current estimated sold products
+            and can have valuable data back from other sellers data. That way he can adjust his sold productions and he
             can be prepared for the upcoming years and evolve professionally.
           </p>
         </div>
+        </AnimationOnScroll>
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight "  >
         <img
           className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
           src={consumerImg}
           alt=""
         />
+        </AnimationOnScroll>
       </div>
 
       <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4 pb-8">
+      <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft" >  
         <img
           className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
           src={charityImg}
           alt=""
         />
+        </AnimationOnScroll>
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight"   >
         <div className="flex flex-col justify-between p-4 leading-normal ml-10">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Charity
@@ -215,7 +229,9 @@ export default function MainHome() {
             That way can achieve better prices and help in food waste.
           </p>
         </div>
+        </AnimationOnScroll>
       </div>
+      
      <section className="allStatics">
      <AllStatics/>
      </section>
