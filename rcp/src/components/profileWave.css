@@ -1,0 +1,16 @@
+.profileImage{
+	width:150px;
+	height:150px;
+	right:10%;
+	top:11%;
+	border-radius: 50%;
+}
+
+.imageUpload{
+    display: none;
+}
+
+.imageWrapper:hover .imageUpload{
+    display:block !important;
+}
+

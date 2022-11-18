@@ -1,7 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
+
 .pageWrapper{
  flex-grow: 1;
 }
-
+.exitButton{
+ width: 25px;
+ height: 25px;
+ border-radius: 50%;
+ background-color: rgb(168, 81, 81);
+ margin-bottom: 0.5em;
+ padding: 0.5em;
+ line-height: 0;
+ text-align: center;
+ color:white;
+}
+textarea{
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid green;
+}
+.selectWidth{
+  width: 249px;
+}
 .footer{
     width: 100%;
     padding: 1em;
@@ -12,7 +32,9 @@
     margin-top: auto;
     margin-bottom:0 ;
 }
-
+.coolFont{
+	font-family: 'Rubik Distressed', cursive;
+}
 .contactUs{
     width: 30%;
     color: white;

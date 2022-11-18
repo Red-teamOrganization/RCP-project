@@ -92,7 +92,7 @@ export default function Signup() {
 
   return (
     <>
-      <div className=" signUpWrapper flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 signUpPage">
+      <div className=" flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 signUpPage">
         <div className="max-w-md w-full space-y-5 signUpContainer">
           <div className="signUpHeader">
             <img src={logo} width={"150px"} className="mx-auto" alt="" />
@@ -158,7 +158,7 @@ export default function Signup() {
                 />
                </div>
               <div>
-              <select className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+              <select className="appearance-none rounded-b-md relative block w-full px-3 py-2 -smborder border-gray-300 placeholder-black text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text"
               value={location}
               onChange={handleChange}
               name="location"
