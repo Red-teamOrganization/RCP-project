@@ -9,7 +9,6 @@ import UserDonations from "../components/UserDonations";
 import UserProducts from "../components/UserProducts";
 import { toast } from "react-toastify";
 import SellerMarketInsights from "../components/SellerMarketInsights";
-import "./seller.css";
 import ProfileWave from "../components/ProfileWave";
 
 function Sellers() {

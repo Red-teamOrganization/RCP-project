@@ -7,14 +7,13 @@ import heroImage from "./../images/recipe.jpeg";
 import { Link } from "react-router-dom";
 import zakaria from "../images/zakaria.jfif";
 import producerImg from "../images/producer.jpeg";
-import consumerImg from "../images/consumer.jpeg";
-import trustedSeller from "../images/trustedSeller.webp"
-import trustedProducer from "../images/trustedProducer.jpg"
+import sellerImg from "../images/consumer.jpeg";
+import noUserImage from "../images/noUser.png";
 import charityImg from "../images/charity.jpg";
 import { useState } from "react";
 import { useEffect } from "react";
 import "animate.css/animate.min.css";
-import { AnimationOnScroll } from 'react-animation-on-scroll';
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -24,10 +23,9 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import WholeMarketInsights from "./WholeMarketInsights";
 
-
 export default function MainHome() {
   const [honorList, setHonorList] = useState([]);
-  const[charities,setCharities]=useState([]);
+  const [charities, setCharities] = useState([]);
 
   const fetchHonorList = async () => {
     const response = await fetch("http://localhost:3000/honorList");
@@ -48,16 +46,13 @@ export default function MainHome() {
   };
 
   useEffect(() => {
-    fetchHonorList()
-      .then((res) => {
-        setHonorList(res.data);
-      })
+    fetchHonorList().then((res) => {
+      setHonorList(res.data);
+    });
 
-    fetchCharities()
-    .then((res)=>{
-      setCharities(res.data)
-    })
-  
+    fetchCharities().then((res) => {
+      setCharities(res.data);
+    });
   }, []);
 
   return (
@@ -118,7 +113,7 @@ export default function MainHome() {
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                   <span className="xl:inline">The </span>{" "}
-                 <span className="text-green-600 xl:inline">ReCiPe </span>
+                  <span className="text-green-600 xl:inline">ReCiPe </span>
                   Project
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
@@ -157,87 +152,89 @@ export default function MainHome() {
           />
         </div>
       </div>
-     
+
       <div className="p-5 text-center bg-green-900">
-      <AnimationOnScroll animateOnce={true} animateIn="animate__bounceIn">
-           <p className="text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-          Features
-        </p>
+        <AnimationOnScroll animateOnce={true} animateIn="animate__bounceIn">
+          <p className="text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+            Features
+          </p>
         </AnimationOnScroll>
       </div>
       <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4">
-      <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft" >  
-        <img
-          className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
-          src={producerImg}
-          alt=""
-        />
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft">
+          <img
+            className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
+            src={producerImg}
+            alt=""
+          />
         </AnimationOnScroll>
-        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight "  >
-        <div className="flex flex-col justify-between p-4 leading-normal ml-10">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Producers
-          </h5>
-          <p className="mb-3 font-normal text-white md:w-96">
-            Producers provide the ReCiPe with his current estimated production
-            and can have valuable data back from other producers. That way he can adjust his production and he
-            can be prepared for the upcoming years and evolve professionally.
-          </p>
-        </div>
-        </AnimationOnScroll>
-      </div>
-      
-      <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4 pb-8">
-      <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft" >  
-        <div className="flex flex-col justify-between p-4 leading-normal mr-10">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Seller
-          </h5>
-          <p className="mb-3 font-normal text-white md:w-96">
-            Sellers provide the ReCiPe with his current estimated sold products
-            and can have valuable data back from other sellers data. That way he can adjust his sold productions and he
-            can be prepared for the upcoming years and evolve professionally.
-          </p>
-        </div>
-        </AnimationOnScroll>
-        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight "  >
-        <img
-          className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
-          src={consumerImg}
-          alt=""
-        />
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight ">
+          <div className="flex flex-col justify-between p-4 leading-normal ml-10">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Producers
+            </h5>
+            <p className="mb-3 font-normal text-white md:w-96">
+              Producers provide the ReCiPe with his current estimated production
+              and can have valuable data back from other producers. That way he
+              can adjust his production and he can be prepared for the upcoming
+              years and evolve professionally.
+            </p>
+          </div>
         </AnimationOnScroll>
       </div>
 
       <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4 pb-8">
-      <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft" >  
-        <img
-          className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
-          src={charityImg}
-          alt=""
-        />
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft">
+          <div className="flex flex-col justify-between p-4 leading-normal mr-10">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Seller
+            </h5>
+            <p className="mb-3 font-normal text-white md:w-96">
+              Sellers provide the ReCiPe with his current estimated sold
+              products and can have valuable data back from other sellers data.
+              That way he can adjust his sold productions and he can be prepared
+              for the upcoming years and evolve professionally.
+            </p>
+          </div>
         </AnimationOnScroll>
-        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight"   >
-        <div className="flex flex-col justify-between p-4 leading-normal ml-10">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Charity
-          </h5>
-          <p className="mb-3 font-normal text-white md:w-96">
-            Charities provide ReCiPe with his monthly needs and he can see which
-            products are available or not tha way can adjust his current needs
-            and consume products that are available and plenty in the market.
-            That way can achieve better prices and help in food waste.
-          </p>
-        </div>
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight ">
+          <img
+            className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
+            src={sellerImg}
+            alt=""
+          />
         </AnimationOnScroll>
       </div>
-      
-     <section className="allStatics">
-     <AllStatics/>
-     </section>
-     <section className="wholeMarketInsights">
-      <WholeMarketInsights />
-     </section>
+
+      <div className="flex flex-wrap justify-center items-center bg-green-900 pt-4 pb-8">
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInLeft">
+          <img
+            className="object-cover w-full h-96 rounded-md md:h-auto md:w-96  md:rounded-l-lg shadow-lg shadow-green-500/50"
+            src={charityImg}
+            alt=""
+          />
+        </AnimationOnScroll>
+        <AnimationOnScroll animateOnce={true} animateIn="animate__backInRight">
+          <div className="flex flex-col justify-between p-4 leading-normal ml-10">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Charity
+            </h5>
+            <p className="mb-3 font-normal text-white md:w-96">
+              Charities provide ReCiPe with his monthly needs and he can see
+              which products are available or not tha way can adjust his current
+              needs and consume products that are available and plenty in the
+              market. That way can achieve better prices and help in food waste.
+            </p>
+          </div>
+        </AnimationOnScroll>
+      </div>
+
+      <section className="allStatics">
+        <AllStatics />
+      </section>
+      <section className="wholeMarketInsights">
+        <WholeMarketInsights />
+      </section>
       <div className="text-center">
         <p className="m-10 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
           Our honor list
@@ -245,38 +242,57 @@ export default function MainHome() {
       </div>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {honorList.map((user, i) => {
-             if(user.numberOfDonations>0){
-              return (
-                <SwiperSlide key={user._id}>
-                <div className="flex justify-around items-center" >
-               {user.image ? (<img
-                   className="object-fill w-3/12 h-30 rounded"
-                   src={"http://localhost:3000/"+user.image.replace("public","")}
-                   alt={`slide${i+1}`}
-                 />):(<img
-                 className="object-fill w-3/12 h-30 rounded"
-                 src={user.userType==="seller"? trustedSeller : trustedProducer}
-                 alt={`slide${i+1}`}/>)
-                }
+          if (user.numberOfDonations > 0) {
+            return (
+              <SwiperSlide key={user._id}>
+                <div className="flex justify-around items-center">
+                  {user.image ? (
+                    <img
+                      className="object-fill w-3/12 honorImageHeight rounded"
+                      src={
+                        "http://localhost:3000/" +
+                        user.image.replace("public", "")
+                      }
+                      alt={`slide${i + 1}`}
+                    />
+                  ) : (
+                    <img
+                      className="object-fill w-3/12 honorImageHeight rounded"
+                      src={
+                       noUserImage
+                      }
+                      alt={`slide${i + 1}`}
+                    />
+                  )}
 
-                 <div className="w-5/12 bg-green-900 p-5 text-white rounded">
-                 <h1 className="text-center text-xl mb-2">{user.name.toUpperCase()}</h1>
-                 <div className="flex justify-between items-center">
-                 <div>
-                 <p className="mb-1"><i className="fa-regular fa-user"></i> {user.userType}</p>
-                 <p><i className="fa-solid fa-location-dot"></i> {user.location}</p>
-                 </div>
-                 <div>
-                 <h3>Number of donates</h3>
-                 <p className=" border-2  border-yellow-700 numberOfDonations rounded-full">{user.numberOfDonations}</p>
-                 </div>
-                 </div>
-                 </div>
-                 </div>
-               </SwiperSlide>
-             );
-             }
-             else{return(<></>)}
+                  <div className="w-5/12 bg-green-900 p-5 text-white rounded">
+                    <h1 className="text-center text-xl mb-2">
+                      {user.name.toUpperCase()}
+                    </h1>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="mb-1">
+                          <i className="fa-regular fa-user"></i> {user.userType}
+                        </p>
+                        <p>
+                          <i className="fa-solid fa-location-dot"></i>{" "}
+                          {user.location}
+                        </p>
+                      </div>
+                      <div>
+                        <h3>Number of donates</h3>
+                        <p className=" border-2  border-yellow-700 numberOfDonations rounded-full">
+                          {user.numberOfDonations}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          } else {
+            return <></>;
+          }
         })}
       </Swiper>
 
@@ -287,30 +303,44 @@ export default function MainHome() {
       </div>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {charities.map((charity, i) => {
-              return (
-                <SwiperSlide key={charity._id}>
-                <div className="flex justify-around">
-               {charity.image ? (<img
-                   className="object-fill w-3/12 h-30 rounded"
-                   src={"http://localhost:3000/"+charity.image.replace("public","")}
-                   alt={`slide${i+1}`}
-                 />):(<img
-                 className="object-fill w-3/12 h-30 rounded"
-                 src={trustedProducer}
-                 alt={`slide${i+1}`}/>)
-                }
+          return (
+            <SwiperSlide key={charity._id}>
+              <div className="flex justify-around">
+                {charity.image ? (
+                  <img
+                    className="object-fill w-3/12 honorImageHeight rounded"
+                    src={
+                      "http://localhost:3000/" +
+                      charity.image.replace("public", "")
+                    }
+                    alt={`slide${i + 1}`}
+                  />
+                ) : (
+                  <img
+                    className="object-fill w-3/12 honorImageHeight rounded"
+                    src={noUserImage}
+                    alt={`slide${i + 1}`}
+                  />
+                )}
                 <div className="w-5/12 bg-green-900 p-5 text-white rounded relative">
-                <h1 className="text-center text-xl mb-2">{charity.name.toUpperCase()}</h1>
-                 <div>
-                 <p className="text-center"><i className="fa-solid fa-feather"></i> {charity.description}</p>
-                 <p className="absolute bottom-0 left-0 bg-blue-400 p-2 rounded-bl rounded-tr"><i className="fa-solid fa-location-dot"></i> {charity.location}</p>
-                 </div>
-                 </div>
-                 </div>
-               </SwiperSlide>
-             );
-             }
-        )}
+                  <h1 className="text-center text-xl mb-2">
+                    {charity.name.toUpperCase()}
+                  </h1>
+                  <div>
+                    <p className="text-center">
+                      <i className="fa-solid fa-feather"></i>{" "}
+                      {charity.description}
+                    </p>
+                    <p className="absolute bottom-0 left-0 bg-blue-400 p-2 rounded-bl rounded-tr">
+                      <i className="fa-solid fa-location-dot"></i>{" "}
+                      {charity.location}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <div className="text-center">
         <p className="mt-5 mb-3 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
@@ -333,12 +363,13 @@ export default function MainHome() {
               Zakaria
             </h5>
             <p className="mb-3 font-normal text-white">
-              creator of the website from back to front hope you have nice experience using it and to help in saving wasted food from all around the world
+              creator of the website from back to front hope you have nice
+              experience using it and to help in saving wasted food from all
+              around the world
             </p>
           </div>
         </a>
       </div>
     </div>
   );
-
 }

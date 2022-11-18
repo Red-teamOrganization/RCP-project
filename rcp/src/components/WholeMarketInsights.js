@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Toggle, ToggleItem } from "@tremor/react";
-import { Card, Title, AreaChart  } from "@tremor/react";
-
+import { Card, Title, AreaChart } from "@tremor/react";
 
 export default function WholeMarketInsights() {
   const [agriculturalProducts, setAgriculturalProducts] = useState([]);
@@ -31,29 +30,27 @@ export default function WholeMarketInsights() {
       <h1 className="text-center mt-10 mb-10 text-3xl leading-8 font-extrabold tracking-tight text-green-900 sm:text-4xl">
         Whole Market Insights
       </h1>
-     <div className="mb-2 max-w-xl mx-auto">
-      <Toggle
-        defaultValue={1}
-        handleSelect={(value) => setItemRendered(value)}
-        color="green"
-      >
-        <ToggleItem value={1} text="Agricultural" />
-        <ToggleItem value={2} text="Protein" />
-        <ToggleItem value={3} text="Diary" />
-        <div className="flex items-center">
-          <Title className="ml-5" color="emerald">filter by year</Title>
-          <input type="number" value={year} onChange={handleYearChange}  />
-        </div>
-      </Toggle>
+      <div className="mb-2 max-w-xl mx-auto">
+        <Toggle
+          defaultValue={1}
+          handleSelect={(value) => setItemRendered(value)}
+          color="green"
+        >
+          <ToggleItem value={1} text="Agricultural" />
+          <ToggleItem value={2} text="Protein" />
+          <ToggleItem value={3} text="Diary" />
+          <div className="flex items-center">
+            <Title className="ml-5" color="emerald">
+              filter by year
+            </Title>
+            <input type="number" value={year} onChange={handleYearChange} />
+          </div>
+        </Toggle>
       </div>
       {itemRendered === 1 ? (
         <>
           {agriculturalProducts ? (
-            <Card
-            maxWidth="max-w-5xl"
-            decoration="top"
-            decorationColor="green"
-            >
+            <Card maxWidth="max-w-5xl" decoration="top" decorationColor="green">
               <Title color="green">Agriculture products in ({year})</Title>
               <AreaChart
                 data={agriculturalProducts}
@@ -67,21 +64,17 @@ export default function WholeMarketInsights() {
             </Card>
           ) : (
             <div
-            className="p-4 mb-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
-            role="alert"
-          >
-            no entered agricultural products for {year}
-          </div>
+              className="p-4 mb-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
+              role="alert"
+            >
+              no entered agricultural products for {year}
+            </div>
           )}
         </>
       ) : itemRendered === 2 ? (
         <>
           {proteinProducts ? (
-            <Card
-            maxWidth="max-w-5xl"
-            decoration="top"
-            decorationColor="red"
-            >
+            <Card maxWidth="max-w-5xl" decoration="top" decorationColor="red">
               <Title color="red">Protein products in ({year})</Title>
               <AreaChart
                 data={proteinProducts}
@@ -95,21 +88,17 @@ export default function WholeMarketInsights() {
             </Card>
           ) : (
             <div
-            className="p-4 mb-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
-            role="alert"
-          >
-            no entered protein products for {year}
-          </div>
+              className="p-4 mb-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
+              role="alert"
+            >
+              no entered protein products for {year}
+            </div>
           )}
         </>
       ) : (
         <>
           {diaryProducts ? (
-            <Card
-            maxWidth="max-w-5xl"
-            decoration="top"
-            decorationColor="blue"
-            >
+            <Card maxWidth="max-w-5xl" decoration="top" decorationColor="blue">
               <Title color="blue">Diary products in ({year})</Title>
               <AreaChart
                 data={diaryProducts}
@@ -123,11 +112,11 @@ export default function WholeMarketInsights() {
             </Card>
           ) : (
             <div
-            className="p-4 mb-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
-            role="alert"
-          >
-            no entered diary products for {year}
-          </div>
+              className="p-4 mb-4 mx-auto text-sm text-red-700 bg-red-100 w-80 rounded-lg dark:bg-red-200 dark:text-red-800 text-center"
+              role="alert"
+            >
+              no entered diary products for {year}
+            </div>
           )}
         </>
       )}
