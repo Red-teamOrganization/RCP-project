@@ -17,6 +17,7 @@
     "url": "https://github.com/zikaloai71/ZBlog-post/issues"
   },
   "homepage": "https://github.com/zikaloai71/ZBlog-post#readme",
+ 
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -26,5 +27,8 @@
     "mongoose": "^6.6.1",
     "multer": "^1.4.5-lts.1",
     "validator": "^13.7.0"
+  },
+  "engines": {
+    "node": "18.12.1"
   }
 }
