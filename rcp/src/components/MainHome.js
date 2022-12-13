@@ -351,7 +351,7 @@ export default function MainHome() {
       <div className="p-6 w-full flex content-center justify-around">
         <a
           href="/"
-          className="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-green-100 dark:border-green-700 dark:bg-green-800 dark:hover:bg-green-700"
+          className="mb-4 w-96 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-green-400 dark:border-green-700 dark:bg-green-800 dark:hover:bg-green-700"
         >
           <img
             className="object-cover w-full  rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
@@ -359,10 +359,10 @@ export default function MainHome() {
             alt=""
           />
           <div className="flex flex-col justify-between p-4 leading-normal">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-white ">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-black ">
               Zakaria
             </h5>
-            <p className="mb-3 font-normal text-white">
+            <p className="mb-3 font-normal text-black">
               creator of the website from back to front hope you have nice
               experience using it and to help in saving wasted food from all
               around the world
