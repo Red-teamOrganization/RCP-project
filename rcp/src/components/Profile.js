@@ -23,7 +23,7 @@ export default function Profile(props) {
         return;
       }
 
-      let response = await fetch("http://localhost:3000/user/addDescription", {
+      let response = await fetch("https://rcp-q1g3.onrender.com/user/addDescription", {
         method: "POSt",
         body: JSON.stringify({ description }),
         headers: {

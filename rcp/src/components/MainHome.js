@@ -28,7 +28,7 @@ export default function MainHome() {
   const [charities, setCharities] = useState([]);
 
   const fetchHonorList = async () => {
-    const response = await fetch("http://localhost:3000/honorList");
+    const response = await fetch("https://rcp-q1g3.onrender.com/honorList");
     if (!response.ok) {
       throw new Error("Data could not be fetched!");
     } else {
@@ -37,7 +37,7 @@ export default function MainHome() {
   };
 
   const fetchCharities = async () => {
-    const response = await fetch("http://localhost:3000/allCharities");
+    const response = await fetch("https://rcp-q1g3.onrender.com/allCharities");
     if (!response.ok) {
       throw new Error("Data could not be fetched!");
     } else {
@@ -250,7 +250,7 @@ export default function MainHome() {
                     <img
                       className="object-fill w-3/12 honorImageHeight rounded"
                       src={
-                        "http://localhost:3000/" +
+                        "https://rcp-q1g3.onrender.com/" +
                         user.image.replace("public", "")
                       }
                       alt={`slide${i + 1}`}
@@ -310,7 +310,7 @@ export default function MainHome() {
                   <img
                     className="object-fill w-3/12 honorImageHeight rounded"
                     src={
-                      "http://localhost:3000/" +
+                      "https://rcp-q1g3.onrender.com/" +
                       charity.image.replace("public", "")
                     }
                     alt={`slide${i + 1}`}

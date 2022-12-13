@@ -21,7 +21,7 @@ function handleYearChange(e){
 useEffect(()=>{
     async function fetchAllAgriculturalSoldProducts(year){
         try{
-            let response = await fetch("http://localhost:3000/soldProducts/allSellerAgricultureProductsByLocation",{
+            let response = await fetch("https://rcp-q1g3.onrender.com/soldProducts/allSellerAgricultureProductsByLocation",{
                 method:"POST",
                 body: JSON.stringify({location:seller.user.location}),
                 headers: {
@@ -45,7 +45,7 @@ useEffect(()=>{
 useEffect(()=>{
   async function fetchAllProteinSoldProducts(year){
       try{
-          let response = await fetch("http://localhost:3000/soldProducts/allSellerProteinProductsByLocation",{
+          let response = await fetch("https://rcp-q1g3.onrender.com/soldProducts/allSellerProteinProductsByLocation",{
               method:"POST",
               body: JSON.stringify({location:seller.user.location}),
               headers: {
@@ -69,7 +69,7 @@ useEffect(()=>{
 useEffect(()=>{
   async function fetchAllDiarySoldProducts(year){
       try{
-          let response = await fetch("http://localhost:3000/soldProducts/allSellerDiaryProductsByLocation",{
+          let response = await fetch("https://rcp-q1g3.onrender.com/soldProducts/allSellerDiaryProductsByLocation",{
               method:"POST",
               body: JSON.stringify({location:seller.user.location}),
               headers: {

@@ -17,7 +17,7 @@ export default function Navbar() {
 
   async function handleLogOut() {
     try {
-      let response = await fetch("http://localhost:3000/user/logOut", {
+      let response = await fetch("https://rcp-q1g3.onrender.com/user/logOut", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

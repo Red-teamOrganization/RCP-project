@@ -14,7 +14,7 @@ export default function ProfileWave() {
         try {
           let formData = new FormData();
           formData.append("logo", e.target.files[0]);
-          let response = await fetch("http://localhost:3000/user/logoUpload", {
+          let response = await fetch("https://rcp-q1g3.onrender.com/user/logoUpload", {
             method: "POST",
             body: formData,
             headers: {
@@ -59,7 +59,7 @@ export default function ProfileWave() {
           className="absolute z-[100] profileImage"
           src={
             user.user.image
-              ? "http://localhost:3000/" +
+              ? "https://rcp-q1g3.onrender.com/" +
                 user.user.image.replace("public", "")
               : noUserImage
           }
