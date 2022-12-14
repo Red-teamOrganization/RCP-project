@@ -15,6 +15,6 @@ the link of the website : https://rcpproject.web.app/ <br>
 
 note : the appilication is hosted freely on render as backend server and on firebase as frontend so you maybe face some connection problems or late respond for most of the features on the website. 
 
-
+## still work on responsiveness and styles
 
 
