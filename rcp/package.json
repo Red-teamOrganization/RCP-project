@@ -16,6 +16,7 @@
     "babel-plugin-macros": "^3.1.0",
     "cosmiconfig": "^7.0.1",
     "firebase": "^9.9.0",
+    "firebase-cli": "^1.2.0",
     "react": "^18.2.0",
     "react-animation-on-scroll": "^5.1.0",
     "react-countup": "^6.3.2",
