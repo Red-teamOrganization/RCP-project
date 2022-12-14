@@ -9,11 +9,12 @@ We call our project R.C.P. and it stands for Responsible Consumption Production.
 
 This application plan to gather data of the total production and the total consumption. Small societies to big countries can use that data to reduce food waste, adjust the prices of goods and create new job opportunities.
 
-to start the appilication : <br>1- you must download the repo and open the RCP-Backend with your code editor.<br>
-                             2- write the following commands in your terminal <br>
-                                  a-```$ npm install``` <br>
-                                  b-```$ npm start``` <br>
+
                                   
-this commands will run the api server so you can use the website  from this link : https://rcpproject.web.app/ <br>
+the link of the website : https://rcpproject.web.app/ <br>
+
+note : the appilication is hosted freely on render as backend server and on firebase as frontend so you maybe face some connection problems or late respond for most of the features on the website. 
+
+
 
 
