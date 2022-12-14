@@ -25,7 +25,7 @@ export default function ProducerMarketInsights() {
     async function fetchAllAgriculturalSoldProducts(year) {
       try {
         let response = await fetch(
-          "http://localhost:3000/producedProducts/allProducerAgricultureProductsByLocation",
+          "https://rcp-q1g3.onrender.com/producedProducts/allProducerAgricultureProductsByLocation",
           {
             method: "POST",
             body: JSON.stringify({ location: producer.user.location }),
@@ -49,7 +49,7 @@ export default function ProducerMarketInsights() {
     async function fetchAllProteinSoldProducts(year) {
       try {
         let response = await fetch(
-          "http://localhost:3000/producedProducts/allProducerProteinProductsByLocation",
+          "https://rcp-q1g3.onrender.com/producedProducts/allProducerProteinProductsByLocation",
           {
             method: "POST",
             body: JSON.stringify({ location: producer.user.location }),
@@ -73,7 +73,7 @@ export default function ProducerMarketInsights() {
     async function fetchAllDiarySoldProducts(year) {
       try {
         let response = await fetch(
-          "http://localhost:3000/producedProducts/allProducerDiaryProductsByLocation",
+          "https://rcp-q1g3.onrender.com/producedProducts/allProducerDiaryProductsByLocation",
           {
             method: "POST",
             body: JSON.stringify({ location: producer.user.location }),

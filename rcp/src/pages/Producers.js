@@ -66,7 +66,7 @@ function Producers() {
     async function fetchDonations() {
       try {
         let response = await fetch(
-          "http://localhost:3000/producerDonations/myDonations",
+          "https://rcp-q1g3.onrender.com/producerDonations/myDonations",
           {
             method: "GET",
             headers: {
@@ -92,7 +92,7 @@ function Producers() {
 
     const fetchCharities = async () => {
       try {
-        const response = await fetch("http://localhost:3000/allCharities");
+        const response = await fetch("https://rcp-q1g3.onrender.com/allCharities");
         let json = await response.json();
         setCharities(
           json.data.filter((c) => c.location === producer.user.location)
@@ -110,7 +110,7 @@ function Producers() {
     async function fetchProducerProducts() {
       try {
         let response = await fetch(
-          "http://localhost:3000/producedProducts/myproducedProducts",
+          "https://rcp-q1g3.onrender.com/producedProducts/myproducedProducts",
           {
             method: "GET",
             headers: {
@@ -197,7 +197,7 @@ function Producers() {
         return;
       }
       let response = await fetch(
-        "http://localhost:3000/producedProducts/addProducedProduct",
+        "https://rcp-q1g3.onrender.com/producedProducts/addProducedProduct",
         {
           method: "POSt",
           body: JSON.stringify(addProducerProduct),
@@ -242,7 +242,7 @@ function Producers() {
         return;
       }
       let response = await fetch(
-        `http://localhost:3000/producedProducts/editProducedProduct/${id}`,
+        `https://rcp-q1g3.onrender.com/producedProducts/editProducedProduct/${id}`,
         {
           method: "PATCH",
           body: JSON.stringify(editedProducerProduct),
@@ -286,7 +286,7 @@ function Producers() {
         return;
       }
       let response = await fetch(
-        "http://localhost:3000/producerDonations/addProducerDonation",
+        "https://rcp-q1g3.onrender.com/producerDonations/addProducerDonation",
         {
           method: "POSt",
           body: JSON.stringify(addProducerDonation),
@@ -325,7 +325,7 @@ function Producers() {
   async function deleteProducerDonation(id) {
     try {
       let response = await fetch(
-        `http://localhost:3000/producerDonations/deleteDonation/${id}`,
+        `https://rcp-q1g3.onrender.com/producerDonations/deleteDonation/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -356,7 +356,7 @@ function Producers() {
         return;
       }
       let response = await fetch(
-        `http://localhost:3000/producerDonations/editDonation/${id}`,
+        `https://rcp-q1g3.onrender.com/producerDonations/editDonation/${id}`,
         {
           method: "PATCH",
           body: JSON.stringify(editedProducerDonation),
@@ -393,7 +393,7 @@ function Producers() {
   async function deleteProducerProduct(id) {
     try {
       let response = await fetch(
-        `http://localhost:3000/producedProducts/deleteProducedProduct/${id}`,
+        `https://rcp-q1g3.onrender.com/producedProducts/deleteProducedProduct/${id}`,
         {
           method: "DELETE",
           headers: {

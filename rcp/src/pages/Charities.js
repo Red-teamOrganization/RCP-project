@@ -17,7 +17,7 @@ export default function Charities() {
   useEffect(() => {
     async function fetchDonations() {
       try {
-        let response = await fetch("http://localhost:3000/user/profile", {
+        let response = await fetch("https://rcp-q1g3.onrender.com/user/profile", {
           method: "GET",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -53,7 +53,7 @@ export default function Charities() {
   async function checkDonation(id) {
     try {
       let response = await fetch(
-        `http://localhost:3000/user/charityProfile/donationCheck/${id}`,
+        `https://rcp-q1g3.onrender.com/user/charityProfile/donationCheck/${id}`,
         {
           method: "POSt",
           headers: {

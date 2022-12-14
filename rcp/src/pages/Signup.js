@@ -58,7 +58,7 @@ export default function Signup() {
         return;
       }
 
-      let response = await fetch("http://localhost:3000/user/signUp", {
+      let response = await fetch("https://rcp-q1g3.onrender.com/user/signUp", {
         method: "POSt",
         body: JSON.stringify(userData),
         headers: {

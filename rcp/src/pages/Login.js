@@ -41,7 +41,7 @@ export default function Login() {
         setError("all fields are required");
         return;
       }
-      let response = await fetch("http://localhost:3000/user/logIn", {
+      let response = await fetch("https://rcp-q1g3.onrender.com/user/logIn", {
         method: "POSt",
         body: JSON.stringify(userData),
         headers: {

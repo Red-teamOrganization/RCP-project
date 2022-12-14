@@ -9,7 +9,7 @@ export default function AllStatics() {
 
   useEffect(() => {
     async function getAllStatics() {
-      let response = await fetch("http://localhost:3000/AllStatics");
+      let response = await fetch("https://rcp-q1g3.onrender.com/AllStatics");
       let json = await response.json();
       setTotalProducedProducts(json.data.productionObj);
       setTotalSoldProducts(json.data.consumptionObj);

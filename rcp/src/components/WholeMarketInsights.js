@@ -16,7 +16,7 @@ export default function WholeMarketInsights() {
 
   useEffect(() => {
     async function fetchMarketInsights(year) {
-      let response = await fetch("http://localhost:3000/totalMarketInsights");
+      let response = await fetch("https://rcp-q1g3.onrender.com/totalMarketInsights");
       let json = await response.json();
       setAgriculturalProducts(json.data.agriculture[year]);
       setProteinProducts(json.data.protein[year]);
