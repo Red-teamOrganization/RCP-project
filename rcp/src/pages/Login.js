@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import useRestfulApi from "../hooks/useRestfulApi";
+import getHostName from "../utility/getHostName";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
@@ -12,7 +14,8 @@ export default function Login() {
     email: "",
     password: "",
   });
-
+  const hostName = getHostName()
+  const [loginError , sendLoginReq] = useRestfulApi();
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [error, setError] = useState(null);
@@ -41,14 +44,9 @@ export default function Login() {
         setError("all fields are required");
         return;
       }
-      let response = await fetch("https://rcp-q1g3.onrender.com/user/logIn", {
-        method: "POSt",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-      let data = await response.json();
+      
+     let data = await sendLoginReq(`${hostName}user/logIn` , "POST" , userData )
+    
       setLoading(true);
       if (!data.apiStatus) {
         setError(data.message);
@@ -68,7 +66,7 @@ export default function Login() {
       });
     } catch (err) {
       setLoading(false);
-      setError(err);
+      setError(loginError);
     }
   }
 

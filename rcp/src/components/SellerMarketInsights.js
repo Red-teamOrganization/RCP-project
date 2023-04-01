@@ -1,10 +1,17 @@
 import React, { useState , useEffect  } from 'react'
+import getHostName from '../utility/getHostName';
+import useRestfulApi from '../hooks/useRestfulApi';
+
 import { Card, Title, LineChart } from "@tremor/react";
 import { Toggle, ToggleItem } from "@tremor/react";
 
 
 export default function SellerMarketInsights() {
   const seller = JSON.parse(localStorage.getItem('user'))
+
+  const hostName = getHostName();
+  const[error,sendReq] = useRestfulApi();
+
   const[agriculturalSoldProducts , setAgriculturalSoldProducts] = useState([])
   const[proteinSoldProducts , setProteinSoldProducts] = useState([])
   const[diarySoldProducts,setDiarySoldProducts] = useState([])
@@ -21,20 +28,12 @@ function handleYearChange(e){
 useEffect(()=>{
     async function fetchAllAgriculturalSoldProducts(year){
         try{
-            let response = await fetch("https://rcp-q1g3.onrender.com/soldProducts/allSellerAgricultureProductsByLocation",{
-                method:"POST",
-                body: JSON.stringify({location:seller.user.location}),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                  },
-            })
-            let json = await response.json()
-            
-            setAgriculturalSoldProducts(json.data[year])
+            const response = await sendReq(`${hostName}soldProducts/allSellerAgricultureProductsByLocation`, "POST", {location: seller.user.location})
+            setAgriculturalSoldProducts(response.data[year])
          
         }
         catch(e){
-          console.log(e)
+          console.log(error)
         }
     }
   
@@ -45,20 +44,11 @@ useEffect(()=>{
 useEffect(()=>{
   async function fetchAllProteinSoldProducts(year){
       try{
-          let response = await fetch("https://rcp-q1g3.onrender.com/soldProducts/allSellerProteinProductsByLocation",{
-              method:"POST",
-              body: JSON.stringify({location:seller.user.location}),
-              headers: {
-                  "Content-type": "application/json; charset=UTF-8",
-                },
-          })
-          let json = await response.json()
-          
-          setProteinSoldProducts(json.data[year])
-       
+          const response = await sendReq(`${hostName}soldProducts/allSellerProteinProductsByLocation`, "POST", {location: seller.user.location})
+          setProteinSoldProducts(response.data[year])
       }
       catch(e){
-        console.log(e)
+        console.log(error)
       }
   }
 
@@ -69,20 +59,12 @@ useEffect(()=>{
 useEffect(()=>{
   async function fetchAllDiarySoldProducts(year){
       try{
-          let response = await fetch("https://rcp-q1g3.onrender.com/soldProducts/allSellerDiaryProductsByLocation",{
-              method:"POST",
-              body: JSON.stringify({location:seller.user.location}),
-              headers: {
-                  "Content-type": "application/json; charset=UTF-8",
-                },
-          })
-          let json = await response.json()
-          
-          setDiarySoldProducts(json.data[year])
+          const response = await sendReq(`${hostName}soldProducts/allSellerDiaryProductsByLocation`, "POST", {location: seller.user.location})
+          setDiarySoldProducts(response.data[year])
        
       }
       catch(e){
-        console.log(e)
+        console.log(error)
       }
   }
 

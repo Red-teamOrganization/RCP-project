@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import getHostName from "../utility/getHostName";
+import useRestfulApi from "../hooks/useRestfulApi";
+
 import AddDonation from "../components/AddDonation";
 import AddProduct from "../components/AddProduct";
 import EditDonation from "../components/EditDonation";
@@ -12,7 +15,10 @@ import SellerMarketInsights from "../components/SellerMarketInsights";
 import ProfileWave from "../components/ProfileWave";
 
 function Sellers() {
+  const hostName = getHostName();
   const seller = JSON.parse(localStorage.getItem("user"));
+
+  const [error, sendReq] = useRestfulApi();
 
   const [sellerDonations, setSellerDonations] = useState([]);
   const [sellerProducts, setSellerProducts] = useState([]);
@@ -64,18 +70,9 @@ function Sellers() {
   useEffect(() => {
     async function fetchDonations() {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/sellerDonations/myDonations",
-          {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `bearer ${seller.token}`,
-            },
-          }
-        );
-        let json = await response.json();
-        setSellerDonations(json.data);
+        const response = await sendReq(`${hostName}sellerDonations/myDonations`, "GET", null, seller.token);
+      
+        setSellerDonations(response.data);
 
         if (sellerDonations.length > 0) {
           setDonationFlag(true);
@@ -85,19 +82,19 @@ function Sellers() {
         }
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        console.log(error);
       }
     }
 
     const fetchCharities = async () => {
       try {
-        const response = await fetch("https://rcp-q1g3.onrender.com/allCharities");
-        let json = await response.json();
+        const response = await sendReq(`${hostName}allCharities`, "GET", null, null);
+       
         setCharities(
-          json.data.filter((c) => c.location === seller.user.location)
+          response.data.filter((c) => c.location === seller.user.location)
         );
       } catch (err) {
-        console.log(err);
+        console.log(error);
       }
     };
 
@@ -106,20 +103,11 @@ function Sellers() {
   }, [sellerDonations]);
 
   useEffect(() => {
-    async function fetchProducerProducts() {
+    async function fetchSellerProducts() {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/soldProducts/mysoldProducts",
-          {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `bearer ${seller.token}`,
-            },
-          }
-        );
-        let json = await response.json();
-        setSellerProducts(json.data);
+        const response = await sendReq(`${hostName}soldProducts/mysoldProducts`, "GET", null, seller.token);
+      
+        setSellerProducts(response.data);
         if (sellerProducts.length > 0) {
           setProductsFlag(true);
         }
@@ -128,11 +116,11 @@ function Sellers() {
         }
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        console.log(error);
       }
     }
-    fetchProducerProducts();
-  }, [sellerProducts, seller.token]);
+    fetchSellerProducts();
+  }, [sellerProducts]);
 
   function handleCloseAddProductForm() {
     setAddProductFlag(false);
@@ -183,7 +171,7 @@ function Sellers() {
     });
   }
 
-  async function handleAddProducerProductSubmit(e) {
+  async function handleAddSellerProductSubmit(e) {
     try {
       e.preventDefault();
       if (
@@ -196,21 +184,13 @@ function Sellers() {
         setAddSellerError("all fields are required");
         return;
       }
-      let response = await fetch(
-        "https://rcp-q1g3.onrender.com/soldProducts/addSoldProduct",
-        {
-          method: "POSt",
-          body: JSON.stringify(addSellerProduct),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${seller.token}`,
-          },
-        }
-      );
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
-        setAddSellerError(json.message);
+      const response = await sendReq(`${hostName}soldProducts/addSoldProduct`, "POST", addSellerProduct, seller.token);
+      
+      
+      if (!response.apiStatus) {
+        setAddSellerError(response.message);
+        setLoading(false);
         return;
       }
       setAddSellerProduct({
@@ -228,7 +208,7 @@ function Sellers() {
       setLoading(false);
     }
   }
-  async function handleEditProducerProductSubmit(e, id) {
+  async function handleEditSellerProductSubmit(e, id) {
     try {
       e.preventDefault();
       if (
@@ -241,21 +221,11 @@ function Sellers() {
         toast.error("all fields are required");
         return;
       }
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/soldProducts/editSoldProduct/${id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(editedSellerProduct),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${seller.token}`,
-          },
-        }
-      );
+      const response = await sendReq(`${hostName}soldProducts/editSoldProduct/${id}`, "PATCH", editedSellerProduct, seller.token);
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
-        toast.error(json.message);
+      if (!response.apiStatus) {
+        toast.error(response.message);
+        setLoading(false)
         return;
       }
       setEditedSellerProduct({
@@ -272,7 +242,7 @@ function Sellers() {
       setLoading(false);
     }
   }
-  async function handleAddProducerDonationSubmit(e) {
+  async function handleAddSellerDonationSubmit(e) {
     try {
       e.preventDefault();
       if (
@@ -285,21 +255,12 @@ function Sellers() {
         setAddDonationError("all fields are required");
         return;
       }
-      let response = await fetch(
-        "https://rcp-q1g3.onrender.com/sellerDonations/addSellerDonation",
-        {
-          method: "POSt",
-          body: JSON.stringify(addSellerDonation),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${seller.token}`,
-          },
-        }
-      );
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
+      const response = await sendReq(`${hostName}sellerDonations/addSellerDonation`, "POST", addSellerDonation, seller.token);
+
+      if (!response.apiStatus) {
         setAddDonationError("your donation hasn't been added try again later");
+        setLoading(false);
         return;
       }
       setAddSellerDonation({
@@ -312,7 +273,7 @@ function Sellers() {
       setAddDonationError(null);
       setAddDonationFlag(false);
       toast.success(
-        `your ${json.data.productName} has sent to ${json.data.charityName} successfully`,
+        `your ${response.data.productName} has sent to ${response.data.charityName} successfully`,
         {
           icon: "🚀",
         }
@@ -324,23 +285,15 @@ function Sellers() {
   }
   async function deleteProducerDonation(id) {
     try {
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/sellerDonations/deleteDonation/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `bearer ${seller.token}`,
-          },
-        }
-      );
-      let json = await response.json();
-      if (!json.apiStatus) {
-        toast.error(json.message);
+      const response = await sendReq(`${hostName}sellerDonations/deleteDonation/${id}`, "DELETE", null, seller.token);
+
+      if (!response.apiStatus) {
+        toast.error(response.message);
         return;
       }
       toast.info("your donation has been removed");
     } catch (err) {
-      toast.error(err);
+      toast.error(error);
     }
   }
   async function editProducerDonationSubmit(e, id) {
@@ -355,21 +308,11 @@ function Sellers() {
         toast.error("all fields are required");
         return;
       }
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/sellerDonations/editDonation/${id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(editedSellerDonation),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${seller.token}`,
-          },
-        }
-      );
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
-        toast.error(json.message);
+      const response = await sendReq(`${hostName}sellerDonations/editDonation/${id}`, "PATCH", editedSellerDonation, seller.token);
+     
+      if (!response.apiStatus) {
+        toast.error(response.message);
         setEditedSellerDonation({
           productName: "",
           quantity: 0,
@@ -392,22 +335,14 @@ function Sellers() {
 
   async function deleteProducerProduct(id) {
     try {
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/soldProducts/deleteSoldProduct/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `bearer ${seller.token}`,
-          },
-        }
-      );
-      let json = await response.json();
-      if (!json.apiStatus) {
-        setDeleteProductError(json.message);
+      const response = await sendReq(`${hostName}soldProducts/deleteSoldProduct/${id}`, "DELETE", null, seller.token);
+  
+      if (!response.apiStatus) {
+        setDeleteProductError(response.message);
         return;
       }
     } catch (err) {
-      setDeleteProductError(err.message);
+      setDeleteProductError(error.message);
     }
   }
 
@@ -558,7 +493,7 @@ function Sellers() {
               </button>
               {addDonationFlag && (
                 <AddDonation
-                  handleAddDonationSubmit={handleAddProducerDonationSubmit}
+                  handleAddDonationSubmit={handleAddSellerDonationSubmit}
                   addDonation={addSellerDonation}
                   handleAddDonationChange={handleAddDonationChange}
                   charities={charities}
@@ -616,7 +551,7 @@ function Sellers() {
               </button>
               {addProductFlag && (
                 <AddProduct
-                  handleAddProductSubmit={handleAddProducerProductSubmit}
+                  handleAddProductSubmit={handleAddSellerProductSubmit}
                   addProduct={addSellerProduct}
                   handleAddProductChange={handleAddProductChange}
                   error={addSellerError}
@@ -653,7 +588,7 @@ function Sellers() {
                         />
                         {product._id === editProductFormFlag ? (
                           <EditProduct
-                            handleEditSubmit={handleEditProducerProductSubmit}
+                            handleEditSubmit={handleEditSellerProductSubmit}
                             editedProduct={editedSellerProduct}
                             setEditFormFlag={setEditProductFormFlag}
                             handleEditProductChange={handleEditProductChange}

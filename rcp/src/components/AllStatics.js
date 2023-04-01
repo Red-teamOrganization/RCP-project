@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
+import useRestfulApi from "../hooks/useRestfulApi";
+import getHostName from "../utility/getHostName";
 import CountUp from "react-countup";
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export default function AllStatics() {
+  const hostName = getHostName();
   const [totalProducedProducts, setTotalProducedProducts] = useState({});
   const [totalSoldProducts, setTotalSoldProducts] = useState({});
+  const [,getStatics] = useRestfulApi()
 
+ 
   useEffect(() => {
     async function getAllStatics() {
-      let response = await fetch("https://rcp-q1g3.onrender.com/AllStatics");
-      let json = await response.json();
-      setTotalProducedProducts(json.data.productionObj);
-      setTotalSoldProducts(json.data.consumptionObj);
+      let response = await getStatics(`${hostName}AllStatics` , "GET" , null);
+      setTotalProducedProducts(response.data.productionObj);
+      setTotalSoldProducts(response.data.consumptionObj);
     }
     getAllStatics();
   });

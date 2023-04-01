@@ -22,38 +22,28 @@ import "swiper/css/navigation";
 
 import { Navigation } from "swiper";
 import WholeMarketInsights from "./WholeMarketInsights";
+import useRestfulApi from "../hooks/useRestfulApi";
+import getHostName from "../utility/getHostName";
 
 export default function MainHome() {
+  const hostName = getHostName()
   const [honorList, setHonorList] = useState([]);
   const [charities, setCharities] = useState([]);
+  const [ , sendReq] = useRestfulApi();
 
   const fetchHonorList = async () => {
-    const response = await fetch("https://rcp-q1g3.onrender.com/honorList");
-    if (!response.ok) {
-      throw new Error("Data could not be fetched!");
-    } else {
-      return response.json();
-    }
+     let response = await sendReq(`${hostName}honorList`,"GET",null)
+     setHonorList(response.data);
   };
 
   const fetchCharities = async () => {
-    const response = await fetch("https://rcp-q1g3.onrender.com/allCharities");
-    if (!response.ok) {
-      throw new Error("Data could not be fetched!");
-    } else {
-      return response.json();
-    }
+    let response = await sendReq(`${hostName}allCharities`,"GET",null)
+    setCharities(response.data);
   };
-
   useEffect(() => {
-    fetchHonorList().then((res) => {
-      setHonorList(res.data);
-    });
-
-    fetchCharities().then((res) => {
-      setCharities(res.data);
-    });
-  }, []);
+    fetchHonorList()
+    fetchCharities()
+  });
 
   return (
     <div>
@@ -250,7 +240,7 @@ export default function MainHome() {
                     <img
                       className="object-fill w-3/12 honorImageHeight rounded"
                       src={
-                        "https://rcp-q1g3.onrender.com/" +
+                        `${hostName}`  +
                         user.image.replace("public", "")
                       }
                       alt={`slide${i + 1}`}
@@ -291,7 +281,7 @@ export default function MainHome() {
               </SwiperSlide>
             );
           } else {
-            return <></>;
+            return <Fragment key={i}></Fragment>;
           }
         })}
       </Swiper>
@@ -310,7 +300,7 @@ export default function MainHome() {
                   <img
                     className="object-fill w-3/12 honorImageHeight rounded"
                     src={
-                      "https://rcp-q1g3.onrender.com/" +
+                      `${hostName}` +
                       charity.image.replace("public", "")
                     }
                     alt={`slide${i + 1}`}

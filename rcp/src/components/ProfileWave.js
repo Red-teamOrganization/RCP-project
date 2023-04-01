@@ -1,4 +1,5 @@
 import React, {useState}from 'react'
+import getHostName from '../utility/getHostName';
 import { toast } from 'react-toastify';
 import ImageUpload from "./ImageUpload";
 import LoadingComponent from "../components/LoadingComponent";
@@ -6,15 +7,17 @@ import noUserImage from "../images/noUser.png"
 import "./profileWave.css"
 
 export default function ProfileWave() {
-
+    const hostName = getHostName();
     const [loading, setLoading] = useState(false);
     const user = JSON.parse(localStorage.getItem("user"));
- 
+
     async function handleImageEdit(e) {
         try {
           let formData = new FormData();
           formData.append("logo", e.target.files[0]);
-          let response = await fetch("https://rcp-q1g3.onrender.com/user/logoUpload", {
+         
+          setLoading(true);
+          let response = await fetch(`${hostName}user/logoUpload`, {
             method: "POST",
             body: formData,
             headers: {
@@ -25,6 +28,7 @@ export default function ProfileWave() {
           let json = await response.json();
           if(!json.apiStatus){
             toast.error("check your connection")
+            setLoading(false)
             return
           }
           user.user["image"] = json.data.image;
@@ -59,8 +63,8 @@ export default function ProfileWave() {
           className="absolute z-[100] profileImage"
           src={
             user.user.image
-              ? "https://rcp-q1g3.onrender.com/" +
-                user.user.image.replace("public", "")
+              ?`${hostName}` +
+                user.user.image.replace("public/", "")
               : noUserImage
           }
           alt=""
