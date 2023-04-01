@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import getHostName from "../utility/getHostName";
+import useRestfulApi from "../hooks/useRestfulApi";
+
 import LoadingComponent from "../components/LoadingComponent";
 import { toast } from "react-toastify";
 
 export default function Profile(props) {
+  const hostName = getHostName();
+  const [, sendReq] = useRestfulApi();
   const [showDescriptionForm, setShowDescriptionForm] = useState(false);
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,18 +27,11 @@ export default function Profile(props) {
         toast.error("you must enter a description");
         return;
       }
-
-      let response = await fetch("https://rcp-q1g3.onrender.com/user/addDescription", {
-        method: "POSt",
-        body: JSON.stringify({ description }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `bearer ${props.user.token}`,
-        },
-      });
+      const response = await sendReq(`${hostName}user/addDescription`, "POST", { description }, props.user.token);
+   
       setLoading(true);
-      let data = await response.json();
-      props.user.user["description"] = data.data.description;
+      
+      props.user.user["description"] = response.data.description;
 
       localStorage.setItem("user", JSON.stringify(props.user));
       setShowDescriptionForm(false);

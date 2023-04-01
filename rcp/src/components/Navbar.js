@@ -1,15 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import getHostName from "../utility/getHostName";
+import useRestfulApi from "../hooks/useRestfulApi";
+
 import { NavLink, Link } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
+
+
 import logo from "../images/logo.png";
 import "./nav.css";
 import { toast } from 'react-toastify';
 
 export default function Navbar() {
+  const hostName = getHostName()
   let userData = JSON.parse(localStorage.getItem("user"));
+  const[error,sendReq]=useRestfulApi();
   const { user } = useAuthContext();
 
   const navigate = useNavigate();
@@ -17,22 +24,17 @@ export default function Navbar() {
 
   async function handleLogOut() {
     try {
-      let response = await fetch("https://rcp-q1g3.onrender.com/user/logOut", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `bearer ${userData.token}`,
-        },
-      });
-      await response.json();
+      await sendReq(`${hostName}user/logOut`, "GET", null, userData.token)
+   
       localStorage.removeItem("user");
+      
       dispatch({ type: "LOGOUT" });
       navigate("/login");
       toast.success("good bye come back soon",{
         icon: "😥"
       })
     } catch (err) {
-      console.log(err);
+      console.log(error);
     }
   }
 

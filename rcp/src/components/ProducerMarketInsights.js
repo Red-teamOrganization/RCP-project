@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import getHostName from "../utility/getHostName";
+import useRestfulApi from "../hooks/useRestfulApi";
+
 import { Card, Title, LineChart } from "@tremor/react";
 import { Toggle, ToggleItem } from "@tremor/react";
 
 export default function ProducerMarketInsights() {
   const producer = JSON.parse(localStorage.getItem("user"));
+  const hostName = getHostName();
+  const [error,sendReq] = useRestfulApi()
   const [
     agriculturalProducedProducts,
     setAgriculturalProducedProducts,
@@ -24,21 +29,10 @@ export default function ProducerMarketInsights() {
   useEffect(() => {
     async function fetchAllAgriculturalSoldProducts(year) {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/producedProducts/allProducerAgricultureProductsByLocation",
-          {
-            method: "POST",
-            body: JSON.stringify({ location: producer.user.location }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        );
-        let json = await response.json();
-
-        setAgriculturalProducedProducts(json.data[year]);
+        const response = await sendReq(`${hostName}producedProducts/allProducerAgricultureProductsByLocation`, "POST", {location: producer.user.location})
+        setAgriculturalProducedProducts(response.data[year]);
       } catch (e) {
-        console.log(e);
+        console.log(error);
       }
     }
 
@@ -48,21 +42,10 @@ export default function ProducerMarketInsights() {
   useEffect(() => {
     async function fetchAllProteinSoldProducts(year) {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/producedProducts/allProducerProteinProductsByLocation",
-          {
-            method: "POST",
-            body: JSON.stringify({ location: producer.user.location }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        );
-        let json = await response.json();
-
-        setProteinProducedProducts(json.data[year]);
+        const response = await sendReq(`${hostName}producedProducts/allProducerProteinProductsByLocation`, "POST", {location: producer.user.location})
+        setProteinProducedProducts(response.data[year]);
       } catch (e) {
-        console.log(e);
+        console.log(error);
       }
     }
 
@@ -72,21 +55,13 @@ export default function ProducerMarketInsights() {
   useEffect(() => {
     async function fetchAllDiarySoldProducts(year) {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/producedProducts/allProducerDiaryProductsByLocation",
-          {
-            method: "POST",
-            body: JSON.stringify({ location: producer.user.location }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        );
-        let json = await response.json();
+        const response = await sendReq(`${hostName}producedProducts/allProducerDiaryProductsByLocation`, "POST", {location: producer.user.location})
+    
+     
 
-        setDiaryProducedProducts(json.data[year]);
+        setDiaryProducedProducts(response.data[year]);
       } catch (e) {
-        console.log(e);
+        console.log(error);
       }
     }
 

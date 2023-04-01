@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import useRestfulApi from "../hooks/useRestfulApi";
+import getHostName from "../utility/getHostName";
 import LoadingComponent from "../components/LoadingComponent";
 import Profile from "../components/Profile";
 import { toast } from "react-toastify";
@@ -7,6 +9,8 @@ import "./Charities.css";
 import ProfileWave from "../components/ProfileWave";
 
 export default function Charities() {
+  const hostName = getHostName();
+  const [error, sendReq] = useRestfulApi();
   const charity = JSON.parse(localStorage.getItem("user"));
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,18 +21,11 @@ export default function Charities() {
   useEffect(() => {
     async function fetchDonations() {
       try {
-        let response = await fetch("https://rcp-q1g3.onrender.com/user/profile", {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${charity.token}`,
-          },
-        });
-        let json = await response.json();
-        setDonations(json.data.donations);
+        const response = await sendReq(`${hostName}user/profile`, "GET", null, charity.token);
+        setDonations(response.data.donations);
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        console.log(error);
       }
     }
     const filterDonations = function(){
@@ -42,7 +39,7 @@ export default function Charities() {
     fetchDonations();
     filterDonations();
 
-  }, [donations, charity.token,toggleDonations]);
+  }, [donations,toggleDonations]);
 
   if (loading) {
     return <LoadingComponent />;
@@ -52,17 +49,8 @@ export default function Charities() {
 
   async function checkDonation(id) {
     try {
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/user/charityProfile/donationCheck/${id}`,
-        {
-          method: "POSt",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${charity.token}`,
-          },
-        }
-      );
-      await response.json();
+       await sendReq(`${hostName}user/charityProfile/donationCheck/${id}`, "POST", null, charity.token);
+   
       toast.success(
         `you have ${
           toggleDonations ? "unchecked" : "checked"
@@ -72,7 +60,7 @@ export default function Charities() {
         }
       );
     } catch (err) {
-      console.log(err);
+      console.log(error);
     }
   }
 

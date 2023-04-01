@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useRestfulApi from "../hooks/useRestfulApi";
+import getHostName from "../utility/getHostName";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
-import { useEffect } from "react";
+
 import { toast } from "react-toastify";
 import "./signUp.css";
 
 export default function Signup() {
+  const hostName = getHostName()
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -16,6 +20,7 @@ export default function Signup() {
     location: "",
     userType: "",
   });
+  const [signUpError , sendSignUpReq] = useRestfulApi();
   let user = JSON.parse(localStorage.getItem("user"));
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -58,15 +63,9 @@ export default function Signup() {
         return;
       }
 
-      let response = await fetch("https://rcp-q1g3.onrender.com/user/signUp", {
-        method: "POSt",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
+      let data = await sendSignUpReq(`${hostName}user/signUp` , "POST" , userData )
       setLoading(true);
-      let data = await response.json();
+      
       if (!data.apiStatus) {
         setError(data.message);
         setLoading(false);
@@ -86,7 +85,7 @@ export default function Signup() {
         icon: "😊",
       });
     } catch (err) {
-      setError(err.message);
+      setError(signUpError);
       setLoading(false);
     }
   }
@@ -144,7 +143,7 @@ export default function Signup() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-t-md relative block w-60 px-3 py-2 mr-1 border border-gray-300 placeholder-black text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-t-md relative block w-full px-3 py-2 mr-1 border border-gray-300 placeholder-black text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={handleChange}
@@ -156,7 +155,7 @@ export default function Signup() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-t-md relative block w-60 px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-black text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={handleChange}

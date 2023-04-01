@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import useRestfulApi from "../hooks/useRestfulApi";
+import getHostName from "../utility/getHostName";
+
+
 import AddDonation from "../components/AddDonation";
 import AddProduct from "../components/AddProduct";
 import EditDonation from "../components/EditDonation";
@@ -13,6 +17,9 @@ import ProducerMarketInsights from "../components/ProducerMarketInsights";
 import ProfileWave from "../components/ProfileWave";
 
 function Producers() {
+  const hostName = getHostName();
+  const [error, sendReq] = useRestfulApi();
+
   const producer = JSON.parse(localStorage.getItem("user"));
 
   const [producerDonations, setProducerDonations] = useState([]);
@@ -65,19 +72,8 @@ function Producers() {
   useEffect(() => {
     async function fetchDonations() {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/producerDonations/myDonations",
-          {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `bearer ${producer.token}`,
-            },
-          }
-        );
-        let json = await response.json();
-        setProducerDonations(json.data);
-
+        let response = await sendReq(`${hostName}producerDonations/myDonations`, "GET", null, producer.token);
+        setProducerDonations(response.data);
         if (producerDonations.length > 0) {
           setDonationFlag(true);
         }
@@ -86,19 +82,19 @@ function Producers() {
         }
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        console.log(error);
       }
     }
 
     const fetchCharities = async () => {
       try {
-        const response = await fetch("https://rcp-q1g3.onrender.com/allCharities");
-        let json = await response.json();
+        let response = await sendReq(`${hostName}allCharities`, "GET", null);
+       
         setCharities(
-          json.data.filter((c) => c.location === producer.user.location)
+          response.data.filter((c) => c.location === producer.user.location)
         );
       } catch (err) {
-        console.log(err);
+        console.log(error);
       }
     };
 
@@ -109,18 +105,10 @@ function Producers() {
   useEffect(() => {
     async function fetchProducerProducts() {
       try {
-        let response = await fetch(
-          "https://rcp-q1g3.onrender.com/producedProducts/myproducedProducts",
-          {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `bearer ${producer.token}`,
-            },
-          }
-        );
-        let json = await response.json();
-        setProducerProducts(json.data);
+        let response = await sendReq(`${hostName}producedProducts/myproducedProducts`, "GET", null, producer.token);
+      
+        
+        setProducerProducts(response.data);
         if (producerProducts.length > 0) {
           setProductsFlag(true);
         }
@@ -196,21 +184,12 @@ function Producers() {
         setAddProducerError("all fields are required");
         return;
       }
-      let response = await fetch(
-        "https://rcp-q1g3.onrender.com/producedProducts/addProducedProduct",
-        {
-          method: "POSt",
-          body: JSON.stringify(addProducerProduct),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${producer.token}`,
-          },
-        }
-      );
+      let response = await sendReq(`${hostName}producedProducts/addProducedProduct`, "POST", addProducerProduct, producer.token);
+    
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
-        setAddProducerError(json.message);
+     
+      if (!response.apiStatus) {
+        setAddProducerError(response.message);
         return;
       }
       setAddProducerProduct({
@@ -224,7 +203,7 @@ function Producers() {
       setAddProductFlag(false);
       toast.success("product has been added successfully");
     } catch (err) {
-      setAddProducerError(err.message);
+      setAddProducerError(error);
       setLoading(false);
     }
   }
@@ -241,21 +220,12 @@ function Producers() {
         toast.error("all fields are required");
         return;
       }
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/producedProducts/editProducedProduct/${id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(editedProducerProduct),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${producer.token}`,
-          },
-        }
-      );
+      let response = await sendReq(`${hostName}producedProducts/editProducedProduct/${id}`, "PATCH", editedProducerProduct, producer.token);
+      
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
-        toast.error(json.message);
+    
+      if (!response.apiStatus) {
+        toast.error(response.message);
         return;
       }
       setEditedProducerProduct({
@@ -268,7 +238,7 @@ function Producers() {
       toast.success("your product has been edited successfully");
       setEditProductFormFlag("");
     } catch (err) {
-      toast.error(err);
+      toast.error(error);
       setLoading(false);
     }
   }
@@ -285,20 +255,11 @@ function Producers() {
         setAddDonationError("all fields are required");
         return;
       }
-      let response = await fetch(
-        "https://rcp-q1g3.onrender.com/producerDonations/addProducerDonation",
-        {
-          method: "POSt",
-          body: JSON.stringify(addProducerDonation),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${producer.token}`,
-          },
-        }
-      );
+      let response = await sendReq(`${hostName}producerDonations/addProducerDonation`, "POST", addProducerDonation, producer.token);
+   
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
+      
+      if (!response.apiStatus) {
         setAddDonationError("your donation hasn't been added try again later");
         return;
       }
@@ -312,35 +273,28 @@ function Producers() {
       setAddDonationError(null);
       setAddDonationFlag(false);
       toast.success(
-        `your ${json.data.productName} has sent to ${json.data.charityName} successfully`,
+        `your ${response.data.productName} has sent to ${response.data.charityName} successfully`,
         {
           icon: "🚀",
         }
       );
     } catch (err) {
-      setAddDonationError(err.message);
+      setAddDonationError(error);
       setLoading(false);
     }
   }
   async function deleteProducerDonation(id) {
     try {
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/producerDonations/deleteDonation/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `bearer ${producer.token}`,
-          },
-        }
-      );
-      let json = await response.json();
-      if (!json.apiStatus) {
-        toast.error(json.message);
+   
+      let response = await sendReq(`${hostName}producerDonations/deleteDonation/${id}`, "DELETE", null, producer.token);
+      
+      if (!response.apiStatus) {
+        toast.error(response.message);
         return;
       }
       toast.info("your donation has been removed");
     } catch (err) {
-      toast.error(err);
+      toast.error(error);
     }
   }
   async function editProducerDonationSubmit(e, id) {
@@ -355,21 +309,12 @@ function Producers() {
         toast.error("all fields are required");
         return;
       }
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/producerDonations/editDonation/${id}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(editedProducerDonation),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `bearer ${producer.token}`,
-          },
-        }
-      );
+    let response = await sendReq(`${hostName}producerDonations/editDonation/${id}`, "PATCH", editedProducerDonation, producer.token);
+    
       setLoading(true);
-      let json = await response.json();
-      if (!json.apiStatus) {
-        toast.error(json.message);
+      
+      if (!response.apiStatus) {
+        toast.error(response.message);
         setEditedProducerDonation({
           productName: "",
           quantity: 0,
@@ -385,29 +330,22 @@ function Producers() {
       });
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log(error);
       setLoading(false);
     }
   }
 
   async function deleteProducerProduct(id) {
     try {
-      let response = await fetch(
-        `https://rcp-q1g3.onrender.com/producedProducts/deleteProducedProduct/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `bearer ${producer.token}`,
-          },
-        }
-      );
-      let json = await response.json();
-      if (!json.apiStatus) {
-        setDeleteProductError(json.message);
+      let response = await sendReq(`${hostName}producedProducts/deleteProducedProduct/${id}`, "DELETE", null, producer.token);
+  
+      if (!response.apiStatus) {
+        setDeleteProductError(response.message);
         return;
       }
+      toast.success("your product has been removed")
     } catch (err) {
-      setDeleteProductError(err.message);
+      setDeleteProductError(error);
     }
   }
 

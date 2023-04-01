@@ -12,7 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import '@tremor/react/dist/esm/tremor.css';
 import Error404 from "./pages/Error404";
 function App() {
-  
+
+ 
   return (
   
       <BrowserRouter>
