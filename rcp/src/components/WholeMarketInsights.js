@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useRestfulApi from "../hooks/useRestfulApi";
-import getHostName from "../utility/getHostName";
+
 import { Toggle, ToggleItem } from "@tremor/react";
 import { Card, Title, AreaChart } from "@tremor/react";
 
 export default function WholeMarketInsights() {
-  const hostName = getHostName();
   const [, getMarketInsights] = useRestfulApi();
   const [agriculturalProducts, setAgriculturalProducts] = useState([]);
   const [proteinProducts, setProteinProducts] = useState([]);
@@ -21,14 +20,14 @@ export default function WholeMarketInsights() {
   useEffect(() => {
     async function fetchMarketInsights(year) {
       
-      let response = await getMarketInsights(`${hostName}totalMarketInsights`,"GET",null);
+      let response = await getMarketInsights("totalMarketInsights","GET",null);
       setAgriculturalProducts(response.data.agriculture[year]);
       setProteinProducts(response.data.protein[year]);
       setDiaryProducts(response.data.diary[year]);
      
     }
     fetchMarketInsights(year);
-  }, [year , getMarketInsights, hostName]);
+  }, [year , getMarketInsights]);
 
   return (
     <div>

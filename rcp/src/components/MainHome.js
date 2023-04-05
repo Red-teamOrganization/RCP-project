@@ -32,12 +32,12 @@ export default function MainHome() {
   const [ , sendReq] = useRestfulApi();
 
   const fetchHonorList = async () => {
-     let response = await sendReq(`${hostName}honorList`,"GET",null)
+     let response = await sendReq("honorList","GET",null)
      setHonorList(response.data);
   };
 
   const fetchCharities = async () => {
-    let response = await sendReq(`${hostName}allCharities`,"GET",null)
+    let response = await sendReq("allCharities","GET",null)
     setCharities(response.data);
   };
   useEffect(() => {

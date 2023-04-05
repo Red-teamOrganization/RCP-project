@@ -17,7 +17,7 @@ export default function ProfileWave() {
           formData.append("logo", e.target.files[0]);
          
           setLoading(true);
-          let response = await fetch(`${hostName}user/logoUpload`, {
+          let response = await fetch("user/logoUpload", {
             method: "POST",
             body: formData,
             headers: {
