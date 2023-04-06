@@ -53,7 +53,7 @@ function Users() {
     }
 
     fetchDonations();
-  }, [userDonations, error, currentUser.token, sendReq,userType]);
+  }, [userDonations]);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -73,7 +73,7 @@ function Users() {
       }
     }
     fetchProducts();
-  }, [userProducts, error, currentUser.token, sendReq,userType]);
+  }, [userProducts]);
 
   //close different portal forms
   function handleCloseAddProductForm() {
