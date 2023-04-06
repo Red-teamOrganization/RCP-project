@@ -60,7 +60,7 @@ export default function Login() {
         password: "",
       });
       setLoading(false);
-      navigate("/main");
+      navigate("/dashBoard");
       toast.success(`welcome back ${data.data.user.name}`, {
         icon: "😄",
       });

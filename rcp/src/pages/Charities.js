@@ -9,9 +9,10 @@ import "./Charities.css";
 import ProfileWave from "../components/ProfileWave";
 
 export default function Charities() {
-
+    
   const [error, sendReq] = useRestfulApi();
   const charity = JSON.parse(localStorage.getItem("user"));
+
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toggleSideBar, setToggleSideBar] = useState(true);
@@ -39,7 +40,7 @@ export default function Charities() {
     fetchDonations();
     filterDonations();
 
-  }, [donations,toggleDonations]);
+  }, [donations]);
 
   if (loading) {
     return <LoadingComponent />;

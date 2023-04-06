@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 export default function UserDonations(props) {
   const [error, sendReq] = useRestfulApi();
   const [editDonationFormFlag, setEditDonationFormFlag] = useState("");
+  const [loading , setLoading] = useState(false)
 
   function toggleEditDonationFormFlag(id) {
     setEditDonationFormFlag(id);
@@ -14,6 +15,7 @@ export default function UserDonations(props) {
 
   async function deleteDonation(id) {
     try {
+      setLoading(true);
       let response = await sendReq(
         props.currentUser.user.userType === "seller"
           ? `sellerDonations/deleteDonation/${id}}`
@@ -22,7 +24,7 @@ export default function UserDonations(props) {
         null,
         props.currentUser.token
       );
-
+      setLoading(false)
       if (!response.apiStatus) {
         toast.error(response.message);
         return;
@@ -30,6 +32,7 @@ export default function UserDonations(props) {
       toast.info("your donation has been removed");
     } catch (err) {
       toast.error(error);
+      setLoading(false)
     }
   }
 
@@ -38,7 +41,9 @@ export default function UserDonations(props) {
       <p className="w-2/12">{props.charityName}</p>
       <p className="w-2/12">{props.quantity} kg</p>
       <p className="w-2/12">{props.productName}</p>
-      <button
+      {loading ? <button className="bg-gray-500 p-2 rounded">deleting...</button> :
+      <>
+        <button
         className="bg-yellow-500 p-2 rounded "
         onClick={() => toggleEditDonationFormFlag(props.donationId)}
       >
@@ -65,6 +70,11 @@ export default function UserDonations(props) {
       ) : (
         <></>
       )}
+      
+      </>
+      
+    }
+    
     </>
   );
 }

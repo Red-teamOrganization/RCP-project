@@ -68,7 +68,7 @@ export default function Navbar() {
                     <NavLink to="/" className="navItem">
                       HOME
                     </NavLink>
-                    <NavLink to="/main" className="navItem" aria-current="page">
+                    <NavLink to="/dashBoard" className="navItem" aria-current="page">
                       DashBoard
                     </NavLink>
                     <div

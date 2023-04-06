@@ -8,7 +8,8 @@ export default function SellerMarketInsights() {
   return (
    <>
    <MarketInsights 
-   agricultureUrl="soldProducts/allSellerAgricultureProductsByLocation" proteinUrl="soldProducts/allSellerProteinProductsByLocation"
+   agricultureUrl="soldProducts/allSellerAgricultureProductsByLocation" 
+   proteinUrl="soldProducts/allSellerProteinProductsByLocation"
    diaryUrl="soldProducts/allSellerDiaryProductsByLocation"
    currentUser={seller}
    />
