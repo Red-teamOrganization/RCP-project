@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import EditDonation from "./EditDonation";
 import useRestfulApi from "../hooks/useRestfulApi";
 
 import { toast } from "react-toastify";
+import EditDonation from "./EditDonation";
 
-export default function UserDonations(props) {
+export default function UserDonations({donation,currentUser}) {
   const [error, sendReq] = useRestfulApi();
   const [editDonationFormFlag, setEditDonationFormFlag] = useState("");
   const [loading , setLoading] = useState(false)
@@ -17,12 +17,12 @@ export default function UserDonations(props) {
     try {
       setLoading(true);
       let response = await sendReq(
-        props.currentUser.user.userType === "seller"
+        currentUser.user.userType === "seller"
           ? `sellerDonations/deleteDonation/${id}}`
           : `producerDonations/deleteDonation/${id}`,
         "DELETE",
         null,
-        props.currentUser.token
+        currentUser.token
       );
       setLoading(false)
       if (!response.apiStatus) {
@@ -38,33 +38,33 @@ export default function UserDonations(props) {
 
   return (
     <>
-      <p className="w-2/12">{props.charityName}</p>
-      <p className="w-2/12">{props.quantity} kg</p>
-      <p className="w-2/12">{props.productName}</p>
+      <p className="w-2/12">{donation.charityName}</p>
+      <p className="w-2/12">{donation.quantity} kg</p>
+      <p className="w-2/12">{donation.productName}</p>
       {loading ? <button className="bg-gray-500 p-2 rounded">deleting...</button> :
       <>
         <button
         className="bg-yellow-500 p-2 rounded "
-        onClick={() => toggleEditDonationFormFlag(props.donationId)}
+        onClick={() => toggleEditDonationFormFlag(donation._id)}
       >
         edit
       </button>
       <button
         className="bg-red-500 p-2 rounded"
         onClick={() => {
-          deleteDonation(props.donationId);
+          deleteDonation(donation._id);
         }}
       >
         delete
       </button>
-      {props.donationId === editDonationFormFlag ? (
+      {donation._id === editDonationFormFlag ? (
         <EditDonation
-          currentUser={props.currentUser}
+          currentUser={currentUser}
           setEditDonationFormFlag={setEditDonationFormFlag}
           url={
-            props.currentUser.user.userType === "seller"
-              ? `sellerDonations/editDonation/${props.donationId}}`
-              : `producerDonations/editDonation/${props.donationId}`
+            currentUser.user.userType === "seller"
+              ? `sellerDonations/editDonation/${donation._id}}`
+              : `producerDonations/editDonation/${donation._id}`
           }
         />
       ) : (

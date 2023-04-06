@@ -6,7 +6,7 @@ const hostName = getHostName();
 const useRestfulApi = () => {
   const [error, setError] = useState(null);
  async function sendReq(url,method,body,authorization = null){
-  //  console.log(body)
+ 
     try {
       let response = await fetch(`${hostName}${url}`, { 
         method : method,

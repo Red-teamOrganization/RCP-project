@@ -19,7 +19,7 @@ function Users() {
   const userType = currentUser.user.userType
   
   //use custom hook for different restful api requests
-  const [error, sendReq] = useRestfulApi();
+  const [error, sendReq ] = useRestfulApi();
 
   //state of loading
   const [loading, setLoading] = useState(true);
@@ -37,6 +37,7 @@ function Users() {
 
   //fetch donations and products for a currentUser
   useEffect(() => {
+   
     async function fetchDonations() {
       try {
         let response = await sendReq(userType === "producer" ?
@@ -53,9 +54,11 @@ function Users() {
     }
 
     fetchDonations();
+   
   }, [userDonations]);
 
   useEffect(() => {
+   
     async function fetchProducts() {
       try {
         let response = await sendReq(
@@ -73,6 +76,7 @@ function Users() {
       }
     }
     fetchProducts();
+    
   }, [userProducts]);
 
   //close different portal forms
@@ -106,7 +110,7 @@ function Users() {
               </button>
               {addProductFlag && (
                 <AddProduct
-                  url="producedProducts/addProducedProduct"
+                  url={userType === "producer" ? "producedProducts/addProducedProduct" :"soldProducts/addSoldProduct"}
                   handleCloseAddProductForm={handleCloseAddProductForm}
                   currentUser={currentUser}
                 />
@@ -157,7 +161,7 @@ function Users() {
                 <AddDonation
                   closeAddDonationForm={handleCloseAddDonationForm}
                   currentUser={currentUser}
-                  url="producerDonations/addProducerDonation"
+                  url={userType === "producer" ? "producerDonations/addProducerDonation" : "sellerDonations/addSellerDonation"}
                 />
               )}
               <h1 className="text-center bg-yellow-700 w-3/12 coolFont rounded-tl-md rounded-tr-md p-2">
@@ -179,10 +183,7 @@ function Users() {
                         className="flex flex-wrap justify-between mb-4 items-center border-b border-black p-1"
                       >
                         <UserDonations
-                          charityName={donation.charityName}
-                          quantity={donation.quantity}
-                          productName={donation.productName}
-                          donationId={donation._id}
+                          donation = {donation}
                           currentUser={currentUser}
                         />
                       </div>
