@@ -137,7 +137,7 @@ function handleAddDonationChange(e) {
     {
       loading ? 
       <button className="bg-gray-600 p-2 rounded text-white coolFont" disabled>Loading...</button> : 
-      <button className="bg-blue-900 p-2 rounded text-white coolFont">send donation</button>
+      <button className="bg-blue-900 p-2 rounded text-white coolFont ">send donation</button>
     }
     {addDonationError && <div className='bg-red-500 p-2 rounded text-center text-white coolFont mt-2'>{addDonationError}</div>}
   </form>

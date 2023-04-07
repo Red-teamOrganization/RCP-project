@@ -12,6 +12,7 @@ import UserDonations from "../components/UserDonations";
 import UserProducts from "../components/UserProducts";
 import ProducerMarketInsights from "../components/ProducerMarketInsights";
 import ProfileWave from "../components/ProfileWave";
+import SellerMarketInsights from "../components/SellerMarketInsights";
 
 function Users() {
   //bring data of sign in user from local storage
@@ -196,7 +197,8 @@ function Users() {
 
           {toggleContent === "marketInsights" && (
             <section>
-              <ProducerMarketInsights />
+             
+            {  userType === "producer" ? <ProducerMarketInsights /> : <SellerMarketInsights  />}
             </section>
           )}
         </section>

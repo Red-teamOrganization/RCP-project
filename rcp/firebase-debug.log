@@ -1,0 +1,22 @@
+[debug] [2023-04-07T13:10:50.899Z] ----------------------------------------------------------------------
+[debug] [2023-04-07T13:10:50.904Z] Command:       /home/zakaria/nodejs/bin/node /home/zakaria/nodejs/bin/firebase deploy
+[debug] [2023-04-07T13:10:50.905Z] CLI Version:   11.25.2
+[debug] [2023-04-07T13:10:50.905Z] Platform:      linux
+[debug] [2023-04-07T13:10:50.906Z] Node Version:  v18.14.0
+[debug] [2023-04-07T13:10:50.906Z] Time:          Fri Apr 07 2023 15:10:50 GMT+0200 (Eastern European Standard Time)
+[debug] [2023-04-07T13:10:50.907Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-04-07T13:10:50.913Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-04-07T13:10:51.127Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-04-07T13:10:51.128Z] > authorizing via signed-in user (zekoloay99@gmail.com)
+[debug] [2023-04-07T13:10:51.129Z] [iam] checking project rcpproject for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-04-07T13:10:51.131Z] > refreshing access token with scopes: []
+[debug] [2023-04-07T13:10:51.133Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-04-07T13:10:51.133Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-04-07T13:10:51.576Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-04-07T13:10:51.577Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-04-07T13:10:51.599Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rcpproject:testIamPermissions [none]
+[debug] [2023-04-07T13:10:51.600Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/rcpproject:testIamPermissions x-goog-quota-user=projects/rcpproject
+[debug] [2023-04-07T13:10:51.600Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rcpproject:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-04-07T13:10:51.605Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-04-07T13:10:51.606Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
