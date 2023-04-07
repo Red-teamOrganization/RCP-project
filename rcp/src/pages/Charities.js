@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import useRestfulApi from "../hooks/useRestfulApi";
-import getHostName from "../utility/getHostName";
+
 import LoadingComponent from "../components/LoadingComponent";
 import Profile from "../components/Profile";
 import { toast } from "react-toastify";
@@ -9,9 +9,10 @@ import "./Charities.css";
 import ProfileWave from "../components/ProfileWave";
 
 export default function Charities() {
-  const hostName = getHostName();
+    
   const [error, sendReq] = useRestfulApi();
   const charity = JSON.parse(localStorage.getItem("user"));
+
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toggleSideBar, setToggleSideBar] = useState(true);
@@ -21,7 +22,7 @@ export default function Charities() {
   useEffect(() => {
     async function fetchDonations() {
       try {
-        const response = await sendReq(`${hostName}user/profile`, "GET", null, charity.token);
+        const response = await sendReq("user/profile", "GET", null, charity.token);
         setDonations(response.data.donations);
         setLoading(false);
       } catch (err) {
@@ -39,7 +40,7 @@ export default function Charities() {
     fetchDonations();
     filterDonations();
 
-  }, [donations,toggleDonations]);
+  }, [donations]);
 
   if (loading) {
     return <LoadingComponent />;
@@ -49,7 +50,7 @@ export default function Charities() {
 
   async function checkDonation(id) {
     try {
-       await sendReq(`${hostName}user/charityProfile/donationCheck/${id}`, "POST", null, charity.token);
+       await sendReq(`user/charityProfile/donationCheck/${id}`, "POST", null, charity.token);
    
       toast.success(
         `you have ${

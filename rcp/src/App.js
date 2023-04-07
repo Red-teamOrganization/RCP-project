@@ -12,10 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '@tremor/react/dist/esm/tremor.css';
 import Error404 from "./pages/Error404";
 function App() {
-
- 
   return (
-  
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -23,14 +20,13 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/main" element={<Main />} />
+            <Route path="/dashBoard" element={<Main />} />
           </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />
         <ToastContainer />
       </BrowserRouter>
-    
   );
 }
 

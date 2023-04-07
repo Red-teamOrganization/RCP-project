@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import getHostName from "../utility/getHostName";
+
 import useRestfulApi from "../hooks/useRestfulApi";
 
 import LoadingComponent from "../components/LoadingComponent";
 import { toast } from "react-toastify";
 
 export default function Profile(props) {
-  const hostName = getHostName();
+ 
   const [, sendReq] = useRestfulApi();
   const [showDescriptionForm, setShowDescriptionForm] = useState(false);
   const [description, setDescription] = useState("");
@@ -27,7 +27,7 @@ export default function Profile(props) {
         toast.error("you must enter a description");
         return;
       }
-      const response = await sendReq(`${hostName}user/addDescription`, "POST", { description }, props.user.token);
+      const response = await sendReq("user/addDescription", "POST", { description }, props.user.token);
    
       setLoading(true);
       

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import getHostName from "../utility/getHostName";
+
 import useRestfulApi from "../hooks/useRestfulApi";
 
 import { NavLink, Link } from "react-router-dom";
@@ -14,7 +14,7 @@ import "./nav.css";
 import { toast } from 'react-toastify';
 
 export default function Navbar() {
-  const hostName = getHostName()
+ 
   let userData = JSON.parse(localStorage.getItem("user"));
   const[error,sendReq]=useRestfulApi();
   const { user } = useAuthContext();
@@ -24,7 +24,7 @@ export default function Navbar() {
 
   async function handleLogOut() {
     try {
-      await sendReq(`${hostName}user/logOut`, "GET", null, userData.token)
+      await sendReq("user/logOut", "GET", null, userData.token)
    
       localStorage.removeItem("user");
       
@@ -68,7 +68,7 @@ export default function Navbar() {
                     <NavLink to="/" className="navItem">
                       HOME
                     </NavLink>
-                    <NavLink to="/main" className="navItem" aria-current="page">
+                    <NavLink to="/dashBoard" className="navItem" aria-current="page">
                       DashBoard
                     </NavLink>
                     <div

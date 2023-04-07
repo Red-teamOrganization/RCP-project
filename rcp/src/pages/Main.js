@@ -1,11 +1,10 @@
-import Producers from "./Producers";
-import Sellers from "./Sellers";
+import Users from "./Users";
 import Charities from "./Charities"
 
 function Main() {
   let userData = JSON.parse(localStorage.getItem('user'))
    
-  return <div>{userData.user.userType === "producer" ?  <Producers />  : userData.user.userType === "seller" ? <Sellers /> : <Charities  />}</div>;
+  return <div>{userData.user.userType === "charity"  ?  <Charities />  : <Users/>}</div>;
 }
 
 export default Main;

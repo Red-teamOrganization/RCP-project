@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useRestfulApi from "../hooks/useRestfulApi";
-import getHostName from "../utility/getHostName";
+
 import { LockClosedIcon } from "@heroicons/react/solid";
 import LoadingComponent from "../components/LoadingComponent";
 import logo from "../images/logo.png";
@@ -14,7 +14,7 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const hostName = getHostName()
+
   const [loginError , sendLoginReq] = useRestfulApi();
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -45,7 +45,7 @@ export default function Login() {
         return;
       }
       
-     let data = await sendLoginReq(`${hostName}user/logIn` , "POST" , userData )
+     let data = await sendLoginReq("user/logIn" , "POST" , userData )
     
       setLoading(true);
       if (!data.apiStatus) {
@@ -60,7 +60,7 @@ export default function Login() {
         password: "",
       });
       setLoading(false);
-      navigate("/main");
+      navigate("/dashBoard");
       toast.success(`welcome back ${data.data.user.name}`, {
         icon: "😄",
       });
